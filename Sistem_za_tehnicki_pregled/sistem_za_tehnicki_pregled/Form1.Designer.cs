@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             IzborniPanel = new Panel();
             KlijentPanel = new Panel();
             NazadKlijentButton = new Button();
@@ -36,13 +37,13 @@
             NazadRadnikButton = new Button();
             label4 = new Label();
             AdministratorPanel = new Panel();
+            NazadAdministratorButton = new Button();
             label5 = new Label();
             label2 = new Label();
             label1 = new Label();
             AdministratorButton = new Button();
             RadnikButton = new Button();
             KlijentButton = new Button();
-            NazadAdministratorButton = new Button();
             IzborniPanel.SuspendLayout();
             KlijentPanel.SuspendLayout();
             RadnikPanel.SuspendLayout();
@@ -137,6 +138,16 @@
             AdministratorPanel.TabIndex = 1;
             AdministratorPanel.Visible = false;
             // 
+            // NazadAdministratorButton
+            // 
+            NazadAdministratorButton.Location = new Point(694, 409);
+            NazadAdministratorButton.Name = "NazadAdministratorButton";
+            NazadAdministratorButton.Size = new Size(94, 29);
+            NazadAdministratorButton.TabIndex = 2;
+            NazadAdministratorButton.Text = "Nazad";
+            NazadAdministratorButton.UseVisualStyleBackColor = true;
+            NazadAdministratorButton.Click += NazadAdministratorButton_Click;
+            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -196,22 +207,13 @@
             KlijentButton.UseVisualStyleBackColor = true;
             KlijentButton.Click += KlijentButton_Click;
             // 
-            // NazadAdministratorButton
-            // 
-            NazadAdministratorButton.Location = new Point(694, 409);
-            NazadAdministratorButton.Name = "NazadAdministratorButton";
-            NazadAdministratorButton.Size = new Size(94, 29);
-            NazadAdministratorButton.TabIndex = 2;
-            NazadAdministratorButton.Text = "Nazad";
-            NazadAdministratorButton.UseVisualStyleBackColor = true;
-            NazadAdministratorButton.Click += NazadAdministratorButton_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(IzborniPanel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sistem za tehnički pregled";

@@ -29,6 +29,7 @@ namespace sistem_za_registraciju_vozila
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             IzborniPanel = new Panel();
             KlijentPanel = new Panel();
             NazadKlijentButton = new Button();
@@ -213,6 +214,7 @@ namespace sistem_za_registraciju_vozila
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(IzborniPanel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sistem za registraciju vozila";
