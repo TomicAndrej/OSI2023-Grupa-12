@@ -44,6 +44,7 @@
             AdministratorButton = new Button();
             RadnikButton = new Button();
             KlijentButton = new Button();
+            textBox1 = new TextBox();
             IzborniPanel.SuspendLayout();
             KlijentPanel.SuspendLayout();
             RadnikPanel.SuspendLayout();
@@ -69,6 +70,7 @@
             // 
             // KlijentPanel
             // 
+            KlijentPanel.Controls.Add(textBox1);
             KlijentPanel.Controls.Add(NazadKlijentButton);
             KlijentPanel.Controls.Add(label3);
             KlijentPanel.Dock = DockStyle.Fill;
@@ -207,6 +209,13 @@
             KlijentButton.UseVisualStyleBackColor = true;
             KlijentButton.Click += KlijentButton_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(456, 185);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 1;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -245,5 +254,6 @@
         private Button NazadKlijentButton;
         private Button NazadRadnikButton;
         private Button NazadAdministratorButton;
+        private TextBox textBox1;
     }
 }
