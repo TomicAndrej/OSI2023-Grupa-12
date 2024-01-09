@@ -118,5 +118,84 @@ namespace sistem_za_tehnicki_pregled
             }
             return true;
         }
+
+        private bool provjeraKorisnickogImenaBoka(string korisnickoIme)
+        {
+            string putanjaDoDatoteke = "..\\..\\..\\baza.txt";
+            try
+            {
+                using (StreamReader sr = new StreamReader(putanjaDoDatoteke))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string red = sr.ReadLine();
+                        string[] podaci = red.Split(',');
+
+                        if (podaci.Length == 2)
+                        {
+                            string korisnickoImeDatoteke = podaci[0];
+
+                            if (korisnickoIme == korisnickoImeDatoteke)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška pri čitanju iz datoteke: " + ex.Message);
+            }
+
+            return false;
+        }
+
+        private bool provjeraLozinkeBoka(string lozinka)
+        {
+            string putanjaDoDatoteke = "..\\..\\..\\baza.txt";
+            try
+            {
+                using (StreamReader sr = new StreamReader(putanjaDoDatoteke))
+                {
+                    while (!sr.EndOfStream)
+                    {
+                        string red = sr.ReadLine();
+                        string[] podaci = red.Split(',');
+
+                        if (podaci.Length == 2)
+                        {
+                            string lozinkaDatoteka = podaci[1];
+
+                            if (lozinka == lozinkaDatoteka)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Greška pri čitanju iz datoteke: " + ex.Message);
+            }
+
+            return false;
+        }
+
+        private bool ProveriKorisnickoImeBokaSRB(string korisnickoIme)
+        {
+            List<char> dozvoljeniKarakteri = new List<char>("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._\t\n");
+
+            foreach (char karakter in korisnickoIme)
+            {
+                if (!dozvoljeniKarakteri.Contains(karakter))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     }
 }
