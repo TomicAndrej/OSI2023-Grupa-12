@@ -88,6 +88,13 @@
                 MessageBox.Show("Korisničko ime nije validno!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            /////////////////////
+            if (!f.provjeraKorisnickogImena(KorisnickoImeTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
+            {
+                //MessageBox.Show("Korisničko ime već postoji!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            /////////////////////
             if (BrojZiroRacunaTextBox.Text.Length != 16)
             {
                 MessageBox.Show("Broj žiro računa mora imati 16 cifara!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -131,10 +138,6 @@
                 LozinkaTextBoxLogin.Text = "";
                 // TODO: otvori formu za klijenta
             }
-            /*else
-            {
-                MessageBox.Show("Pogrešno korisničko ime ili lozinka!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
         }
 
         private void KorisnickoImeTextBox_TextChanged(object sender, EventArgs e)
@@ -171,6 +174,91 @@
         {
             MessageBox.Show("JMBG mora imati 13 cifara!", "JMBG", MessageBoxButtons.OK, MessageBoxIcon.Information);
             JMBGTextBox.Focus();
+        }
+
+        private void PrijaviSeAdministratorButton_Click(object sender, EventArgs e)
+        {
+            funkcije f = new funkcije();
+            if (f.provjeraLogInPodataka(KorisnickoImeAdministratorTextBoxLogin.Text, LozinkaAdministratorTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            {
+                //MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LogovanAdministratorPanel.Visible = true;
+                LogovanAdministratorPanel.BringToFront();
+                //AdministratorPanel.Visible = false;
+                KorisnickoImeAdministratorTextBoxLogin.Text = "";
+                LozinkaAdministratorTextBoxLogin.Text = "";
+                // TODO: otvori formu za administratora
+
+            }
+        }
+
+        private void OdjavaLogovanogAdministratoraButton_Click(object sender, EventArgs e)
+        {
+            LogovanAdministratorPanel.Visible = false;
+            AdministratorPanel.Visible = true;
+            RegistracijaAdministratorskihNalogaPanel.Visible = false;
+        }
+
+        private void RegistrujAdministratorskiNalogButton_Click(object sender, EventArgs e)
+        {
+            string poruka = "";
+            if (ImeAdminRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli ime!\n";
+            }
+            if (PrezimeAdminRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli prezime!\n";
+            }
+            if (KorisnickoImeAdminRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli korisničko ime!\n";
+            }
+            if (LozinkaAdminRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli lozinku!\n";
+            }
+            if (PotvrdaLozinkeAdminRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli potvrdu lozinke!\n";
+            }
+            if (poruka != "")
+            {
+                MessageBox.Show(poruka, "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            funkcije f = new funkcije();
+            if (!f.provjeraKorisnickogImena(KorisnickoImeAdminRegistracijaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            {
+                //MessageBox.Show("Korisničko ime već postoji!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (LozinkaAdminRegistracijaTextBox.Text != PotvrdaLozinkeAdminRegistracijaTextBox.Text)
+            {
+                MessageBox.Show("Lozinka i potvrda lozinke se ne poklapaju!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string red = KorisnickoImeAdminRegistracijaTextBox.Text +
+                "," + LozinkaAdminRegistracijaTextBox.Text +
+                "," + ImeAdminRegistracijaTextBox.Text +
+                "," + PrezimeAdminRegistracijaTextBox.Text;
+            using (StreamWriter writer = File.AppendText("..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            {
+                writer.WriteLine(red);
+            }
+            MessageBox.Show("Uspješno ste registrovali administratora!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            KorisnickoImeAdminRegistracijaTextBox.Text = "";
+            LozinkaAdminRegistracijaTextBox.Text = "";
+            ImeAdminRegistracijaTextBox.Text = "";
+            PrezimeAdminRegistracijaTextBox.Text = "";
+            PotvrdaLozinkeAdminRegistracijaTextBox.Text = "";
+        }
+
+        private void KreiranjeAdministratorskihNalogaButton_Click(object sender, EventArgs e)
+        {
+            RegistracijaAdministratorskihNalogaPanel.Visible = true;
+            RegistracijaAdministratorskihNalogaPanel.BringToFront();
+            LogovanAdministratorPanel.Visible = false;
         }
     }
 }
