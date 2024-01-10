@@ -194,6 +194,18 @@ namespace sistem_za_tehnicki_pregled
                     return false;
                 }
             }
+            if (korisnickoIme.Length < 5 || korisnickoIme.Length > 32)
+            {
+                return false;
+            }
+            if (korisnickoIme[0] == '.' || korisnickoIme[korisnickoIme.Length - 1] == '.')
+            {
+                return false;
+            }
+            if (korisnickoIme[0] == '0' || korisnickoIme[0] == '1' || korisnickoIme[0] == '2' || korisnickoIme[0] == '3' || korisnickoIme[0] == '4' || korisnickoIme[0] == '5' || korisnickoIme[0] == '6' || korisnickoIme[0] == '7' || korisnickoIme[0] == '8' || korisnickoIme[0] == '9')
+            {
+                return false;
+            }
             return true;
         }
 
@@ -259,7 +271,7 @@ namespace sistem_za_tehnicki_pregled
             return false;
         }
 
-        public void AddAccountWithInfoClient(string username, string password, string name, string lastName, int idNumber, string giroAccountNumber, string uniqueIdNumber, string filePath)
+        public void AddAccountWithInfoClient(string username, string password, string name, string lastName, string idNumber, string giroAccountNumber, string uniqueIdNumber, string filePath)
         {
             // Combine account information into a string
             //korIme,lozinka,ime,prezime,broj licne,broj ziro racuna,jmb
