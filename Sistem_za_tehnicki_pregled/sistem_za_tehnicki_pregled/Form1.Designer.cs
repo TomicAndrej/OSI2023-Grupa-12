@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             IzborniPanel = new Panel();
+            IndikatorNaKomStePanelu = new Label();
             KlijentPanel = new Panel();
             RegistracijaNalogaPanel = new Panel();
             NazadSaRegistracijeNaLoginButton = new Button();
@@ -70,11 +71,11 @@
             NazadAdministratorButton = new Button();
             LogovanAdministratorPanel = new Panel();
             OdjavaLogovanogAdministratoraButton = new Button();
-            button6 = new Button();
-            button5 = new Button();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
+            PracenjeStatistikeButton = new Button();
+            PregledPostojecihNalogaButton = new Button();
+            BrisanjeRadnickihNalogaButton = new Button();
+            BrisanjeAdministratorskihNalogaButton = new Button();
+            KreiranjeRadnickihNalogaButton = new Button();
             KreiranjeAdministratorskihNalogaButton = new Button();
             RegistracijaAdministratorskihNalogaPanel = new Panel();
             RegistrujAdministratorskiNalogButton = new Button();
@@ -88,8 +89,22 @@
             KorisnickoImeAdminRegistracijaTextBox = new TextBox();
             PrezimeAdminRegistracijaTextBox = new TextBox();
             ImeAdminRegistracijaTextBox = new TextBox();
-            label2 = new Label();
-            label1 = new Label();
+            NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton = new Button();
+            RegistracijaRadnickihNalogaPanel = new Panel();
+            RegistrujRadnickiNalogButton = new Button();
+            PotvrdaLozinkeRadnikRegistracijaLabel = new Label();
+            LozinkaRadnikRegistracijaLabel = new Label();
+            KorisnickoImeRadnikRegistracijaLabel = new Label();
+            PrezimeRadnikRegistracijaLabel = new Label();
+            ImeRadnikRegistracijaLabel = new Label();
+            PotvrdaLozinkeRadnikRegistracijaTextBox = new TextBox();
+            LozinkaRadnikRegistracijaTextBox = new TextBox();
+            KorisnickoImeRadnikRegistracijaTextBox = new TextBox();
+            PrezimeRadnikRegistracijaTextBox = new TextBox();
+            ImeRadnikRegistracijaTextBox = new TextBox();
+            NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton = new Button();
+            PrijavljujemSeKaoLabel = new Label();
+            SistemZaTehnickiPregledLabel = new Label();
             AdministratorButton = new Button();
             RadnikButton = new Button();
             KlijentButton = new Button();
@@ -100,16 +115,18 @@
             AdministratorPanel.SuspendLayout();
             LogovanAdministratorPanel.SuspendLayout();
             RegistracijaAdministratorskihNalogaPanel.SuspendLayout();
+            RegistracijaRadnickihNalogaPanel.SuspendLayout();
             SuspendLayout();
             // 
             // IzborniPanel
             // 
             IzborniPanel.BackColor = Color.FromArgb(255, 224, 192);
+            IzborniPanel.Controls.Add(IndikatorNaKomStePanelu);
             IzborniPanel.Controls.Add(KlijentPanel);
             IzborniPanel.Controls.Add(RadnikPanel);
             IzborniPanel.Controls.Add(AdministratorPanel);
-            IzborniPanel.Controls.Add(label2);
-            IzborniPanel.Controls.Add(label1);
+            IzborniPanel.Controls.Add(PrijavljujemSeKaoLabel);
+            IzborniPanel.Controls.Add(SistemZaTehnickiPregledLabel);
             IzborniPanel.Controls.Add(AdministratorButton);
             IzborniPanel.Controls.Add(RadnikButton);
             IzborniPanel.Controls.Add(KlijentButton);
@@ -118,6 +135,15 @@
             IzborniPanel.Name = "IzborniPanel";
             IzborniPanel.Size = new Size(800, 450);
             IzborniPanel.TabIndex = 0;
+            // 
+            // IndikatorNaKomStePanelu
+            // 
+            IndikatorNaKomStePanelu.AutoSize = true;
+            IndikatorNaKomStePanelu.Location = new Point(12, 9);
+            IndikatorNaKomStePanelu.Name = "IndikatorNaKomStePanelu";
+            IndikatorNaKomStePanelu.Size = new Size(0, 20);
+            IndikatorNaKomStePanelu.TabIndex = 20;
+            IndikatorNaKomStePanelu.Visible = false;
             // 
             // KlijentPanel
             // 
@@ -262,7 +288,6 @@
             JMBGTextBox.Name = "JMBGTextBox";
             JMBGTextBox.Size = new Size(200, 27);
             JMBGTextBox.TabIndex = 7;
-            JMBGTextBox.MouseEnter += JMBGTextBox_MouseEnter;
             // 
             // BrojZiroRacunaTextBox
             // 
@@ -270,7 +295,6 @@
             BrojZiroRacunaTextBox.Name = "BrojZiroRacunaTextBox";
             BrojZiroRacunaTextBox.Size = new Size(200, 27);
             BrojZiroRacunaTextBox.TabIndex = 6;
-            BrojZiroRacunaTextBox.MouseEnter += BrojZiroRacunaTextBox_MouseEnter;
             // 
             // BrojLicneKarteTextBox
             // 
@@ -295,7 +319,6 @@
             LozinkaTextBox.Size = new Size(200, 27);
             LozinkaTextBox.TabIndex = 3;
             LozinkaTextBox.TextChanged += LozinkaTextBox_TextChanged;
-            LozinkaTextBox.MouseEnter += LozinkaTextBox_MouseEnter;
             // 
             // KorisnickoImeTextBox
             // 
@@ -304,7 +327,6 @@
             KorisnickoImeTextBox.Size = new Size(200, 27);
             KorisnickoImeTextBox.TabIndex = 2;
             KorisnickoImeTextBox.TextChanged += KorisnickoImeTextBox_TextChanged;
-            KorisnickoImeTextBox.MouseEnter += KorisnickoImeTextBox_MouseEnter;
             // 
             // PrezimeTextBox
             // 
@@ -494,13 +516,14 @@
             // LogovanAdministratorPanel
             // 
             LogovanAdministratorPanel.Controls.Add(OdjavaLogovanogAdministratoraButton);
-            LogovanAdministratorPanel.Controls.Add(button6);
-            LogovanAdministratorPanel.Controls.Add(button5);
-            LogovanAdministratorPanel.Controls.Add(button4);
-            LogovanAdministratorPanel.Controls.Add(button3);
-            LogovanAdministratorPanel.Controls.Add(button2);
+            LogovanAdministratorPanel.Controls.Add(PracenjeStatistikeButton);
+            LogovanAdministratorPanel.Controls.Add(PregledPostojecihNalogaButton);
+            LogovanAdministratorPanel.Controls.Add(BrisanjeRadnickihNalogaButton);
+            LogovanAdministratorPanel.Controls.Add(BrisanjeAdministratorskihNalogaButton);
+            LogovanAdministratorPanel.Controls.Add(KreiranjeRadnickihNalogaButton);
             LogovanAdministratorPanel.Controls.Add(KreiranjeAdministratorskihNalogaButton);
             LogovanAdministratorPanel.Controls.Add(RegistracijaAdministratorskihNalogaPanel);
+            LogovanAdministratorPanel.Controls.Add(RegistracijaRadnickihNalogaPanel);
             LogovanAdministratorPanel.Dock = DockStyle.Fill;
             LogovanAdministratorPanel.Location = new Point(0, 0);
             LogovanAdministratorPanel.Name = "LogovanAdministratorPanel";
@@ -518,50 +541,51 @@
             OdjavaLogovanogAdministratoraButton.UseVisualStyleBackColor = true;
             OdjavaLogovanogAdministratoraButton.Click += OdjavaLogovanogAdministratoraButton_Click;
             // 
-            // button6
+            // PracenjeStatistikeButton
             // 
-            button6.Location = new Point(450, 320);
-            button6.Name = "button6";
-            button6.Size = new Size(250, 70);
-            button6.TabIndex = 5;
-            button6.Text = "Praćenje statistike";
-            button6.UseVisualStyleBackColor = true;
+            PracenjeStatistikeButton.Location = new Point(450, 320);
+            PracenjeStatistikeButton.Name = "PracenjeStatistikeButton";
+            PracenjeStatistikeButton.Size = new Size(250, 70);
+            PracenjeStatistikeButton.TabIndex = 5;
+            PracenjeStatistikeButton.Text = "Praćenje statistike";
+            PracenjeStatistikeButton.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // PregledPostojecihNalogaButton
             // 
-            button5.Location = new Point(100, 320);
-            button5.Name = "button5";
-            button5.Size = new Size(250, 70);
-            button5.TabIndex = 4;
-            button5.Text = "Pregled postojećih naloga";
-            button5.UseVisualStyleBackColor = true;
+            PregledPostojecihNalogaButton.Location = new Point(100, 320);
+            PregledPostojecihNalogaButton.Name = "PregledPostojecihNalogaButton";
+            PregledPostojecihNalogaButton.Size = new Size(250, 70);
+            PregledPostojecihNalogaButton.TabIndex = 4;
+            PregledPostojecihNalogaButton.Text = "Pregled postojećih naloga";
+            PregledPostojecihNalogaButton.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // BrisanjeRadnickihNalogaButton
             // 
-            button4.Location = new Point(450, 191);
-            button4.Name = "button4";
-            button4.Size = new Size(250, 70);
-            button4.TabIndex = 3;
-            button4.Text = "Brisanje radničkih naloga";
-            button4.UseVisualStyleBackColor = true;
+            BrisanjeRadnickihNalogaButton.Location = new Point(450, 191);
+            BrisanjeRadnickihNalogaButton.Name = "BrisanjeRadnickihNalogaButton";
+            BrisanjeRadnickihNalogaButton.Size = new Size(250, 70);
+            BrisanjeRadnickihNalogaButton.TabIndex = 3;
+            BrisanjeRadnickihNalogaButton.Text = "Brisanje radničkih naloga";
+            BrisanjeRadnickihNalogaButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // BrisanjeAdministratorskihNalogaButton
             // 
-            button3.Location = new Point(100, 190);
-            button3.Name = "button3";
-            button3.Size = new Size(250, 70);
-            button3.TabIndex = 2;
-            button3.Text = "Brisanje administratorskih naloga";
-            button3.UseVisualStyleBackColor = true;
+            BrisanjeAdministratorskihNalogaButton.Location = new Point(100, 190);
+            BrisanjeAdministratorskihNalogaButton.Name = "BrisanjeAdministratorskihNalogaButton";
+            BrisanjeAdministratorskihNalogaButton.Size = new Size(250, 70);
+            BrisanjeAdministratorskihNalogaButton.TabIndex = 2;
+            BrisanjeAdministratorskihNalogaButton.Text = "Brisanje administratorskih naloga";
+            BrisanjeAdministratorskihNalogaButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // KreiranjeRadnickihNalogaButton
             // 
-            button2.Location = new Point(450, 60);
-            button2.Name = "button2";
-            button2.Size = new Size(250, 70);
-            button2.TabIndex = 1;
-            button2.Text = "Kreiranje radničkih naloga";
-            button2.UseVisualStyleBackColor = true;
+            KreiranjeRadnickihNalogaButton.Location = new Point(450, 60);
+            KreiranjeRadnickihNalogaButton.Name = "KreiranjeRadnickihNalogaButton";
+            KreiranjeRadnickihNalogaButton.Size = new Size(250, 70);
+            KreiranjeRadnickihNalogaButton.TabIndex = 1;
+            KreiranjeRadnickihNalogaButton.Text = "Kreiranje radničkih naloga";
+            KreiranjeRadnickihNalogaButton.UseVisualStyleBackColor = true;
+            KreiranjeRadnickihNalogaButton.Click += KreiranjeRadnickihNalogaButton_Click;
             // 
             // KreiranjeAdministratorskihNalogaButton
             // 
@@ -586,6 +610,7 @@
             RegistracijaAdministratorskihNalogaPanel.Controls.Add(KorisnickoImeAdminRegistracijaTextBox);
             RegistracijaAdministratorskihNalogaPanel.Controls.Add(PrezimeAdminRegistracijaTextBox);
             RegistracijaAdministratorskihNalogaPanel.Controls.Add(ImeAdminRegistracijaTextBox);
+            RegistracijaAdministratorskihNalogaPanel.Controls.Add(NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton);
             RegistracijaAdministratorskihNalogaPanel.Dock = DockStyle.Fill;
             RegistracijaAdministratorskihNalogaPanel.Location = new Point(0, 0);
             RegistracijaAdministratorskihNalogaPanel.Name = "RegistracijaAdministratorskihNalogaPanel";
@@ -652,6 +677,7 @@
             // 
             PotvrdaLozinkeAdminRegistracijaTextBox.Location = new Point(300, 234);
             PotvrdaLozinkeAdminRegistracijaTextBox.Name = "PotvrdaLozinkeAdminRegistracijaTextBox";
+            PotvrdaLozinkeAdminRegistracijaTextBox.PasswordChar = '*';
             PotvrdaLozinkeAdminRegistracijaTextBox.Size = new Size(200, 27);
             PotvrdaLozinkeAdminRegistracijaTextBox.TabIndex = 4;
             // 
@@ -659,6 +685,7 @@
             // 
             LozinkaAdminRegistracijaTextBox.Location = new Point(300, 201);
             LozinkaAdminRegistracijaTextBox.Name = "LozinkaAdminRegistracijaTextBox";
+            LozinkaAdminRegistracijaTextBox.PasswordChar = '*';
             LozinkaAdminRegistracijaTextBox.Size = new Size(200, 27);
             LozinkaAdminRegistracijaTextBox.TabIndex = 3;
             // 
@@ -683,25 +710,158 @@
             ImeAdminRegistracijaTextBox.Size = new Size(200, 27);
             ImeAdminRegistracijaTextBox.TabIndex = 0;
             // 
-            // label2
+            // NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(296, 245);
-            label2.Name = "label2";
-            label2.Size = new Size(208, 31);
-            label2.TabIndex = 4;
-            label2.Text = "Prijavljujem se kao:";
+            NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.Location = new Point(694, 409);
+            NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.Name = "NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton";
+            NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.Size = new Size(94, 29);
+            NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.TabIndex = 20;
+            NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.Text = "Nazad";
+            NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.UseVisualStyleBackColor = true;
+            NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.Click += NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton_Click;
             // 
-            // label1
+            // RegistracijaRadnickihNalogaPanel
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(47, 99);
-            label1.Name = "label1";
-            label1.Size = new Size(706, 67);
-            label1.TabIndex = 3;
-            label1.Text = "SISTEM ZA TEHNIČKI PREGLED";
+            RegistracijaRadnickihNalogaPanel.Controls.Add(RegistrujRadnickiNalogButton);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(PotvrdaLozinkeRadnikRegistracijaLabel);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(LozinkaRadnikRegistracijaLabel);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(KorisnickoImeRadnikRegistracijaLabel);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(PrezimeRadnikRegistracijaLabel);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(ImeRadnikRegistracijaLabel);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(PotvrdaLozinkeRadnikRegistracijaTextBox);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(LozinkaRadnikRegistracijaTextBox);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(KorisnickoImeRadnikRegistracijaTextBox);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(PrezimeRadnikRegistracijaTextBox);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(ImeRadnikRegistracijaTextBox);
+            RegistracijaRadnickihNalogaPanel.Controls.Add(NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton);
+            RegistracijaRadnickihNalogaPanel.Dock = DockStyle.Fill;
+            RegistracijaRadnickihNalogaPanel.Location = new Point(0, 0);
+            RegistracijaRadnickihNalogaPanel.Name = "RegistracijaRadnickihNalogaPanel";
+            RegistracijaRadnickihNalogaPanel.Size = new Size(800, 450);
+            RegistracijaRadnickihNalogaPanel.TabIndex = 21;
+            RegistracijaRadnickihNalogaPanel.Visible = false;
+            // 
+            // RegistrujRadnickiNalogButton
+            // 
+            RegistrujRadnickiNalogButton.Location = new Point(300, 290);
+            RegistrujRadnickiNalogButton.Name = "RegistrujRadnickiNalogButton";
+            RegistrujRadnickiNalogButton.Size = new Size(200, 57);
+            RegistrujRadnickiNalogButton.TabIndex = 10;
+            RegistrujRadnickiNalogButton.Text = "Registruj radnički nalog";
+            RegistrujRadnickiNalogButton.UseVisualStyleBackColor = true;
+            RegistrujRadnickiNalogButton.Click += RegistrujRadnickiNalogButton_Click;
+            // 
+            // PotvrdaLozinkeRadnikRegistracijaLabel
+            // 
+            PotvrdaLozinkeRadnikRegistracijaLabel.AutoSize = true;
+            PotvrdaLozinkeRadnikRegistracijaLabel.Location = new Point(181, 235);
+            PotvrdaLozinkeRadnikRegistracijaLabel.Name = "PotvrdaLozinkeRadnikRegistracijaLabel";
+            PotvrdaLozinkeRadnikRegistracijaLabel.Size = new Size(113, 20);
+            PotvrdaLozinkeRadnikRegistracijaLabel.TabIndex = 11;
+            PotvrdaLozinkeRadnikRegistracijaLabel.Text = "Potvrda lozinke:";
+            // 
+            // LozinkaRadnikRegistracijaLabel
+            // 
+            LozinkaRadnikRegistracijaLabel.AutoSize = true;
+            LozinkaRadnikRegistracijaLabel.Location = new Point(181, 202);
+            LozinkaRadnikRegistracijaLabel.Name = "LozinkaRadnikRegistracijaLabel";
+            LozinkaRadnikRegistracijaLabel.Size = new Size(62, 20);
+            LozinkaRadnikRegistracijaLabel.TabIndex = 8;
+            LozinkaRadnikRegistracijaLabel.Text = "Lozinka:";
+            // 
+            // KorisnickoImeRadnikRegistracijaLabel
+            // 
+            KorisnickoImeRadnikRegistracijaLabel.AutoSize = true;
+            KorisnickoImeRadnikRegistracijaLabel.Location = new Point(181, 169);
+            KorisnickoImeRadnikRegistracijaLabel.Name = "KorisnickoImeRadnikRegistracijaLabel";
+            KorisnickoImeRadnikRegistracijaLabel.Size = new Size(109, 20);
+            KorisnickoImeRadnikRegistracijaLabel.TabIndex = 7;
+            KorisnickoImeRadnikRegistracijaLabel.Text = "Korisničko ime:";
+            // 
+            // PrezimeRadnikRegistracijaLabel
+            // 
+            PrezimeRadnikRegistracijaLabel.AutoSize = true;
+            PrezimeRadnikRegistracijaLabel.Location = new Point(181, 136);
+            PrezimeRadnikRegistracijaLabel.Name = "PrezimeRadnikRegistracijaLabel";
+            PrezimeRadnikRegistracijaLabel.Size = new Size(65, 20);
+            PrezimeRadnikRegistracijaLabel.TabIndex = 6;
+            PrezimeRadnikRegistracijaLabel.Text = "Prezime:";
+            // 
+            // ImeRadnikRegistracijaLabel
+            // 
+            ImeRadnikRegistracijaLabel.AutoSize = true;
+            ImeRadnikRegistracijaLabel.Location = new Point(181, 103);
+            ImeRadnikRegistracijaLabel.Name = "ImeRadnikRegistracijaLabel";
+            ImeRadnikRegistracijaLabel.Size = new Size(37, 20);
+            ImeRadnikRegistracijaLabel.TabIndex = 5;
+            ImeRadnikRegistracijaLabel.Text = "Ime:";
+            // 
+            // PotvrdaLozinkeRadnikRegistracijaTextBox
+            // 
+            PotvrdaLozinkeRadnikRegistracijaTextBox.Location = new Point(300, 234);
+            PotvrdaLozinkeRadnikRegistracijaTextBox.Name = "PotvrdaLozinkeRadnikRegistracijaTextBox";
+            PotvrdaLozinkeRadnikRegistracijaTextBox.PasswordChar = '*';
+            PotvrdaLozinkeRadnikRegistracijaTextBox.Size = new Size(200, 27);
+            PotvrdaLozinkeRadnikRegistracijaTextBox.TabIndex = 4;
+            // 
+            // LozinkaRadnikRegistracijaTextBox
+            // 
+            LozinkaRadnikRegistracijaTextBox.Location = new Point(300, 201);
+            LozinkaRadnikRegistracijaTextBox.Name = "LozinkaRadnikRegistracijaTextBox";
+            LozinkaRadnikRegistracijaTextBox.PasswordChar = '*';
+            LozinkaRadnikRegistracijaTextBox.Size = new Size(200, 27);
+            LozinkaRadnikRegistracijaTextBox.TabIndex = 3;
+            // 
+            // KorisnickoImeRadnikRegistracijaTextBox
+            // 
+            KorisnickoImeRadnikRegistracijaTextBox.Location = new Point(300, 166);
+            KorisnickoImeRadnikRegistracijaTextBox.Name = "KorisnickoImeRadnikRegistracijaTextBox";
+            KorisnickoImeRadnikRegistracijaTextBox.Size = new Size(200, 27);
+            KorisnickoImeRadnikRegistracijaTextBox.TabIndex = 2;
+            // 
+            // PrezimeRadnikRegistracijaTextBox
+            // 
+            PrezimeRadnikRegistracijaTextBox.Location = new Point(300, 133);
+            PrezimeRadnikRegistracijaTextBox.Name = "PrezimeRadnikRegistracijaTextBox";
+            PrezimeRadnikRegistracijaTextBox.Size = new Size(200, 27);
+            PrezimeRadnikRegistracijaTextBox.TabIndex = 1;
+            // 
+            // ImeRadnikRegistracijaTextBox
+            // 
+            ImeRadnikRegistracijaTextBox.Location = new Point(300, 100);
+            ImeRadnikRegistracijaTextBox.Name = "ImeRadnikRegistracijaTextBox";
+            ImeRadnikRegistracijaTextBox.Size = new Size(200, 27);
+            ImeRadnikRegistracijaTextBox.TabIndex = 0;
+            // 
+            // NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton
+            // 
+            NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton.Location = new Point(694, 409);
+            NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton.Name = "NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton";
+            NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton.Size = new Size(94, 29);
+            NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton.TabIndex = 20;
+            NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton.Text = "Nazad";
+            NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton.UseVisualStyleBackColor = true;
+            NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton.Click += NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton_Click;
+            // 
+            // PrijavljujemSeKaoLabel
+            // 
+            PrijavljujemSeKaoLabel.AutoSize = true;
+            PrijavljujemSeKaoLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            PrijavljujemSeKaoLabel.Location = new Point(296, 245);
+            PrijavljujemSeKaoLabel.Name = "PrijavljujemSeKaoLabel";
+            PrijavljujemSeKaoLabel.Size = new Size(208, 31);
+            PrijavljujemSeKaoLabel.TabIndex = 4;
+            PrijavljujemSeKaoLabel.Text = "Prijavljujem se kao:";
+            // 
+            // SistemZaTehnickiPregledLabel
+            // 
+            SistemZaTehnickiPregledLabel.AutoSize = true;
+            SistemZaTehnickiPregledLabel.Font = new Font("Segoe UI", 30F, FontStyle.Regular, GraphicsUnit.Point);
+            SistemZaTehnickiPregledLabel.Location = new Point(47, 99);
+            SistemZaTehnickiPregledLabel.Name = "SistemZaTehnickiPregledLabel";
+            SistemZaTehnickiPregledLabel.Size = new Size(706, 67);
+            SistemZaTehnickiPregledLabel.TabIndex = 3;
+            SistemZaTehnickiPregledLabel.Text = "SISTEM ZA TEHNIČKI PREGLED";
             // 
             // AdministratorButton
             // 
@@ -756,17 +916,19 @@
             LogovanAdministratorPanel.ResumeLayout(false);
             RegistracijaAdministratorskihNalogaPanel.ResumeLayout(false);
             RegistracijaAdministratorskihNalogaPanel.PerformLayout();
+            RegistracijaRadnickihNalogaPanel.ResumeLayout(false);
+            RegistracijaRadnickihNalogaPanel.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel IzborniPanel;
-        private Label label1;
+        private Label SistemZaTehnickiPregledLabel;
         private Button AdministratorButton;
         private Button RadnikButton;
         private Button KlijentButton;
-        private Label label2;
+        private Label PrijavljujemSeKaoLabel;
         private Panel KlijentPanel;
         private Panel RadnikPanel;
         private Panel AdministratorPanel;
@@ -806,24 +968,39 @@
         private Button NazadKlijentButton;
         private Button NazadAdministratorButton;
         private Panel LogovanAdministratorPanel;
-        private Button button6;
-        private Button button5;
-        private Button button4;
-        private Button button3;
-        private Button button2;
+        private Button PracenjeStatistikeButton;
+        private Button PregledPostojecihNalogaButton;
+        private Button BrisanjeRadnickihNalogaButton;
+        private Button BrisanjeAdministratorskihNalogaButton;
+        private Button KreiranjeRadnickihNalogaButton;
         private Button KreiranjeAdministratorskihNalogaButton;
+        private Panel RegistracijaRadnickihNalogaPanel;
         private Button OdjavaLogovanogAdministratoraButton;
         private Panel RegistracijaAdministratorskihNalogaPanel;
         private Button RegistrujAdministratorskiNalogButton;
+        private Button RegistrujRadnickiNalogButton;
         private Label PotvrdaLozinkeAdminRegistracijaLabel;
+        private Label LozinkaRadnikRegistracijaLabel;
+        private Label PotvrdaLozinkeRadnikRegistracijaLabel;
         private Label LozinkaAdminRegistracijaLabel;
         private Label KorisnickoImeAdminRegistracijaLabel;
         private Label PrezimeAdminRegistracijaLabel;
+        private Label PrezimeRadnikRegistracijaLabel;
         private Label ImeAdminRegistracijaLabel;
+        private Label ImeRadnikRegistracijaLabel;
         private TextBox PotvrdaLozinkeAdminRegistracijaTextBox;
+        private TextBox PotvrdaLozinkeRadnikRegistracijaTextBox;
         private TextBox LozinkaAdminRegistracijaTextBox;
+        private TextBox LozinkaRadnikRegistracijaTextBox;
+        private Label KorisnickoImeRadnikRegistracijaLabel;
         private TextBox KorisnickoImeAdminRegistracijaTextBox;
+        private TextBox KorisnickoImeRadnikRegistracijaTextBox;
         private TextBox PrezimeAdminRegistracijaTextBox;
+        private TextBox PrezimeRadnikRegistracijaTextBox;
         private TextBox ImeAdminRegistracijaTextBox;
+        private TextBox ImeRadnikRegistracijaTextBox;
+        private Label IndikatorNaKomStePanelu;
+        private Button NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton;
+        private Button NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton;
     }
 }

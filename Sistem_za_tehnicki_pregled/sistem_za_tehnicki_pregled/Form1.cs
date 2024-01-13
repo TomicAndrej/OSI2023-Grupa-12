@@ -10,31 +10,43 @@
         private void KlijentButton_Click(object sender, EventArgs e)
         {
             KlijentPanel.Visible = true;
+            IndikatorNaKomStePanelu.Text = "Klijent";
+            IndikatorNaKomStePanelu.BringToFront();
+            IndikatorNaKomStePanelu.Visible = true;
         }
 
         private void RadnikButton_Click(object sender, EventArgs e)
         {
             RadnikPanel.Visible = true;
+            IndikatorNaKomStePanelu.Text = "Radnik";
+            IndikatorNaKomStePanelu.BringToFront();
+            IndikatorNaKomStePanelu.Visible = true;
         }
 
         private void AdministratorButton_Click(object sender, EventArgs e)
         {
             AdministratorPanel.Visible = true;
+            IndikatorNaKomStePanelu.Text = "Administrator";
+            IndikatorNaKomStePanelu.BringToFront();
+            IndikatorNaKomStePanelu.Visible = true;
         }
 
         private void NazadKlijentButton_Click(object sender, EventArgs e)
         {
             KlijentPanel.Visible = false;
+            IndikatorNaKomStePanelu.Text = "";
         }
 
         private void NazadRadnikButton_Click(object sender, EventArgs e)
         {
             RadnikPanel.Visible = false;
+            IndikatorNaKomStePanelu.Text = "";
         }
 
         private void NazadAdministratorButton_Click(object sender, EventArgs e)
         {
             AdministratorPanel.Visible = false;
+            IndikatorNaKomStePanelu.Text = "";
         }
 
         private void RegistrujNalogButton_Click(object sender, EventArgs e)
@@ -75,6 +87,11 @@
             if (poruka != "")
             {
                 MessageBox.Show(poruka, "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (LozinkaTextBox.Text.Length < 8 || LozinkaTextBox.Text.Length > 32)
+            {
+                MessageBox.Show("Lozinka mora imati između 8 i 32 karaktera!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (LozinkaTextBox.Text != PotvrdaLozinkeTextBox.Text)
@@ -134,9 +151,17 @@
             if (f.provjeraLogInPodataka(KorisnickoImeTextBoxLogin.Text, LozinkaTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
             {
                 MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                IndikatorNaKomStePanelu.Text = "Klijent: " + KorisnickoImeTextBoxLogin.Text;
                 KorisnickoImeTextBoxLogin.Text = "";
                 LozinkaTextBoxLogin.Text = "";
-                // TODO: otvori formu za klijenta
+                /* 
+                 * 
+                 * 
+                 * TODO: otvori formu za klijenta
+                 * 
+                 * 
+                 * 
+                 */
             }
         }
 
@@ -152,30 +177,6 @@
             f.provjeraValidnostiLozinke(LozinkaTextBox.Text);
         }
 
-        private void KorisnickoImeTextBox_MouseEnter(object sender, EventArgs e)
-        {
-            MessageBox.Show("Korisničko ime mora imati između 5 i 32 karaktera!\nDozvoljeni karakteri su samo slova, brojevi, donja crta i tačka.\nKorisničko ime ne smije počinjati brojem, tačkom ili sadržavati razmak.", "Korisničko ime", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            KorisnickoImeTextBox.Focus();
-        }
-
-        private void LozinkaTextBox_MouseEnter(object sender, EventArgs e)
-        {
-            MessageBox.Show("Lozinka mora imati između 8 i 32 karaktera!\nLozinka ne smije sadržavati zarez, tab ili novi red.", "Lozinka", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            LozinkaTextBox.Focus();
-        }
-
-        private void BrojZiroRacunaTextBox_MouseEnter(object sender, EventArgs e)
-        {
-            MessageBox.Show("Broj žiro računa mora imati 16 cifara!", "Broj žiro računa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            BrojZiroRacunaTextBox.Focus();
-        }
-
-        private void JMBGTextBox_MouseEnter(object sender, EventArgs e)
-        {
-            MessageBox.Show("JMBG mora imati 13 cifara!", "JMBG", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            JMBGTextBox.Focus();
-        }
-
         private void PrijaviSeAdministratorButton_Click(object sender, EventArgs e)
         {
             funkcije f = new funkcije();
@@ -185,18 +186,19 @@
                 LogovanAdministratorPanel.Visible = true;
                 LogovanAdministratorPanel.BringToFront();
                 //AdministratorPanel.Visible = false;
+                IndikatorNaKomStePanelu.Text = "Administrator: " + KorisnickoImeAdministratorTextBoxLogin.Text;
                 KorisnickoImeAdministratorTextBoxLogin.Text = "";
                 LozinkaAdministratorTextBoxLogin.Text = "";
-                // TODO: otvori formu za administratora
-
             }
         }
 
         private void OdjavaLogovanogAdministratoraButton_Click(object sender, EventArgs e)
         {
             LogovanAdministratorPanel.Visible = false;
-            AdministratorPanel.Visible = true;
+            AdministratorPanel.Visible = false;
             RegistracijaAdministratorskihNalogaPanel.Visible = false;
+            IndikatorNaKomStePanelu.Text = "";
+            IzborniPanel.Visible = true;
         }
 
         private void RegistrujAdministratorskiNalogButton_Click(object sender, EventArgs e)
@@ -228,9 +230,19 @@
                 return;
             }
             funkcije f = new funkcije();
+            if (!f.ProvjeriValidnostKorisnickogImena(KorisnickoImeAdminRegistracijaTextBox.Text))
+            {
+                MessageBox.Show("Korisničko ime nije validno!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (!f.provjeraKorisnickogImena(KorisnickoImeAdminRegistracijaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
             {
                 //MessageBox.Show("Korisničko ime već postoji!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (LozinkaAdminRegistracijaTextBox.Text.Length < 8 || LozinkaAdminRegistracijaTextBox.Text.Length > 32)
+            {
+                MessageBox.Show("Lozinka mora imati između 8 i 32 karaktera!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             if (LozinkaAdminRegistracijaTextBox.Text != PotvrdaLozinkeAdminRegistracijaTextBox.Text)
@@ -258,7 +270,90 @@
         {
             RegistracijaAdministratorskihNalogaPanel.Visible = true;
             RegistracijaAdministratorskihNalogaPanel.BringToFront();
-            LogovanAdministratorPanel.Visible = false;
+            RegistracijaAdministratorskihNalogaPanel.ResumeLayout();
+        }
+
+        private void NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton_Click(object sender, EventArgs e)
+        {
+            RegistracijaAdministratorskihNalogaPanel.Visible = false;
+        }
+
+        private void KreiranjeRadnickihNalogaButton_Click(object sender, EventArgs e)
+        {
+            RegistracijaRadnickihNalogaPanel.Visible = true;
+            RegistracijaRadnickihNalogaPanel.BringToFront();
+            RegistracijaRadnickihNalogaPanel.ResumeLayout();
+        }
+
+        private void NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton_Click(object sender, EventArgs e)
+        {
+            RegistracijaRadnickihNalogaPanel.Visible = false;
+        }
+
+        private void RegistrujRadnickiNalogButton_Click(object sender, EventArgs e)
+        {
+            string poruka = "";
+            if (ImeRadnikRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli ime!\n";
+            }
+            if (PrezimeRadnikRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli prezime!\n";
+            }
+            if (KorisnickoImeRadnikRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli korisničko ime!\n";
+            }
+            if (LozinkaRadnikRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli lozinku!\n";
+            }
+            if (PotvrdaLozinkeRadnikRegistracijaTextBox.Text == "")
+            {
+                poruka += "Niste unijeli potvrdu lozinke!\n";
+            }
+            if (poruka != "")
+            {
+                MessageBox.Show(poruka, "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            funkcije f = new funkcije();
+            if (!f.ProvjeriValidnostKorisnickogImena(KorisnickoImeRadnikRegistracijaTextBox.Text))
+            {
+                MessageBox.Show("Korisničko ime nije validno!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!f.provjeraKorisnickogImena(KorisnickoImeRadnikRegistracijaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            {
+                //MessageBox.Show("Korisničko ime već postoji!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (LozinkaRadnikRegistracijaTextBox.Text.Length < 8 || LozinkaRadnikRegistracijaTextBox.Text.Length > 32)
+            {
+                MessageBox.Show("Lozinka mora imati između 8 i 32 karaktera!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (LozinkaRadnikRegistracijaTextBox.Text != PotvrdaLozinkeRadnikRegistracijaTextBox.Text)
+            {
+                MessageBox.Show("Lozinka i potvrda lozinke se ne poklapaju!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string red = KorisnickoImeRadnikRegistracijaTextBox.Text +
+                "," + LozinkaRadnikRegistracijaTextBox.Text +
+                "," + ImeRadnikRegistracijaTextBox.Text +
+                "," + PrezimeRadnikRegistracijaTextBox.Text;
+            using (StreamWriter writer = File.AppendText("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            {
+                writer.WriteLine(red);
+            }
+            MessageBox.Show("Uspješno ste registrovali radnika!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            KorisnickoImeRadnikRegistracijaTextBox.Text = "";
+            LozinkaRadnikRegistracijaTextBox.Text = "";
+            ImeRadnikRegistracijaTextBox.Text = "";
+            PrezimeRadnikRegistracijaTextBox.Text = "";
+            PotvrdaLozinkeRadnikRegistracijaTextBox.Text = "";
+
         }
     }
 }

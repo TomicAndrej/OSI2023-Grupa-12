@@ -68,7 +68,7 @@ namespace sistem_za_tehnicki_pregled
                     while (!sr.EndOfStream)
                     {
                         string red = sr.ReadLine();
-                        string[] podaci = red.Split(' ');
+                        string[] podaci = red.Split(',');
                         if (username == podaci[0])
                         {
                             MessageBox.Show("Korisničko ime već postoji!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
