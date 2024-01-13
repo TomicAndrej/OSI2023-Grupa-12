@@ -90,6 +90,9 @@
             PrezimeAdminRegistracijaTextBox = new TextBox();
             ImeAdminRegistracijaTextBox = new TextBox();
             NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton = new Button();
+            NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton = new Button();
+            PregledPostojecihNalogaPanel = new Panel();
+            PregledPostojecihNalogaListBox = new ListBox();
             RegistracijaRadnickihNalogaPanel = new Panel();
             RegistrujRadnickiNalogButton = new Button();
             PotvrdaLozinkeRadnikRegistracijaLabel = new Label();
@@ -528,6 +531,7 @@
             LogovanAdministratorPanel.Controls.Add(KreiranjeRadnickihNalogaButton);
             LogovanAdministratorPanel.Controls.Add(KreiranjeAdministratorskihNalogaButton);
             LogovanAdministratorPanel.Controls.Add(RegistracijaAdministratorskihNalogaPanel);
+            LogovanAdministratorPanel.Controls.Add(PregledPostojecihNalogaPanel);
             LogovanAdministratorPanel.Controls.Add(RegistracijaRadnickihNalogaPanel);
             LogovanAdministratorPanel.Controls.Add(BrisanjeRadnickihNalogaPanel);
             LogovanAdministratorPanel.Dock = DockStyle.Fill;
@@ -564,6 +568,7 @@
             PregledPostojecihNalogaButton.TabIndex = 4;
             PregledPostojecihNalogaButton.Text = "Pregled postojećih naloga";
             PregledPostojecihNalogaButton.UseVisualStyleBackColor = true;
+            PregledPostojecihNalogaButton.Click += PregledPostojecihNalogaButton_Click;
             // 
             // BrisanjeRadnickihNalogaButton
             // 
@@ -728,6 +733,36 @@
             NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.UseVisualStyleBackColor = true;
             NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton.Click += NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton_Click;
             // 
+            // PregledPostojecihNalogaPanel
+            // 
+            PregledPostojecihNalogaPanel.Controls.Add(NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton);
+            PregledPostojecihNalogaPanel.Controls.Add(PregledPostojecihNalogaListBox);
+            PregledPostojecihNalogaPanel.Dock = DockStyle.Fill;
+            PregledPostojecihNalogaPanel.Location = new Point(0, 0);
+            PregledPostojecihNalogaPanel.Name = "PregledPostojecihNalogaPanel";
+            PregledPostojecihNalogaPanel.Size = new Size(800, 450);
+            PregledPostojecihNalogaPanel.TabIndex = 20;
+            PregledPostojecihNalogaPanel.Visible = false;
+            // 
+            // PregledPostojecihNalogaListBox
+            // 
+            PregledPostojecihNalogaListBox.FormattingEnabled = true;
+            PregledPostojecihNalogaListBox.HorizontalScrollbar = true;
+            PregledPostojecihNalogaListBox.Location = new Point(50, 73);
+            PregledPostojecihNalogaListBox.Name = "PregledPostojecihNalogaListBox";
+            PregledPostojecihNalogaListBox.Size = new Size(614, 344);
+            PregledPostojecihNalogaListBox.TabIndex = 1;
+            // 
+            // NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton
+            // 
+            NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.Location = new Point(694, 409);
+            NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.Name = "NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton";
+            NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.Size = new Size(94, 29);
+            NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.TabIndex = 20;
+            NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.Text = "Nazad";
+            NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.UseVisualStyleBackColor = true;
+            NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.Click += NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton_Click;
+            // 
             // RegistracijaRadnickihNalogaPanel
             // 
             RegistracijaRadnickihNalogaPanel.Controls.Add(RegistrujRadnickiNalogButton);
@@ -880,8 +915,6 @@
             ListaRadnickihNalogaComboBox.Name = "ListaRadnickihNalogaComboBox";
             ListaRadnickihNalogaComboBox.Size = new Size(400, 28);
             ListaRadnickihNalogaComboBox.TabIndex = 9;
-            ListaRadnickihNalogaComboBox.Enabled = true;
-            //ListaRadnickihNalogaComboBox.Text = "Izaberite radnički nalog";
             ListaRadnickihNalogaComboBox.SelectedIndexChanged += ListaRadnickihNalogaComboBox_SelectedIndexChanged;
             // 
             // NazadSaPanelaZaBrisanjeRadnickihNalogaNaPanelPrijavljenogAdministratoraButton
@@ -1024,6 +1057,8 @@
         private Panel LogovanAdministratorPanel;
         private Button PracenjeStatistikeButton;
         private Button PregledPostojecihNalogaButton;
+        private Panel PregledPostojecihNalogaPanel;
+        private ListBox PregledPostojecihNalogaListBox;
         private Button BrisanjeRadnickihNalogaButton;
         private Button BrisanjeAdministratorskihNalogaButton;
         private Button KreiranjeRadnickihNalogaButton;
@@ -1056,6 +1091,7 @@
         private TextBox ImeRadnikRegistracijaTextBox;
         private Label IndikatorNaKomStePanelu;
         private Button NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton;
+        private Button NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton;
         private Button NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton;
         private Button NazadSaPanelaZaBrisanjeRadnickihNalogaNaPanelPrijavljenogAdministratoraButton;
     }

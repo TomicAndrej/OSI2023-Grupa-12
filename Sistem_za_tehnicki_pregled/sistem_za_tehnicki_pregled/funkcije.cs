@@ -480,5 +480,43 @@ namespace sistem_za_tehnicki_pregled
             }
         }
 
+        public List<string> GetListOfAllAccounts()
+        {
+            List<string> accounts = new List<string>();
+            accounts.Add("Radnički nalozi:");
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            {
+                string line;
+                //skip the first line
+                sr.ReadLine();
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    accounts.Add(parts[0]);
+                }
+            }
+            accounts.Add("Klijentski nalozi:");
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    accounts.Add(parts[0]);
+                }
+            }
+            accounts.Add("Administratorski nalozi:");
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    accounts.Add(parts[0]);
+                }
+            }
+            return accounts;
+        }
+
     }
 }

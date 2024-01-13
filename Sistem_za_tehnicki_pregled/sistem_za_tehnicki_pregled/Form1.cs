@@ -448,12 +448,12 @@
             }
         }
 
-        private void ListaRadnickihNalogaComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        public void ListaRadnickihNalogaComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             PraznaListaRadnickihNaloga();
         }
 
-        private void ObrisiRadnickiNalogButton_Click(object sender, EventArgs e)
+        public void ObrisiRadnickiNalogButton_Click(object sender, EventArgs e)
         {
             PraznaListaRadnickihNaloga();
             Radnik radnik = (Radnik)ListaRadnickihNalogaComboBox.SelectedItem;
@@ -472,6 +472,20 @@
                     ListaRadnickihNalogaComboBox.Enabled = true;
                 }
             }
+        }
+
+        public void PregledPostojecihNalogaButton_Click(object sender, EventArgs e)
+        {
+            PregledPostojecihNalogaPanel.Visible = true;
+            PregledPostojecihNalogaPanel.BringToFront();
+            PregledPostojecihNalogaPanel.ResumeLayout();
+            funkcije funkcije = new funkcije();
+            PregledPostojecihNalogaListBox.DataSource = funkcije.GetListOfAllAccounts();
+        }
+
+        public void NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton_Click(object sender, EventArgs e)
+        {
+            PregledPostojecihNalogaPanel.Visible = false;
         }
     }
 }
