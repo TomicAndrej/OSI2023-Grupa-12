@@ -125,6 +125,57 @@
             RegistracijaRadnickihNalogaPanel.SuspendLayout();
             BrisanjeRadnickihNalogaPanel.SuspendLayout();
             SuspendLayout();
+
+            panel_pregledIstorije = new Panel();
+            button_pregledIstorije_nazad = new Button();
+            listBox_pregledIstorije = new ListBox();
+            label_pregledIstorije_naslov = new Label();
+            panel_prikazArhive = new Panel();
+            button_prikazArhive_nazad = new Button();
+            listBox_prikazArhive = new ListBox();
+            label_prikazArhive_naslov = new Label();
+            panel_obavljanjeTehnickog = new Panel();
+            button_obavljanjeTehnickog_otkazi = new Button();
+            label_obavljanjeTehnickog_naslov = new Label();
+            listBox_obavljanjeTehnickog = new ListBox();
+            panel_zakazivanjeTermina1 = new Panel();
+            panel_zakazivanjeTermina3 = new Panel();
+            button_zakazivanjeTermina3_nazad = new Button();
+            monthCalendar_zakazivanjeTermina3 = new MonthCalendar();
+            dateTimePicker_zakazivanjeTermina3 = new DateTimePicker();
+            button_zakazivanjeTermina3_zakaziTermin = new Button();
+            panel_zakazivanjeTermina2 = new Panel();
+            label_zakazivanjeTermina_kategorija = new Label();
+            textBox_zakazivanjeTermina2_kategorija = new TextBox();
+            label_zakazivanjeTermina_potkategorija = new Label();
+            textBox_zakazivanjeTermina2_potkategorija = new TextBox();
+            label_zakazivanjeTermina_marka = new Label();
+            textBox_zakazivanjeTermina2_marka = new TextBox();
+            label_zakazivanjeTermina_model = new Label();
+            textBox_zakazivanjeTermina2_model = new TextBox();
+            label_zakazivanjeTermina_godiste = new Label();
+            textBox_zakazivanjeTermina2_godiste = new TextBox();
+            label_zakazivanjeTermina_kubikaza = new Label();
+            textBox_zakazivanjeTermina2_kubikaza = new TextBox();
+            label_zakazivanjeTermina_stiker = new Label();
+            textBox_zakazivanjeTermina2_stiker = new TextBox();
+            button_zakazivanjeTermina2_dalje = new Button();
+            textBox_zakazivanjeTermina2_rokRegistracije = new TextBox();
+            label_zakazivanjeTermina_datumReg = new Label();
+            button_zakazivanjeTermina1_pokreni = new Button();
+            textBox_zakazivanjeTermina1_brojSasije = new TextBox();
+            label_zakazivanjeTermina_unosBrojaSasije = new Label();
+            button_zakazivanjeTermina1_otkazi = new Button();
+            button_prikazArhive = new Button();
+            button_zakazivanjeTehnickog = new Button();
+            button_obavljanjeTehnickog = new Button();
+            button_pregledIstorije = new Button();
+            panel_pregledIstorije.SuspendLayout();
+            panel_prikazArhive.SuspendLayout();
+            panel_obavljanjeTehnickog.SuspendLayout();
+            panel_zakazivanjeTermina1.SuspendLayout();
+            panel_zakazivanjeTermina3.SuspendLayout();
+            panel_zakazivanjeTermina2.SuspendLayout();
             // 
             // IzborniPanel
             // 
@@ -424,6 +475,14 @@
             // 
             // RadnikPanel
             // 
+            RadnikPanel.Controls.Add(panel_pregledIstorije);
+            RadnikPanel.Controls.Add(panel_prikazArhive);
+            RadnikPanel.Controls.Add(panel_obavljanjeTehnickog);
+            RadnikPanel.Controls.Add(panel_zakazivanjeTermina1);
+            RadnikPanel.Controls.Add(button_prikazArhive);
+            RadnikPanel.Controls.Add(button_zakazivanjeTehnickog);
+            RadnikPanel.Controls.Add(button_obavljanjeTehnickog);
+            RadnikPanel.Controls.Add(button_pregledIstorije);
             RadnikPanel.Controls.Add(NazadRadnikButton);
             RadnikPanel.Controls.Add(label4);
             RadnikPanel.Dock = DockStyle.Fill;
@@ -977,6 +1036,422 @@
             KlijentButton.UseVisualStyleBackColor = true;
             KlijentButton.Click += KlijentButton_Click;
             // 
+            // panel_pregledIstorije
+            // 
+            panel_pregledIstorije.Controls.Add(button_pregledIstorije_nazad);
+            panel_pregledIstorije.Controls.Add(listBox_pregledIstorije);
+            panel_pregledIstorije.Controls.Add(label_pregledIstorije_naslov);
+            panel_pregledIstorije.Dock = DockStyle.Fill;
+            panel_pregledIstorije.Location = new Point(0, 0);
+            panel_pregledIstorije.Name = "panel_pregledIstorije";
+            panel_pregledIstorije.Size = new Size(800, 450);
+            panel_pregledIstorije.TabIndex = 15;
+            // 
+            // button_pregledIstorije_nazad
+            // 
+            button_pregledIstorije_nazad.Location = new Point(650, 368);
+            button_pregledIstorije_nazad.Name = "button_pregledIstorije_nazad";
+            button_pregledIstorije_nazad.Size = new Size(94, 29);
+            button_pregledIstorije_nazad.TabIndex = 2;
+            button_pregledIstorije_nazad.Text = "Nazad";
+            button_pregledIstorije_nazad.UseVisualStyleBackColor = true;
+            button_pregledIstorije_nazad.Click += button_pregledIstorije_nazad_Click;
+            // 
+            // listBox_pregledIstorije
+            // 
+            listBox_pregledIstorije.FormattingEnabled = true;
+            listBox_pregledIstorije.HorizontalScrollbar = true;
+            listBox_pregledIstorije.Location = new Point(50, 73);
+            listBox_pregledIstorije.Name = "listBox_pregledIstorije";
+            listBox_pregledIstorije.Size = new Size(527, 324);
+            listBox_pregledIstorije.TabIndex = 1;
+            // 
+            // label_pregledIstorije_naslov
+            // 
+            label_pregledIstorije_naslov.AutoSize = true;
+            label_pregledIstorije_naslov.Location = new Point(50, 31);
+            label_pregledIstorije_naslov.Name = "label_pregledIstorije_naslov";
+            label_pregledIstorije_naslov.Size = new Size(227, 20);
+            label_pregledIstorije_naslov.TabIndex = 0;
+            label_pregledIstorije_naslov.Text = "Prikaz istorije tehnickih pregleda:";
+            // 
+            // panel_prikazArhive
+            // 
+            panel_prikazArhive.Controls.Add(button_prikazArhive_nazad);
+            panel_prikazArhive.Controls.Add(listBox_prikazArhive);
+            panel_prikazArhive.Controls.Add(label_prikazArhive_naslov);
+            panel_prikazArhive.Dock = DockStyle.Fill;
+            panel_prikazArhive.Location = new Point(0, 0);
+            panel_prikazArhive.Name = "panel_prikazArhive";
+            panel_prikazArhive.Size = new Size(800, 450);
+            panel_prikazArhive.TabIndex = 14;
+            // 
+            // button_prikazArhive_nazad
+            // 
+            button_prikazArhive_nazad.Location = new Point(679, 382);
+            button_prikazArhive_nazad.Name = "button_prikazArhive_nazad";
+            button_prikazArhive_nazad.Size = new Size(109, 29);
+            button_prikazArhive_nazad.TabIndex = 2;
+            button_prikazArhive_nazad.Text = "Nazad";
+            button_prikazArhive_nazad.UseVisualStyleBackColor = true;
+            button_prikazArhive_nazad.Click += button_prikazArhive_nazad_Click;
+            // 
+            // listBox_prikazArhive
+            // 
+            listBox_prikazArhive.FormattingEnabled = true;
+            listBox_prikazArhive.HorizontalScrollbar = true;
+            listBox_prikazArhive.Location = new Point(50, 73);
+            listBox_prikazArhive.Name = "listBox_prikazArhive";
+            listBox_prikazArhive.Size = new Size(614, 344);
+            listBox_prikazArhive.TabIndex = 1;
+            // 
+            // label_prikazArhive_naslov
+            // 
+            label_prikazArhive_naslov.AutoSize = true;
+            label_prikazArhive_naslov.Location = new Point(50, 31);
+            label_prikazArhive_naslov.Name = "label_prikazArhive_naslov";
+            label_prikazArhive_naslov.Size = new Size(276, 20);
+            label_prikazArhive_naslov.TabIndex = 0;
+            label_prikazArhive_naslov.Text = "Prikaz svih izvjestaja o ispravnosti vozila:";
+            // 
+            // panel_obavljanjeTehnickog
+            // 
+            panel_obavljanjeTehnickog.Controls.Add(button_obavljanjeTehnickog_otkazi);
+            panel_obavljanjeTehnickog.Controls.Add(label_obavljanjeTehnickog_naslov);
+            panel_obavljanjeTehnickog.Controls.Add(listBox_obavljanjeTehnickog);
+            panel_obavljanjeTehnickog.Dock = DockStyle.Fill;
+            panel_obavljanjeTehnickog.Location = new Point(0, 0);
+            panel_obavljanjeTehnickog.Name = "panel_obavljanjeTehnickog";
+            panel_obavljanjeTehnickog.Size = new Size(800, 450);
+            panel_obavljanjeTehnickog.TabIndex = 13;
+            // 
+            // button_obavljanjeTehnickog_otkazi
+            // 
+            button_obavljanjeTehnickog_otkazi.Location = new Point(650, 364);
+            button_obavljanjeTehnickog_otkazi.Name = "button_obavljanjeTehnickog_otkazi";
+            button_obavljanjeTehnickog_otkazi.Size = new Size(112, 33);
+            button_obavljanjeTehnickog_otkazi.TabIndex = 2;
+            button_obavljanjeTehnickog_otkazi.Text = "Otkaži";
+            button_obavljanjeTehnickog_otkazi.UseVisualStyleBackColor = true;
+            button_obavljanjeTehnickog_otkazi.Click += button_obavljanjeTehnickog_otkazi_Click;
+            // 
+            // label_obavljanjeTehnickog_naslov
+            // 
+            label_obavljanjeTehnickog_naslov.AutoSize = true;
+            label_obavljanjeTehnickog_naslov.Location = new Point(60, 32);
+            label_obavljanjeTehnickog_naslov.Name = "label_obavljanjeTehnickog_naslov";
+            label_obavljanjeTehnickog_naslov.Size = new Size(390, 20);
+            label_obavljanjeTehnickog_naslov.TabIndex = 1;
+            label_obavljanjeTehnickog_naslov.Text = "Izaberite termin za koji želite da obavite tehnički pregled:";
+            // 
+            // listBox_obavljanjeTehnickog
+            // 
+            listBox_obavljanjeTehnickog.FormattingEnabled = true;
+            listBox_obavljanjeTehnickog.HorizontalScrollbar = true;
+            listBox_obavljanjeTehnickog.Location = new Point(60, 73);
+            listBox_obavljanjeTehnickog.Name = "listBox_obavljanjeTehnickog";
+            listBox_obavljanjeTehnickog.Size = new Size(420, 324);
+            listBox_obavljanjeTehnickog.TabIndex = 0;
+            listBox_obavljanjeTehnickog.DoubleClick += listBox_obavljanjeTehnickog_DoubleClick;
+            // 
+            // panel_zakazivanjeTermina1
+            // 
+            panel_zakazivanjeTermina1.Controls.Add(panel_zakazivanjeTermina3);
+            panel_zakazivanjeTermina1.Controls.Add(panel_zakazivanjeTermina2);
+            panel_zakazivanjeTermina1.Controls.Add(button_zakazivanjeTermina1_pokreni);
+            panel_zakazivanjeTermina1.Controls.Add(textBox_zakazivanjeTermina1_brojSasije);
+            panel_zakazivanjeTermina1.Controls.Add(label_zakazivanjeTermina_unosBrojaSasije);
+            panel_zakazivanjeTermina1.Controls.Add(button_zakazivanjeTermina1_otkazi);
+            panel_zakazivanjeTermina1.Dock = DockStyle.Fill;
+            panel_zakazivanjeTermina1.Location = new Point(0, 0);
+            panel_zakazivanjeTermina1.Name = "panel_zakazivanjeTermina1";
+            panel_zakazivanjeTermina1.Size = new Size(800, 450);
+            panel_zakazivanjeTermina1.TabIndex = 6;
+            // 
+            // panel_zakazivanjeTermina3
+            // 
+            panel_zakazivanjeTermina3.Controls.Add(button_zakazivanjeTermina3_nazad);
+            panel_zakazivanjeTermina3.Controls.Add(monthCalendar_zakazivanjeTermina3);
+            panel_zakazivanjeTermina3.Controls.Add(dateTimePicker_zakazivanjeTermina3);
+            panel_zakazivanjeTermina3.Controls.Add(button_zakazivanjeTermina3_zakaziTermin);
+            panel_zakazivanjeTermina3.Location = new Point(47, 64);
+            panel_zakazivanjeTermina3.Name = "panel_zakazivanjeTermina3";
+            panel_zakazivanjeTermina3.Size = new Size(408, 325);
+            panel_zakazivanjeTermina3.TabIndex = 12;
+            // 
+            // button_zakazivanjeTermina3_nazad
+            // 
+            button_zakazivanjeTermina3_nazad.Location = new Point(15, 275);
+            button_zakazivanjeTermina3_nazad.Name = "button_zakazivanjeTermina3_nazad";
+            button_zakazivanjeTermina3_nazad.Size = new Size(94, 29);
+            button_zakazivanjeTermina3_nazad.TabIndex = 8;
+            button_zakazivanjeTermina3_nazad.Text = "Nazad";
+            button_zakazivanjeTermina3_nazad.UseVisualStyleBackColor = true;
+            button_zakazivanjeTermina3_nazad.Click += button_zakazivanjeTermina3_nazad_Click;
+            // 
+            // monthCalendar_zakazivanjeTermina3
+            // 
+            monthCalendar_zakazivanjeTermina3.Location = new Point(10, 9);
+            monthCalendar_zakazivanjeTermina3.Name = "monthCalendar_zakazivanjeTermina3";
+            monthCalendar_zakazivanjeTermina3.TabIndex = 6;
+            // 
+            // dateTimePicker_zakazivanjeTermina3
+            // 
+            dateTimePicker_zakazivanjeTermina3.Format = DateTimePickerFormat.Time;
+            dateTimePicker_zakazivanjeTermina3.Location = new Point(15, 228);
+            dateTimePicker_zakazivanjeTermina3.Name = "dateTimePicker_zakazivanjeTermina3";
+            dateTimePicker_zakazivanjeTermina3.Size = new Size(250, 27);
+            dateTimePicker_zakazivanjeTermina3.TabIndex = 7;
+            // 
+            // button_zakazivanjeTermina3_zakaziTermin
+            // 
+            button_zakazivanjeTermina3_zakaziTermin.Location = new Point(137, 275);
+            button_zakazivanjeTermina3_zakaziTermin.Name = "button_zakazivanjeTermina3_zakaziTermin";
+            button_zakazivanjeTermina3_zakaziTermin.Size = new Size(128, 29);
+            button_zakazivanjeTermina3_zakaziTermin.TabIndex = 3;
+            button_zakazivanjeTermina3_zakaziTermin.Text = "Zakazi termin";
+            button_zakazivanjeTermina3_zakaziTermin.UseVisualStyleBackColor = true;
+            button_zakazivanjeTermina3_zakaziTermin.Click += button_zakazivanjeTermina3_zakaziTermin_click;
+            // 
+            // panel_zakazivanjeTermina2
+            // 
+            panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_kategorija);
+            panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_kategorija);
+            panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_potkategorija);
+            panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_potkategorija);
+            panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_marka);
+            panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_marka);
+            panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_model);
+            panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_model);
+            panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_godiste);
+            panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_godiste);
+            panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_kubikaza);
+            panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_kubikaza);
+            panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_stiker);
+            panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_stiker);
+            panel_zakazivanjeTermina2.Controls.Add(button_zakazivanjeTermina2_dalje);
+            panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_rokRegistracije);
+            panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_datumReg);
+            panel_zakazivanjeTermina2.Location = new Point(53, 55);
+            panel_zakazivanjeTermina2.Name = "panel_zakazivanjeTermina2";
+            panel_zakazivanjeTermina2.Size = new Size(359, 322);
+            panel_zakazivanjeTermina2.TabIndex = 10;
+            // 
+            // label_zakazivanjeTermina_kategorija
+            // 
+            label_zakazivanjeTermina_kategorija.AutoSize = true;
+            label_zakazivanjeTermina_kategorija.Location = new Point(16, 12);
+            label_zakazivanjeTermina_kategorija.Name = "label_zakazivanjeTermina_kategorija";
+            label_zakazivanjeTermina_kategorija.Size = new Size(81, 20);
+            label_zakazivanjeTermina_kategorija.TabIndex = 9;
+            label_zakazivanjeTermina_kategorija.Text = "Kategorija:";
+            // 
+            // textBox_zakazivanjeTermina2_kategorija
+            // 
+            textBox_zakazivanjeTermina2_kategorija.Location = new Point(149, 9);
+            textBox_zakazivanjeTermina2_kategorija.Name = "textBox_zakazivanjeTermina2_kategorija";
+            textBox_zakazivanjeTermina2_kategorija.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina2_kategorija.TabIndex = 8;
+            // 
+            // label_zakazivanjeTermina_potkategorija
+            // 
+            label_zakazivanjeTermina_potkategorija.AutoSize = true;
+            label_zakazivanjeTermina_potkategorija.Location = new Point(16, 45);
+            label_zakazivanjeTermina_potkategorija.Name = "label_zakazivanjeTermina_potkategorija";
+            label_zakazivanjeTermina_potkategorija.Size = new Size(100, 20);
+            label_zakazivanjeTermina_potkategorija.TabIndex = 10;
+            label_zakazivanjeTermina_potkategorija.Text = "Potkategorija:";
+            // 
+            // textBox_zakazivanjeTermina2_potkategorija
+            // 
+            textBox_zakazivanjeTermina2_potkategorija.Location = new Point(149, 42);
+            textBox_zakazivanjeTermina2_potkategorija.Name = "textBox_zakazivanjeTermina2_potkategorija";
+            textBox_zakazivanjeTermina2_potkategorija.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina2_potkategorija.TabIndex = 17;
+            // 
+            // label_zakazivanjeTermina_marka
+            // 
+            label_zakazivanjeTermina_marka.AutoSize = true;
+            label_zakazivanjeTermina_marka.Location = new Point(16, 78);
+            label_zakazivanjeTermina_marka.Name = "label_zakazivanjeTermina_marka";
+            label_zakazivanjeTermina_marka.Size = new Size(53, 20);
+            label_zakazivanjeTermina_marka.TabIndex = 11;
+            label_zakazivanjeTermina_marka.Text = "Marka:";
+            // 
+            // textBox_zakazivanjeTermina2_marka
+            // 
+            textBox_zakazivanjeTermina2_marka.Location = new Point(149, 75);
+            textBox_zakazivanjeTermina2_marka.Name = "textBox_zakazivanjeTermina2_marka";
+            textBox_zakazivanjeTermina2_marka.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina2_marka.TabIndex = 18;
+            // 
+            // label_zakazivanjeTermina_model
+            // 
+            label_zakazivanjeTermina_model.AutoSize = true;
+            label_zakazivanjeTermina_model.Location = new Point(16, 111);
+            label_zakazivanjeTermina_model.Name = "label_zakazivanjeTermina_model";
+            label_zakazivanjeTermina_model.Size = new Size(55, 20);
+            label_zakazivanjeTermina_model.TabIndex = 12;
+            label_zakazivanjeTermina_model.Text = "Model:";
+            // 
+            // textBox_zakazivanjeTermina2_model
+            // 
+            textBox_zakazivanjeTermina2_model.Location = new Point(149, 108);
+            textBox_zakazivanjeTermina2_model.Name = "textBox_zakazivanjeTermina2_model";
+            textBox_zakazivanjeTermina2_model.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina2_model.TabIndex = 19;
+            // 
+            // label_zakazivanjeTermina_godiste
+            // 
+            label_zakazivanjeTermina_godiste.AutoSize = true;
+            label_zakazivanjeTermina_godiste.Location = new Point(16, 144);
+            label_zakazivanjeTermina_godiste.Name = "label_zakazivanjeTermina_godiste";
+            label_zakazivanjeTermina_godiste.Size = new Size(63, 20);
+            label_zakazivanjeTermina_godiste.TabIndex = 13;
+            label_zakazivanjeTermina_godiste.Text = "Godište:";
+            // 
+            // textBox_zakazivanjeTermina2_godiste
+            // 
+            textBox_zakazivanjeTermina2_godiste.Location = new Point(149, 141);
+            textBox_zakazivanjeTermina2_godiste.Name = "textBox_zakazivanjeTermina2_godiste";
+            textBox_zakazivanjeTermina2_godiste.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina2_godiste.TabIndex = 20;
+            // 
+            // label_zakazivanjeTermina_kubikaza
+            // 
+            label_zakazivanjeTermina_kubikaza.AutoSize = true;
+            label_zakazivanjeTermina_kubikaza.Location = new Point(16, 177);
+            label_zakazivanjeTermina_kubikaza.Name = "label_zakazivanjeTermina_kubikaza";
+            label_zakazivanjeTermina_kubikaza.Size = new Size(72, 20);
+            label_zakazivanjeTermina_kubikaza.TabIndex = 14;
+            label_zakazivanjeTermina_kubikaza.Text = "Kubikaža:";
+            // 
+            // textBox_zakazivanjeTermina2_kubikaza
+            // 
+            textBox_zakazivanjeTermina2_kubikaza.Location = new Point(149, 174);
+            textBox_zakazivanjeTermina2_kubikaza.Name = "textBox_zakazivanjeTermina2_kubikaza";
+            textBox_zakazivanjeTermina2_kubikaza.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina2_kubikaza.TabIndex = 21;
+            // 
+            // label_zakazivanjeTermina_stiker
+            // 
+            label_zakazivanjeTermina_stiker.AutoSize = true;
+            label_zakazivanjeTermina_stiker.Location = new Point(16, 210);
+            label_zakazivanjeTermina_stiker.Name = "label_zakazivanjeTermina_stiker";
+            label_zakazivanjeTermina_stiker.Size = new Size(49, 20);
+            label_zakazivanjeTermina_stiker.TabIndex = 15;
+            label_zakazivanjeTermina_stiker.Text = "Stiker:";
+            // 
+            // textBox_zakazivanjeTermina2_stiker
+            // 
+            textBox_zakazivanjeTermina2_stiker.Location = new Point(149, 207);
+            textBox_zakazivanjeTermina2_stiker.Name = "textBox_zakazivanjeTermina2_stiker";
+            textBox_zakazivanjeTermina2_stiker.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina2_stiker.TabIndex = 22;
+            // 
+            // button_zakazivanjeTermina2_dalje
+            // 
+            button_zakazivanjeTermina2_dalje.Location = new Point(161, 279);
+            button_zakazivanjeTermina2_dalje.Name = "button_zakazivanjeTermina2_dalje";
+            button_zakazivanjeTermina2_dalje.Size = new Size(94, 29);
+            button_zakazivanjeTermina2_dalje.TabIndex = 24;
+            button_zakazivanjeTermina2_dalje.Text = "Dalje";
+            button_zakazivanjeTermina2_dalje.UseVisualStyleBackColor = true;
+            button_zakazivanjeTermina2_dalje.Click += button_zakazivanjeTermina2_dalje_Click;
+            // 
+            // textBox_zakazivanjeTermina2_rokRegistracije
+            // 
+            textBox_zakazivanjeTermina2_rokRegistracije.Location = new Point(149, 240);
+            textBox_zakazivanjeTermina2_rokRegistracije.Name = "textBox_zakazivanjeTermina2_rokRegistracije";
+            textBox_zakazivanjeTermina2_rokRegistracije.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina2_rokRegistracije.TabIndex = 23;
+            // 
+            // label_zakazivanjeTermina_datumReg
+            // 
+            label_zakazivanjeTermina_datumReg.AutoSize = true;
+            label_zakazivanjeTermina_datumReg.Location = new Point(16, 243);
+            label_zakazivanjeTermina_datumReg.Name = "label_zakazivanjeTermina_datumReg";
+            label_zakazivanjeTermina_datumReg.Size = new Size(114, 20);
+            label_zakazivanjeTermina_datumReg.TabIndex = 16;
+            label_zakazivanjeTermina_datumReg.Text = "Rok registracije:";
+            // 
+            // button_zakazivanjeTermina1_pokreni
+            // 
+            button_zakazivanjeTermina1_pokreni.Location = new Point(197, 69);
+            button_zakazivanjeTermina1_pokreni.Name = "button_zakazivanjeTermina1_pokreni";
+            button_zakazivanjeTermina1_pokreni.Size = new Size(94, 29);
+            button_zakazivanjeTermina1_pokreni.TabIndex = 11;
+            button_zakazivanjeTermina1_pokreni.Text = "Pokreni";
+            button_zakazivanjeTermina1_pokreni.UseVisualStyleBackColor = true;
+            button_zakazivanjeTermina1_pokreni.Click += button_zakazivanjeTermina1_pokreni_Click;
+            // 
+            // textBox_zakazivanjeTermina1_brojSasije
+            // 
+            textBox_zakazivanjeTermina1_brojSasije.Location = new Point(197, 19);
+            textBox_zakazivanjeTermina1_brojSasije.Name = "textBox_zakazivanjeTermina1_brojSasije";
+            textBox_zakazivanjeTermina1_brojSasije.Size = new Size(125, 27);
+            textBox_zakazivanjeTermina1_brojSasije.TabIndex = 2;
+            textBox_zakazivanjeTermina1_brojSasije.KeyPress += textBox_zakazivanjeTermina1_brojSasije_KeyPress;
+            // 
+            // label_zakazivanjeTermina_unosBrojaSasije
+            // 
+            label_zakazivanjeTermina_unosBrojaSasije.AutoSize = true;
+            label_zakazivanjeTermina_unosBrojaSasije.Location = new Point(56, 22);
+            label_zakazivanjeTermina_unosBrojaSasije.Name = "label_zakazivanjeTermina_unosBrojaSasije";
+            label_zakazivanjeTermina_unosBrojaSasije.Size = new Size(132, 20);
+            label_zakazivanjeTermina_unosBrojaSasije.TabIndex = 1;
+            label_zakazivanjeTermina_unosBrojaSasije.Text = "Unesite broj sasije:";
+            // 
+            // button_zakazivanjeTermina1_otkazi
+            // 
+            button_zakazivanjeTermina1_otkazi.Location = new Point(650, 382);
+            button_zakazivanjeTermina1_otkazi.Name = "button_zakazivanjeTermina1_otkazi";
+            button_zakazivanjeTermina1_otkazi.Size = new Size(112, 40);
+            button_zakazivanjeTermina1_otkazi.TabIndex = 0;
+            button_zakazivanjeTermina1_otkazi.Text = "Otkazi";
+            button_zakazivanjeTermina1_otkazi.UseVisualStyleBackColor = true;
+            button_zakazivanjeTermina1_otkazi.Click += button_zakazivanjeTermina1_otkazi_click;
+            // 
+            // button_prikazArhive
+            // 
+            button_prikazArhive.Location = new Point(450, 200);
+            button_prikazArhive.Name = "button_prikazArhive";
+            button_prikazArhive.Size = new Size(200, 60);
+            button_prikazArhive.TabIndex = 1;
+            button_prikazArhive.Text = "Prikaz arhive sa izvjestajima";
+            button_prikazArhive.UseVisualStyleBackColor = true;
+            button_prikazArhive.Click += button_prikazArhive_Click;
+            // 
+            // button_zakazivanjeTehnickog
+            // 
+            button_zakazivanjeTehnickog.Location = new Point(150, 70);
+            button_zakazivanjeTehnickog.Name = "button_zakazivanjeTehnickog";
+            button_zakazivanjeTehnickog.Size = new Size(200, 60);
+            button_zakazivanjeTehnickog.TabIndex = 3;
+            button_zakazivanjeTehnickog.Text = "Zakazivanje tehnickog";
+            button_zakazivanjeTehnickog.UseVisualStyleBackColor = true;
+            button_zakazivanjeTehnickog.Click += button_zakazivanjeTehnickog_Click;
+            // 
+            // button_obavljanjeTehnickog
+            // 
+            button_obavljanjeTehnickog.Location = new Point(150, 200);
+            button_obavljanjeTehnickog.Name = "button_obavljanjeTehnickog";
+            button_obavljanjeTehnickog.Size = new Size(200, 60);
+            button_obavljanjeTehnickog.TabIndex = 0;
+            button_obavljanjeTehnickog.Text = "Obavljanje tehničkog";
+            button_obavljanjeTehnickog.UseVisualStyleBackColor = true;
+            button_obavljanjeTehnickog.Click += button_obavljanjeTehnickog_Click;
+            // 
+            // button_pregledIstorije
+            // 
+            button_pregledIstorije.Location = new Point(450, 70);
+            button_pregledIstorije.Name = "button_pregledIstorije";
+            button_pregledIstorije.Size = new Size(200, 60);
+            button_pregledIstorije.TabIndex = 2;
+            button_pregledIstorije.Text = "Pregled istorije";
+            button_pregledIstorije.UseVisualStyleBackColor = true;
+            button_pregledIstorije.Click += button_pregledIstorije_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1003,6 +1478,19 @@
             RegistracijaRadnickihNalogaPanel.ResumeLayout(false);
             RegistracijaRadnickihNalogaPanel.PerformLayout();
             BrisanjeRadnickihNalogaPanel.ResumeLayout(false);
+            // BrisanjeRadnickihNalogaPanel.PerformLayout();
+
+            panel_pregledIstorije.ResumeLayout(false);
+            panel_pregledIstorije.PerformLayout();
+            panel_prikazArhive.ResumeLayout(false);
+            panel_prikazArhive.PerformLayout();
+            panel_obavljanjeTehnickog.ResumeLayout(false);
+            panel_obavljanjeTehnickog.PerformLayout();
+            panel_zakazivanjeTermina1.ResumeLayout(false);
+            panel_zakazivanjeTermina1.PerformLayout();
+            panel_zakazivanjeTermina3.ResumeLayout(false);
+            panel_zakazivanjeTermina2.ResumeLayout(false);
+            panel_zakazivanjeTermina2.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1094,5 +1582,49 @@
         private Button NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton;
         private Button NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton;
         private Button NazadSaPanelaZaBrisanjeRadnickihNalogaNaPanelPrijavljenogAdministratoraButton;
+        private Button button_prikazArhive;
+        private Button button_zakazivanjeTehnickog;
+        private Button button_obavljanjeTehnickog;
+        private Button button_pregledIstorije;
+        private Panel panel_zakazivanjeTermina1;
+        private Panel panel_zakazivanjeTermina2;
+        private Label label_zakazivanjeTermina_kategorija;
+        private TextBox textBox_zakazivanjeTermina2_kategorija;
+        private Label label_zakazivanjeTermina_potkategorija;
+        private TextBox textBox_zakazivanjeTermina2_potkategorija;
+        private Label label_zakazivanjeTermina_marka;
+        private TextBox textBox_zakazivanjeTermina2_marka;
+        private Label label_zakazivanjeTermina_model;
+        private TextBox textBox_zakazivanjeTermina2_model;
+        private Label label_zakazivanjeTermina_godiste;
+        private TextBox textBox_zakazivanjeTermina2_godiste;
+        private Label label_zakazivanjeTermina_kubikaza;
+        private TextBox textBox_zakazivanjeTermina2_kubikaza;
+        private Label label_zakazivanjeTermina_stiker;
+        private TextBox textBox_zakazivanjeTermina2_stiker;
+        private Button button_zakazivanjeTermina2_dalje;
+        private TextBox textBox_zakazivanjeTermina2_rokRegistracije;
+        private Label label_zakazivanjeTermina_datumReg;
+        private Panel panel_zakazivanjeTermina3;
+        private Button button_zakazivanjeTermina3_nazad;
+        private MonthCalendar monthCalendar_zakazivanjeTermina3;
+        private DateTimePicker dateTimePicker_zakazivanjeTermina3;
+        private Button button_zakazivanjeTermina3_zakaziTermin;
+        private Button button_zakazivanjeTermina1_pokreni;
+        private TextBox textBox_zakazivanjeTermina1_brojSasije;
+        private Label label_zakazivanjeTermina_unosBrojaSasije;
+        private Button button_zakazivanjeTermina1_otkazi;
+        private Panel panel_obavljanjeTehnickog;
+        private Label label_obavljanjeTehnickog_naslov;
+        private ListBox listBox_obavljanjeTehnickog;
+        private Button button_obavljanjeTehnickog_otkazi;
+        private Panel panel_prikazArhive;
+        private ListBox listBox_prikazArhive;
+        private Label label_prikazArhive_naslov;
+        private Button button_prikazArhive_nazad;
+        private Panel panel_pregledIstorije;
+        private ListBox listBox_pregledIstorije;
+        private Label label_pregledIstorije_naslov;
+        private Button button_pregledIstorije_nazad;
     }
 }

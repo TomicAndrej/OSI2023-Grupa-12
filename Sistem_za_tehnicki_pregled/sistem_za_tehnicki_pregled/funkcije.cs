@@ -8,7 +8,10 @@ namespace sistem_za_tehnicki_pregled
 {
     internal class funkcije
     {
-        private string terminiFilePath = "..\\..\\..\\..\\termini.txt";
+        private string terminiFilePath = "..\\..\\..\\..\\..\\Fajlovi\\termini.txt";
+        private string vozilaFilePath = "..\\..\\..\\..\\..\\Fajlovi\\vozila.txt";
+        private string izvjestajiOIspravnostiFilePath = "..\\..\\..\\..\\..\\Fajlovi\\izvjestajiOIspravnosti.txt";
+        private string istorijaTPFilePath = "..\\..\\..\\..\\..\\Fajlovi\\istorijaTP.txt";
         public bool provjeraKorisnickogImena(string username, string putanja)
         {
             if (username.Length < 5 || username.Length > 32)
@@ -344,7 +347,7 @@ namespace sistem_za_tehnicki_pregled
                 // Replace the original file with the temporary file
                 File.Delete(filePath);
                 File.Move(tempFile, filePath);
-                MessageBox.Show($"Podci za nalog '{username}' uspjesno promijenjeni.");
+                MessageBox.Show($"Podaci za nalog '{username}' uspjesno promijenjeni.");
             }
             else
             {
@@ -378,7 +381,7 @@ namespace sistem_za_tehnicki_pregled
             foreach (string line in lines)
             {
                 string[] parts = line.Split(',');
-                if (parts.Length > 0 && parts[4] == brojSasije)
+                if (parts.Length > 0 && parts[9] == brojSasije)
                 {
                     return true;
                 }
@@ -399,18 +402,47 @@ namespace sistem_za_tehnicki_pregled
             return false;
         }
 
-        public void ZakaziTermin(string jmb, string datum, string vrijeme, string kategorija, string brojSasije)
+        public bool ZakaziTermin(string jmb, string datum, string vrijeme, string kategorija, string potkategorija, string marka, string model, string godiste, string kubikaza, string brojSasije, string stiker, string datumReg)
         {
-            if(ProvjeraZauzetostiTermina(datum, vrijeme))
+            if (ProvjeraZauzetostiTermina(datum, vrijeme))
             {
                 MessageBox.Show("Termin je zauzet!");
+                return false;
             }
             else
             {
                 using (StreamWriter writer = new StreamWriter(terminiFilePath, true))
                 {
-                    writer.WriteLine($"{jmb},{datum},{vrijeme},{kategorija},{brojSasije}");
+                    writer.WriteLine($"{jmb},{datum},{vrijeme},{kategorija},{potkategorija},{marka},{model},{godiste},{kubikaza},{brojSasije},{stiker},{datumReg}");
+                    MessageBox.Show("Termin zakazan");
+                    return true;
                 }
+            }
+        }
+
+        public bool ZakaziTerminVoziloPostoji(string jmb, string brojSasije, string datum, string vrijeme)
+        {
+            if (ProvjeraZauzetostiTermina(datum, vrijeme))
+            {
+                MessageBox.Show("Termin je zauzet!");
+                return false;
+            }
+            else
+            {
+                string[] lines = File.ReadAllLines(vozilaFilePath);
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(',');
+                    if (parts.Length > 0 && parts[7] == brojSasije)
+                    {
+                        using (StreamWriter writer = new StreamWriter(terminiFilePath, true))
+                        {
+                            writer.WriteLine($"{jmb},{datum},{vrijeme},{parts[0]},{parts[1]},{parts[3]},{parts[4]},{parts[5]},{parts[6]},{brojSasije},{parts[8]},{parts[9]}");
+                            MessageBox.Show("Termin zakazan");
+                        }
+                    }
+                }
+                return true;
             }
         }
 
@@ -431,7 +463,7 @@ namespace sistem_za_tehnicki_pregled
                         string[] parts = line.Split(',');
 
                         // Check if the line doesnt contain the brojSasije to be removed
-                        if (!(parts.Length > 0 && parts[4] == brojSasije))
+                        if (!(parts.Length > 0 && parts[9] == brojSasije))
                         {
                             writer.WriteLine(line);
                         }
@@ -448,9 +480,9 @@ namespace sistem_za_tehnicki_pregled
             }
         }
 
-        public List<string> GetAllTermini(string filePath)
+        public List<string> GetAllTermini()
         {
-            string[] lines = File.ReadAllLines(filePath);
+            string[] lines = File.ReadAllLines(terminiFilePath);
             List<string> termini = new List<string>();
 
             foreach (string line in lines)
@@ -460,7 +492,7 @@ namespace sistem_za_tehnicki_pregled
                 // Check if the line contains the provided username and password
                 if (parts.Length > 0)
                 {
-                    termini.Add($"{parts[0]},{parts[1]},{parts[2]},{parts[3]},{parts[4]}");
+                    termini.Add($"{parts[1]},{parts[2]},{parts[5]},{parts[6]},{parts[9]}");
                 }
             }
             return termini;
@@ -516,6 +548,197 @@ namespace sistem_za_tehnicki_pregled
                 }
             }
             return accounts;
+        }
+        public bool ProvjeraLozinkeDatogNaloga(string username, string newPassword, string filePath)
+        {
+            string[] lines = File.ReadAllLines(filePath);
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+
+                // Check if the line contains the provided username and password
+                if (parts.Length > 0 && parts[0] == username && parts[1] == newPassword)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool PretragaVozilaUFajluVozila(string brojSasije)
+        {
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[7] == brojSasije)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool ObaviTehnicki(string brojSasije, string datum, string vrijeme)
+        {
+            //kocnica,tahograf,svjetla,retrovizori,brisaci,pneumatici,signalizacija,izduvniSistem
+            // get random number from 0 to 1 10% chance of 0, and 90% chance of 1
+            Random random = new Random();
+
+            // Define probabilities (0 has 10% chance, 1 has 90% chance)
+            char[] probabilities = { '0', '1', '1', '1', '1', '1', '1', '1', '1', '1' };
+
+            // Retrieve the number based on the index
+            char kocnica = probabilities[random.Next(probabilities.Length)];
+            char svjetla = probabilities[random.Next(probabilities.Length)];
+            char retrovizori = probabilities[random.Next(probabilities.Length)];
+            char pneumatici = probabilities[random.Next(probabilities.Length)];
+            char signalizacija = probabilities[random.Next(probabilities.Length)];
+            char izduvniSistem = probabilities[random.Next(probabilities.Length)];
+
+            char prosaoTp = '0';
+            if (kocnica == '1' && svjetla == '1' && retrovizori == '1' && pneumatici == '1' && signalizacija == '1' && izduvniSistem == '1')
+            {
+                prosaoTp = '1';
+            }
+            else prosaoTp = '0';
+
+            MessageBox.Show($"Kočnica: {kocnica}\nSvjetla: {svjetla}\nRetrovizori: {retrovizori}\nPneumatici: {pneumatici}\nSignalizacija: {signalizacija}\nIzduvni sistem: {izduvniSistem}", "Izvještaj o ispravnosti");
+
+            DodajIzvjestajOIspravnosti(brojSasije, kocnica.ToString(), svjetla.ToString(), retrovizori.ToString(), pneumatici.ToString(), signalizacija.ToString(), izduvniSistem.ToString());
+
+            DodajIstorijuTP(brojSasije, datum, vrijeme, prosaoTp.ToString());
+            updateVoziloProsaoTp(brojSasije, prosaoTp.ToString());
+
+            return prosaoTp == '1';
+        }
+
+        public string pronadjiTablicu(string brojSasije)
+        {
+            //kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,(tablica)
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[7] == brojSasije)
+                {
+                    return parts[11];
+                }
+            }
+            return "";//TODO da li se uvijek vraca parts[11] ili nekad ne
+        }
+
+        public void IzdajPotvrduTP(string brojSasije)
+        {
+            string[] lines = File.ReadAllLines(terminiFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[9] == brojSasije)
+                {
+                    string potvrdaText = $"Registarska oznaka: {pronadjiTablicu(parts[7])}\n" +
+                                         $"Broj šasije: {parts[7]}\n" +
+                                         $"Marka: {parts[5]}\n" +
+                                         $"Model: {parts[6]}\n" +
+                                         $"Datum i vrijeme tehničkog pregleda: {parts[1]} {parts[2]}\n" +
+                                         $"Ime i prezime: Ime Prezime";//TODO ime prezime   
+                    // create a .txt file in potvrdeTP folder
+                    string potvrdaTPFilePath = "C:\\Users\\daco0\\Desktop\\tehnpregledTest\\TehnickiTest\\potvrdeTP\\" + brojSasije + ".txt";
+                    using (StreamWriter writer = new StreamWriter(potvrdaTPFilePath, true))
+                    {
+                        writer.WriteLine(potvrdaText);
+                    }
+                    MessageBox.Show(potvrdaText);
+                }
+            }
+        }
+
+        public void DodajIzvjestajOIspravnosti(string brojSasije, string kocnica, string svjetla, string retrovizori, string pneumatici, string signalizacija, string izduvniSistem)
+        {
+            using (StreamWriter writer = new StreamWriter(izvjestajiOIspravnostiFilePath, true))
+            {
+                writer.WriteLine($"{brojSasije},{kocnica},{svjetla},{retrovizori},{pneumatici},{signalizacija},{izduvniSistem}");
+            }
+        }
+
+        public void DodajIstorijuTP(string brojSasije, string datum, string vrijeme, string prosaoTp)
+        {
+            using (StreamWriter writer = new StreamWriter(istorijaTPFilePath, true))
+            {
+                writer.WriteLine($"{brojSasije},{datum},{vrijeme},{prosaoTp}");
+            }
+        }
+
+        public void updateVoziloProsaoTp(string brojSasije, string prosaoTp)
+        {
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            // Create a temporary file to store updated account information
+            string tempFile = Path.GetTempFileName();
+
+            using (StreamWriter writer = new StreamWriter(tempFile))
+            {
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(',');
+
+                    // Check if the line contains the provided username
+                    if (parts.Length > 0 && parts[7] == brojSasije)
+                    {
+                        parts[10] = prosaoTp;
+                        // Join the parts back into a line and write to the temporary file
+                        writer.WriteLine(string.Join(",", parts));
+                    }
+                    else
+                    {
+                        // Write other lines to the temporary file
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+            // Replace the original file with the temporary file
+            File.Delete(vozilaFilePath);
+            File.Move(tempFile, vozilaFilePath);
+        }
+
+        public List<string> listaSvihIzvjestajaOIspravnosti()
+        {
+            string[] lines = File.ReadAllLines(izvjestajiOIspravnostiFilePath);
+            List<string> izvjestaji = new List<string>();
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+
+                //brojSasije,kocnica,svjetla,retrovizori,pneumatici,signalizacija,izduvniSistem
+                if (parts.Length > 0)
+                {
+                    izvjestaji.Add($"Vozilo: {parts[0]}, kocnice {((parts[1] == "1") ? "ispravne" : "neispravne")}, " +
+                                   $"svjetla {((parts[2] == "1") ? "ispravne" : "neispravne")}, " +
+                                   $"retorvizori {((parts[3] == "1") ? "ispravni" : "neispravni")}, " +
+                                   $"pneumatici {((parts[4] == "1") ? "ispravni" : "neispravni")}, " +
+                                   $"signalizacija {((parts[5] == "1") ? "ispravna" : "neispravna")}, " +
+                                   $"izduvni sistem {((parts[6] == "1") ? "ispravan" : "neispravan")}");
+                }
+            }
+            return izvjestaji;
+        }
+
+        public List<string> listaIstorijeTP()
+        {
+            string[] lines = File.ReadAllLines(istorijaTPFilePath);
+            List<string> istorija = new List<string>();
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+
+                //brojSasije,datum,vrijeme,prosaoTp
+                if (parts.Length > 0)
+                {
+                    istorija.Add($"Vozilo: {parts[0]}, datum: {parts[1]}, vrijeme: {parts[2]}, " +
+                                                          $"prosao tehnicki pregled: {((parts[3] == "1") ? "da" : "ne")}");
+                }
+            }
+            return istorija;
         }
 
     }
