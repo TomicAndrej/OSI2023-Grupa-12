@@ -467,6 +467,18 @@ namespace sistem_za_tehnicki_pregled
         }
         //TODO parser
 
+        public void UcitajNaloge(List<Radnik> radnici)
+        {
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    radnici.Add(new Radnik(parts[0], parts[1], parts[2], parts[3]));
+                }
+            }
+        }
 
     }
 }
