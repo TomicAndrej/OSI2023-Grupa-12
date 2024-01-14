@@ -512,39 +512,46 @@ namespace sistem_za_tehnicki_pregled
             }
         }
 
-        public List<string> GetListOfAllAccounts()
+        public List<string> GetListOfAllAccountsKlijent()
         {
             List<string> accounts = new List<string>();
-            accounts.Add("Radnički nalozi:");
-            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
-            {
-                string line;
-                //skip the first line
-                sr.ReadLine();
-                while ((line = sr.ReadLine()) != null)
-                {
-                    string[] parts = line.Split(',');
-                    accounts.Add(parts[0]);
-                }
-            }
-            accounts.Add("Klijentski nalozi:");
             using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
             {
                 string line;
+                
+                //sr.ReadLine();//skip the first line
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
-                    accounts.Add(parts[0]);
+                    accounts.Add($"{parts[2]} {parts[3]} ({parts[0]})");
                 }
             }
-            accounts.Add("Administratorski nalozi:");
+            return accounts;
+        }
+        public List<string> GetListOfAllAccountsRadnik()
+        {
+            List<string> accounts = new List<string>();
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    accounts.Add($"{parts[2]} {parts[3]} ({parts[0]})");
+                }
+            }
+            return accounts;
+        }
+        public List<string> GetListOfAllAccountsAdmin()
+        {
+            List<string> accounts = new List<string>();
             using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] parts = line.Split(',');
-                    accounts.Add(parts[0]);
+                    accounts.Add($"{parts[2]} {parts[3]} ({parts[0]})");//TODO ne prikazivati trenutnog admina
                 }
             }
             return accounts;

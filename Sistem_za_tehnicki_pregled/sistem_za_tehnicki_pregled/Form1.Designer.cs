@@ -136,7 +136,12 @@
             NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton = new Button();
             PregledPostojecihNalogaPanel = new Panel();
             NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton = new Button();
-            PregledPostojecihNalogaListBox = new ListBox();
+            PregledPostojecihNalogaKlijentListBox = new ListBox();
+            PregledPostojecihNalogaKlijentLabel = new Label();
+            PregledPostojecihNalogaRadnikLabel = new Label();
+            PregledPostojecihNalogaAdminLabel = new Label();
+            PregledPostojecihNalogaRadnikListBox = new ListBox();
+            PregledPostojecihNalogaAdminListBox = new ListBox();
             RegistracijaRadnickihNalogaPanel = new Panel();
             RegistrujRadnickiNalogButton = new Button();
             PotvrdaLozinkeRadnikRegistracijaLabel = new Label();
@@ -1020,7 +1025,6 @@
             LogovanAdministratorPanel.Controls.Add(RegistracijaRadnickihNalogaPanel);
             LogovanAdministratorPanel.Controls.Add(BrisanjeRadnickihNalogaPanel);
             LogovanAdministratorPanel.Controls.Add(BrisanjeAdministratorskihNalogaPanel);
-            LogovanAdministratorPanel.Dock = DockStyle.Fill;
             LogovanAdministratorPanel.Location = new Point(0, 0);
             LogovanAdministratorPanel.Name = "LogovanAdministratorPanel";
             LogovanAdministratorPanel.Size = new Size(800, 450);
@@ -1222,7 +1226,12 @@
             // PregledPostojecihNalogaPanel
             // 
             PregledPostojecihNalogaPanel.Controls.Add(NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton);
-            PregledPostojecihNalogaPanel.Controls.Add(PregledPostojecihNalogaListBox);
+            PregledPostojecihNalogaPanel.Controls.Add(PregledPostojecihNalogaKlijentListBox);
+            PregledPostojecihNalogaPanel.Controls.Add(PregledPostojecihNalogaRadnikListBox);
+            PregledPostojecihNalogaPanel.Controls.Add(PregledPostojecihNalogaAdminListBox);
+            PregledPostojecihNalogaPanel.Controls.Add(PregledPostojecihNalogaKlijentLabel);
+            PregledPostojecihNalogaPanel.Controls.Add(PregledPostojecihNalogaRadnikLabel);
+            PregledPostojecihNalogaPanel.Controls.Add(PregledPostojecihNalogaAdminLabel);
             PregledPostojecihNalogaPanel.Dock = DockStyle.Fill;
             PregledPostojecihNalogaPanel.Location = new Point(0, 0);
             PregledPostojecihNalogaPanel.Name = "PregledPostojecihNalogaPanel";
@@ -1240,15 +1249,62 @@
             NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.UseVisualStyleBackColor = true;
             NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton.Click += NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton_Click;
             // 
-            // PregledPostojecihNalogaListBox
+            // PregledPostojecihNalogaKlijentListBox
             // 
-            PregledPostojecihNalogaListBox.FormattingEnabled = true;
-            PregledPostojecihNalogaListBox.HorizontalScrollbar = true;
-            PregledPostojecihNalogaListBox.ItemHeight = 20;
-            PregledPostojecihNalogaListBox.Location = new Point(50, 73);
-            PregledPostojecihNalogaListBox.Name = "PregledPostojecihNalogaListBox";
-            PregledPostojecihNalogaListBox.Size = new Size(614, 344);
-            PregledPostojecihNalogaListBox.TabIndex = 1;
+            PregledPostojecihNalogaKlijentListBox.FormattingEnabled = true;
+            PregledPostojecihNalogaKlijentListBox.HorizontalScrollbar = true;
+            PregledPostojecihNalogaKlijentListBox.ItemHeight = 20;
+            PregledPostojecihNalogaKlijentListBox.Location = new Point(50, 73);
+            PregledPostojecihNalogaKlijentListBox.Name = "PregledPostojecihNalogaKlijentListBox";
+            PregledPostojecihNalogaKlijentListBox.Size = new Size(200, 320);
+            PregledPostojecihNalogaKlijentListBox.TabIndex = 1;
+            // 
+            // PregledPostojecihNalogaRadnikListBox
+            // 
+            PregledPostojecihNalogaRadnikListBox.FormattingEnabled = true;
+            PregledPostojecihNalogaRadnikListBox.HorizontalScrollbar = true;
+            PregledPostojecihNalogaRadnikListBox.ItemHeight = 20;
+            PregledPostojecihNalogaRadnikListBox.Location = new Point(280, 73);
+            PregledPostojecihNalogaRadnikListBox.Name = "PregledPostojecihNalogaListBox";
+            PregledPostojecihNalogaRadnikListBox.Size = new Size(200, 320);
+            PregledPostojecihNalogaRadnikListBox.TabIndex = 1;
+            // 
+            // PregledPostojecihNalogaAdminListBox
+            // 
+            PregledPostojecihNalogaAdminListBox.FormattingEnabled = true;
+            PregledPostojecihNalogaAdminListBox.HorizontalScrollbar = true;
+            PregledPostojecihNalogaAdminListBox.ItemHeight = 20;
+            PregledPostojecihNalogaAdminListBox.Location = new Point(510, 73);
+            PregledPostojecihNalogaAdminListBox.Name = "PregledPostojecihNalogaListBox";
+            PregledPostojecihNalogaAdminListBox.Size = new Size(200, 320);
+            PregledPostojecihNalogaAdminListBox.TabIndex = 1;
+            // 
+            // PregledPostojecihNalogaKlijentLabel
+            // 
+            PregledPostojecihNalogaKlijentLabel.AutoSize = true;
+            PregledPostojecihNalogaKlijentLabel.Location = new Point(50, 50);
+            PregledPostojecihNalogaKlijentLabel.Name = "PregledPostojecihNalogaKlijentLabel";
+            PregledPostojecihNalogaKlijentLabel.Size = new Size(113, 20);
+            PregledPostojecihNalogaKlijentLabel.TabIndex = 11;
+            PregledPostojecihNalogaKlijentLabel.Text = "Klijentski nalozi:";
+            // 
+            // PregledPostojecihNalogaRadnikLabel
+            // 
+            PregledPostojecihNalogaRadnikLabel.AutoSize = true;
+            PregledPostojecihNalogaRadnikLabel.Location = new Point(280, 50);
+            PregledPostojecihNalogaRadnikLabel.Name = "PregledPostojecihNalogaRadnikLabel";
+            PregledPostojecihNalogaRadnikLabel.Size = new Size(113, 20);
+            PregledPostojecihNalogaRadnikLabel.TabIndex = 11;
+            PregledPostojecihNalogaRadnikLabel.Text = "Radnički nalozi:";
+            // 
+            // PregledPostojecihNalogaAdminLabel
+            // 
+            PregledPostojecihNalogaAdminLabel.AutoSize = true;
+            PregledPostojecihNalogaAdminLabel.Location = new Point(510, 50);
+            PregledPostojecihNalogaAdminLabel.Name = "PregledPostojecihNalogaAdminLabel";
+            PregledPostojecihNalogaAdminLabel.Size = new Size(113, 20);
+            PregledPostojecihNalogaAdminLabel.TabIndex = 11;
+            PregledPostojecihNalogaAdminLabel.Text = "Administratorski nalozi:";
             // 
             // RegistracijaRadnickihNalogaPanel
             // 
@@ -1626,7 +1682,12 @@
         private Button PracenjeStatistikeButton;
         private Button PregledPostojecihNalogaButton;
         private Panel PregledPostojecihNalogaPanel;
-        private ListBox PregledPostojecihNalogaListBox;
+        private ListBox PregledPostojecihNalogaKlijentListBox;
+        private Label PregledPostojecihNalogaKlijentLabel;
+        private Label PregledPostojecihNalogaRadnikLabel;
+        private Label PregledPostojecihNalogaAdminLabel;
+        private ListBox PregledPostojecihNalogaRadnikListBox;
+        private ListBox PregledPostojecihNalogaAdminListBox;
         private Button BrisanjeRadnickihNalogaButton;
         private Button BrisanjeAdministratorskihNalogaButton;
         private Button KreiranjeRadnickihNalogaButton;

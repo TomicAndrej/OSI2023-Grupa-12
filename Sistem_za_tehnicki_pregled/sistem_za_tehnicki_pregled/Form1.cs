@@ -499,7 +499,9 @@
             PregledPostojecihNalogaPanel.BringToFront();
             PregledPostojecihNalogaPanel.ResumeLayout();
             funkcije funkcije = new funkcije();
-            PregledPostojecihNalogaListBox.DataSource = funkcije.GetListOfAllAccounts();
+            PregledPostojecihNalogaKlijentListBox.DataSource = funkcije.GetListOfAllAccountsKlijent();
+            PregledPostojecihNalogaRadnikListBox.DataSource = funkcije.GetListOfAllAccountsRadnik();
+            PregledPostojecihNalogaAdminListBox.DataSource = funkcije.GetListOfAllAccountsAdmin();
         }
 
         public void NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton_Click(object sender, EventArgs e)
