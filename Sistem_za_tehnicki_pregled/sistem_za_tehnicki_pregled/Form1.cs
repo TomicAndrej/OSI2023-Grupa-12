@@ -361,20 +361,30 @@
             PotvrdaLozinkeRadnikRegistracijaTextBox.Text = "";
 
         }
-
+        List<Radnik> administratori = new List<Radnik>();
         private void BrisanjeAdministratorskihNalogaButton_Click(object sender, EventArgs e)
         {
-            /*
-             * 
-             * 
-             * 
-             * 
-             * todo: brisanje administratorskih naloga
-             * 
-             * 
-             * 
-             * 
-             */
+            BrisanjeAdministratorskihNalogaPanel.Visible = true;
+            BrisanjeAdministratorskihNalogaPanel.BringToFront();
+            BrisanjeAdministratorskihNalogaPanel.ResumeLayout();
+            UcitajAdministratore();
+            ListaAdministratorskihNalogaComboBox.DataSource = administratori;
+            ListaAdministratorskihNalogaComboBox.DisplayMember = "PrikaziFormat";
+            ListaAdministratorskihNalogaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ListaAdministratorskihNalogaComboBox.Enabled = true;
+        }
+        public void UcitajAdministratore()
+        {
+            administratori.Clear();
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] strings = line.Split(',');
+                    administratori.Add(new Radnik(strings[0], strings[1], strings[2], strings[3]));
+                }
+            }
         }
         List<Radnik> radnici = new List<Radnik>();
         public void UcitajRadnike()
@@ -399,7 +409,6 @@
             UcitajRadnike();
             ListaRadnickihNalogaComboBox.DataSource = radnici;
             ListaRadnickihNalogaComboBox.DisplayMember = "PrikaziFormat";
-            //ListaRadnickihNalogaComboBox.SelectedIndex = -1;
             ListaRadnickihNalogaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             ListaRadnickihNalogaComboBox.Enabled = true;
         }
@@ -408,19 +417,20 @@
         {
             ListaRadnickihNalogaComboBox.DataSource = radnici;
             ListaRadnickihNalogaComboBox.DisplayMember = "PrikaziFormat";
-            ListaRadnickihNalogaComboBox.SelectedIndexChanged += ListaRadnickihNalogaComboBox_SelectedIndexChanged;
             ListaRadnickihNalogaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             ListaRadnickihNalogaComboBox.Enabled = true;
             BrisanjeRadnickihNalogaPanel.Visible = false;
         }
 
-        public void PraznaListaRadnickihNaloga()
+        public bool PraznaListaRadnickihNaloga()
         {
-            if (radnici.Count == 1 && BrisanjeRadnickihNalogaPanel.Visible == true)
+            if (radnici.Count == 0 && BrisanjeRadnickihNalogaPanel.Visible == true)
             {
                 MessageBox.Show("Lista radnika je prazna!", "Brisanje radnika", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 BrisanjeRadnickihNalogaPanel.Visible = false;
+                return true;
             }
+            return false;
         }
 
         public void UkloniRadnickiNalog(string KorisnickoIme, string putanja)
@@ -441,16 +451,18 @@
                     sw.WriteLine(line);
                 }
             }
+            string[] pom = putanja.Split("\\");
+            string[] pom2 = pom[pom.Length - 1].Split(".");
             if (nalogUklonjen)
             {
                 File.Delete(putanja);
                 File.Move(pomFajl, putanja);
-                MessageBox.Show($"Nalog '{KorisnickoIme}' je uspješno uklonjen!", "Brisanje radnika", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Nalog '{KorisnickoIme}' je uspješno uklonjen!", "Brisanje " + pom2[0] + "a", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 File.Delete(pomFajl);
-                MessageBox.Show($"Nalog '{KorisnickoIme}' ne postoji!", "Brisanje radnika", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Nalog '{KorisnickoIme}' ne postoji!", "Brisanje " + pom2[0] + "a", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -461,9 +473,10 @@
 
         public void ObrisiRadnickiNalogButton_Click(object sender, EventArgs e)
         {
-            PraznaListaRadnickihNaloga();
+            if (PraznaListaRadnickihNaloga())
+                return;
             Radnik radnik = (Radnik)ListaRadnickihNalogaComboBox.SelectedItem;
-            if ((ListaRadnickihNalogaComboBox.SelectedIndex != -1) && (radnik != radnici[0]))
+            if (radnik != null /*(ListaRadnickihNalogaComboBox.SelectedIndex != -1) && radnici.Count > 0 /*&& (radnik != radnici[0])*/)
             {
                 DialogResult dr = MessageBox.Show($"Da li ste sigurni da želite da uklonite nalog '{radnik.PrikaziFormat}'?", "Brisanje radnika", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
@@ -706,6 +719,51 @@
         private void button_pregledIstorije_nazad_Click(object sender, EventArgs e)
         {
             panel_pregledIstorije.Visible = !panel_pregledIstorije.Visible;
+        }
+
+        private void NazadSaPanelaZaBrisanjeAdministratorskihNalogaNaPanelPrijavljenogAdministratoraButton_Click(object sender, EventArgs e)
+        {
+            ListaAdministratorskihNalogaComboBox.DataSource = administratori;
+            ListaAdministratorskihNalogaComboBox.DisplayMember = "PrikaziFormat";
+            ListaAdministratorskihNalogaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            ListaAdministratorskihNalogaComboBox.Enabled = true;
+            BrisanjeAdministratorskihNalogaPanel.Visible = false;
+        }
+
+        public bool PraznaListaAdministratorskihNaloga()
+        {
+            if (administratori.Count == 0 && BrisanjeAdministratorskihNalogaPanel.Visible == true)
+            {
+                MessageBox.Show("Lista administratora je prazna!", "Brisanje administratora", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+            return false;
+        }
+
+        private void ListaAdministratorskihNalogaComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PraznaListaAdministratorskihNaloga();
+        }
+
+        private void ObrisiAdministratorskiNalogButton_Click(object sender, EventArgs e)
+        {
+            if (PraznaListaAdministratorskihNaloga())
+                return;
+            Radnik admin = (Radnik)ListaAdministratorskihNalogaComboBox.SelectedItem;
+            if (admin != null )
+            {
+                DialogResult dr = MessageBox.Show($"Da li ste sigurni da želite da uklonite nalog '{admin.PrikaziFormat}'?", "Brisanje administratora", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    UkloniRadnickiNalog(admin.Username, "..\\..\\..\\..\\..\\Fajlovi\\administrator.txt");
+                    ListaAdministratorskihNalogaComboBox.DataSource = null;
+                    administratori.Remove(admin);
+                    ListaAdministratorskihNalogaComboBox.DataSource = administratori;
+                    ListaAdministratorskihNalogaComboBox.DisplayMember = "PrikaziFormat";
+                    ListaAdministratorskihNalogaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+                    ListaAdministratorskihNalogaComboBox.Enabled = true;
+                }
+            }
         }
     }
 }
