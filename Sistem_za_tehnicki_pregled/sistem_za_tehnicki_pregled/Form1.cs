@@ -1,4 +1,6 @@
-﻿namespace sistem_za_tehnicki_pregled
+﻿using Microsoft.VisualBasic;
+
+namespace sistem_za_tehnicki_pregled
 {
     public partial class Form1 : Form
     {
@@ -12,6 +14,7 @@
             panel_prikazArhive.Visible = false;
             panel_pregledIstorije.Visible = false;
         }
+        string trenutniNalog = "";
 
         private void KlijentButton_Click(object sender, EventArgs e)
         {
@@ -158,6 +161,7 @@
             {
                 MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 IndikatorNaKomStePanelu.Text = "Klijent: " + KorisnickoImeTextBoxLogin.Text;
+                trenutniNalog = KorisnickoImeTextBoxLogin.Text;
                 KorisnickoImeTextBoxLogin.Text = "";
                 LozinkaTextBoxLogin.Text = "";
                 /* 
@@ -193,16 +197,18 @@
                 LogovanAdministratorPanel.BringToFront();
                 //AdministratorPanel.Visible = false;
                 IndikatorNaKomStePanelu.Text = "Administrator: " + KorisnickoImeAdministratorTextBoxLogin.Text;
+                trenutniNalog = KorisnickoImeAdministratorTextBoxLogin.Text;
                 KorisnickoImeAdministratorTextBoxLogin.Text = "";
                 LozinkaAdministratorTextBoxLogin.Text = "";
             }
         }
-
+        // TODO postaviti trenutniNalog kod logovanja radnika
         private void OdjavaLogovanogAdministratoraButton_Click(object sender, EventArgs e)
         {
             LogovanAdministratorPanel.Visible = false;
             AdministratorPanel.Visible = false;
             RegistracijaAdministratorskihNalogaPanel.Visible = false;
+            trenutniNalog = "";
             IndikatorNaKomStePanelu.Text = "";
             IzborniPanel.Visible = true;
         }
@@ -382,7 +388,10 @@
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] strings = line.Split(',');
-                    administratori.Add(new Radnik(strings[0], strings[1], strings[2], strings[3]));
+                    if (trenutniNalog != strings[0])
+                    {
+                        administratori.Add(new Radnik(strings[0], strings[1], strings[2], strings[3]));
+                    }
                 }
             }
         }
@@ -546,10 +555,11 @@
 
             DateTime selectedTime = dateTimePicker_zakazivanjeTermina3.Value;
             string selectedTimeFormatted = selectedTime.ToString("HH:mm");
-
+            //TODO radnik mora unijeti jmb klijenta...(kod klijentskog zakazivanja se automatski uzima jmb klijenta funkcije.PronadjiJmbNaOsnovuNaloga(trenutniNalog))
+            
             if (voziloPostoji)
             {
-                if (funkcije.ZakaziTerminVoziloPostoji("trenutniJmb", uneseniBrojSasije, selectedDateFormatted, selectedTimeFormatted))
+                if (funkcije.ZakaziTerminVoziloPostoji(uneseniBrojSasije, selectedDateFormatted, selectedTimeFormatted))
                 {
                     textBox_zakazivanjeTermina1_brojSasije.Text = string.Empty;
                     textBox_zakazivanjeTermina2_kategorija.Text = string.Empty;
@@ -570,7 +580,8 @@
             }
             else
             {
-                if (funkcije.ZakaziTermin("trenutniJmb", selectedDateFormatted, selectedTimeFormatted, textBox_zakazivanjeTermina2_kategorija.Text, textBox_zakazivanjeTermina2_potkategorija.Text, textBox_zakazivanjeTermina2_marka.Text, textBox_zakazivanjeTermina2_model.Text, textBox_zakazivanjeTermina2_godiste.Text, textBox_zakazivanjeTermina2_kubikaza.Text, uneseniBrojSasije, textBox_zakazivanjeTermina2_stiker.Text, textBox_zakazivanjeTermina2_rokRegistracije.Text))
+                string jmbKlijenta = Interaction.InputBox("Unesite JMB klijenta", "JMB klijenta", "jmb", -1, -1);
+                if (funkcije.ZakaziTermin(jmbKlijenta, selectedDateFormatted, selectedTimeFormatted, textBox_zakazivanjeTermina2_kategorija.Text, textBox_zakazivanjeTermina2_potkategorija.Text, textBox_zakazivanjeTermina2_marka.Text, textBox_zakazivanjeTermina2_model.Text, textBox_zakazivanjeTermina2_godiste.Text, textBox_zakazivanjeTermina2_kubikaza.Text, uneseniBrojSasije, textBox_zakazivanjeTermina2_stiker.Text, textBox_zakazivanjeTermina2_rokRegistracije.Text))
                 {
                     textBox_zakazivanjeTermina1_brojSasije.Text = string.Empty;
                     textBox_zakazivanjeTermina2_kategorija.Text = string.Empty;
@@ -590,6 +601,7 @@
                 }
             }
         }
+        //TODO kod zakazivanja termina bi se trebao dodati jmb klijenta i tablica vozila
 
         private void button_zakazivanjeTermina1_pokreni_Click(object sender, EventArgs e)
         {
@@ -675,23 +687,24 @@
             {
                 string selected = listBox_obavljanjeTehnickog.SelectedItem.ToString();
                 string[] selectedSplit = selected.Split(',');
+                string brojSasije = selectedSplit[4].Split(':')[1];
+                string datum = selectedSplit[0].Split(':')[1];
+                string vrijeme = selectedSplit[1].Split(':')[1];
 
                 funkcije funkcije = new funkcije();
-                bool uspjesno = funkcije.ObaviTehnicki(selectedSplit[4], selectedSplit[0], selectedSplit[1]);
+                bool uspjesno = funkcije.ObaviTehnicki(brojSasije, datum, vrijeme);
 
                 if (uspjesno)
                 {
                     MessageBox.Show("Uspjesno obavljen tehnicki pregled");
-                    funkcije.IzdajPotvrduTP(selectedSplit[4]);
-                    funkcije.RemoveTermin(selectedSplit[4]);
-                    listBox_obavljanjeTehnickog.DataSource = funkcije.GetAllTermini();
+                    funkcije.IzdajPotvrduTP(brojSasije);
                 }
                 else
                 {
                     MessageBox.Show("Niste prosli tehnicki pregled");
-                    funkcije.RemoveTermin(selectedSplit[4]);
-                    listBox_obavljanjeTehnickog.DataSource = funkcije.GetAllTermini();
                 }
+                //funkcije.RemoveTermin(brojSasije);
+                listBox_obavljanjeTehnickog.DataSource = funkcije.GetAllTermini();
             }
         }
 

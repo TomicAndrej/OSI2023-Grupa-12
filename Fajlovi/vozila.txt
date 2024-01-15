@@ -1,5 +1,4 @@
-kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,tablica
-M,M1,jmb,mercedes,benz,2012,2000,1111,123456789,12/12/1213,1,A11-E-333
+M,M1,2502003161504,mercedes,benz,2012,2000,1111,123456789,12/12/1213,True,A11-E-333
 A,A1,jmb,audi,a4,2012,2000,2222,123456789,12/12/1213,0,A11-E-444
-C,C1,jmb,citroen,c4,2012,2000,3333,123456789,12/12/1213,1,A11-E-555
+C,C1,0711002101460,citroen,c4,2012,2000,3333,123456789,12/12/1213,True,A11-E-555
 B,B1,jmb,bmw,320,2012,2000,4444,123456789,12/12/1213,0,A11-E-666

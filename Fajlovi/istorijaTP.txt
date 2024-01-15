@@ -18,3 +18,39 @@
 1111,25/01/2024,08:57,1
 5432,31/01/2024,22:51,1
 1234,13/01/2024,01:15,1
+Broj Šasije:5555,Datum:17/01/2024, Vrijeme:01:15,True
+Broj Šasije:5555,Datum:17/01/2024, Vrijeme:01:15,False
+Broj Šasije:4444,Datum:16/01/2024, Vrijeme:01:15,True
+Broj Šasije:5555,Datum:17/01/2024, Vrijeme:01:15,True
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:22,True
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:26,True
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:26,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:26,False
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,True
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,True
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,True
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1112,Datum:16/01/2024, Vrijeme:00:37,False
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,False
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,False
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,False
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,True
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,False
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,False
+Broj Šasije:1111,Datum:15/01/2024, Vrijeme:00:37,True
+1111,15/01/2024,00,False
+1112,16/01/2024,00,True
+1111,15/01/2024,00,True
+3333,15/01/2024,01,True
+1111,15/01/2024,00,True
+5555,15/01/2024,01,True
+1111,15/01/2024,01,True
+5555,18/01/2024,01,True
