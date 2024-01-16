@@ -26,7 +26,8 @@ namespace sistem_za_tehnicki_pregled
 
         private void RadnikButton_Click(object sender, EventArgs e)
         {
-            RadnikPanel.Visible = true;
+            LoginRadnikaPanel.Visible = true;
+            //RadnikPanel.Visible = true;
             IndikatorNaKomStePanelu.Text = "Radnik";
             IndikatorNaKomStePanelu.BringToFront();
             IndikatorNaKomStePanelu.Visible = true;
@@ -49,7 +50,16 @@ namespace sistem_za_tehnicki_pregled
         private void NazadRadnikButton_Click(object sender, EventArgs e)
         {
             RadnikPanel.Visible = false;
+            //IndikatorNaKomStePanelu.Text = "Radnik";
+            /*LogovanAdministratorPanel.Visible = false;
+            AdministratorPanel.Visible = false;
+            RegistracijaAdministratorskihNalogaPanel.Visible = false;
+            trenutniNalog = "";
             IndikatorNaKomStePanelu.Text = "";
+            IzborniPanel.Visible = true;*/
+            LoginRadnikaPanel.Visible = false;
+            IndikatorNaKomStePanelu.Text = "";
+            IzborniPanel.Visible = true;
         }
 
         private void NazadAdministratorButton_Click(object sender, EventArgs e)
@@ -159,19 +169,13 @@ namespace sistem_za_tehnicki_pregled
             funkcije f = new funkcije();
             if (f.provjeraLogInPodataka(KorisnickoImeTextBoxLogin.Text, LozinkaTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
             {
-                MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LogovanKlijentPanel.Visible = true;
+                LogovanKlijentPanel.BringToFront();
                 IndikatorNaKomStePanelu.Text = "Klijent: " + KorisnickoImeTextBoxLogin.Text;
                 trenutniNalog = KorisnickoImeTextBoxLogin.Text;
                 KorisnickoImeTextBoxLogin.Text = "";
                 LozinkaTextBoxLogin.Text = "";
-                /* 
-                 * 
-                 * 
-                 * TODO: otvori formu za klijenta
-                 * 
-                 * 
-                 * 
-                 */
             }
         }
 
@@ -522,6 +526,8 @@ namespace sistem_za_tehnicki_pregled
         private void button_zakazivanjeTehnickog_Click(object sender, EventArgs e)
         {
             panel_zakazivanjeTermina1.Visible = !panel_zakazivanjeTermina1.Visible;
+            button_zakazivanjeTermina1_pokreni.Enabled = true;
+            textBox_zakazivanjeTermina1_brojSasije.Enabled = true;
         }
 
         private void button_zakazivanjeTermina1_otkazi_click(object sender, EventArgs e)
@@ -556,7 +562,7 @@ namespace sistem_za_tehnicki_pregled
             DateTime selectedTime = dateTimePicker_zakazivanjeTermina3.Value;
             string selectedTimeFormatted = selectedTime.ToString("HH:mm");
             //TODO radnik mora unijeti jmb klijenta...(kod klijentskog zakazivanja se automatski uzima jmb klijenta funkcije.PronadjiJmbNaOsnovuNaloga(trenutniNalog))
-            
+
             if (voziloPostoji)
             {
                 if (funkcije.ZakaziTerminVoziloPostoji(uneseniBrojSasije, selectedDateFormatted, selectedTimeFormatted))
@@ -611,7 +617,7 @@ namespace sistem_za_tehnicki_pregled
 
             if (voziloImaTermin)
             {
-                MessageBox.Show("Ovo vozilo vec ima zakazan termin");
+                MessageBox.Show("Ovo vozilo već ima zakazan termin");
             }
             else
             {
@@ -624,6 +630,8 @@ namespace sistem_za_tehnicki_pregled
                 {
                     panel_zakazivanjeTermina3.Visible = true;
                 }
+                button_zakazivanjeTermina1_pokreni.Enabled = false;
+                textBox_zakazivanjeTermina1_brojSasije.Enabled = false;
             }
         }
         private void textBox_zakazivanjeTermina1_brojSasije_KeyPress(object sender, KeyPressEventArgs e)
@@ -765,7 +773,7 @@ namespace sistem_za_tehnicki_pregled
             if (PraznaListaAdministratorskihNaloga())
                 return;
             Radnik admin = (Radnik)ListaAdministratorskihNalogaComboBox.SelectedItem;
-            if (admin != null )
+            if (admin != null)
             {
                 DialogResult dr = MessageBox.Show($"Da li ste sigurni da želite da uklonite nalog '{admin.PrikaziFormat}'?", "Brisanje administratora", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
@@ -779,6 +787,36 @@ namespace sistem_za_tehnicki_pregled
                     ListaAdministratorskihNalogaComboBox.Enabled = true;
                 }
             }
+        }
+
+        private void PrijaviSeRadnikButton_Click(object sender, EventArgs e)
+        {
+            funkcije f = new funkcije();
+            if (f.provjeraLogInPodataka(KorisnickoImeRadnikaTextBoxLogin.Text, LozinkaRadnikaTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            {
+                //MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RadnikPanel.Visible = true;
+                RadnikPanel.BringToFront();
+                //AdministratorPanel.Visible = false;
+                IndikatorNaKomStePanelu.Text = "Radnik: " + KorisnickoImeRadnikaTextBoxLogin.Text;
+                trenutniNalog = KorisnickoImeRadnikaTextBoxLogin.Text;
+                KorisnickoImeRadnikaTextBoxLogin.Text = "";
+                LozinkaRadnikaTextBoxLogin.Text = "";
+            }
+        }
+
+        private void NazadSaLogovanogRadnikaNaIzborniPanelButton_Click(object sender, EventArgs e)
+        {
+            LoginRadnikaPanel.Visible = false;
+            IndikatorNaKomStePanelu.Text = "";
+        }
+
+        private void OdjavaLogovanogKlijentaButton_Click(object sender, EventArgs e)
+        {
+            LogovanKlijentPanel.Visible = false;
+            IndikatorNaKomStePanelu.Text = "";
+            KlijentPanel.Visible = false;
+            IzborniPanel.Visible = true;
         }
     }
 }
