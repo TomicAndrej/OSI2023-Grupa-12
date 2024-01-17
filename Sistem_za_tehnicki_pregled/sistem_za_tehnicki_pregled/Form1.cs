@@ -923,6 +923,7 @@ namespace sistem_za_tehnicki_pregled
 
         private void PrikazStatistikeUPrikazuStatistikeButton_Click(object sender, EventArgs e)
         {
+            StatistikaRichTextBox .Clear();
             string kategorija = ((KeyValuePair<string, List<string>>)KategorijaComboBox.SelectedItem).Key;
             if (KategorijaComboBox.SelectedItem != null && PotkategorijaComboBox.SelectedItem == null)
             {
