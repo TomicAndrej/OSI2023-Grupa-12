@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System.Globalization;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 
 namespace sistem_za_tehnicki_pregled
 {
@@ -9,6 +10,9 @@ namespace sistem_za_tehnicki_pregled
         public Form1()
         {
             InitializeComponent();
+            InicijalizujPodatke();
+            KategorijaComboBox.DataSource = new BindingSource(vozilaKategorije, null);
+            KategorijaComboBox.DisplayMember = "Key";
         }
         string trenutniNalog = "";
 
@@ -825,9 +829,6 @@ namespace sistem_za_tehnicki_pregled
             PracenjeStatistikePanel.Visible = true;
             PracenjeStatistikePanel.BringToFront();
             PracenjeStatistikePanel.ResumeLayout();
-            InicijalizujPodatke();
-            KategorijaComboBox.DataSource = new BindingSource(vozilaKategorije, null);
-            KategorijaComboBox.DisplayMember = "Key";
         }
 
         private Dictionary<string, List<string>> vozilaKategorije = new Dictionary<string, List<string>>();
@@ -868,24 +869,41 @@ namespace sistem_za_tehnicki_pregled
             PrikazStatistikePanel.Visible = false;
         }
 
-        bool provjeraTehnickogPregleda(string datum, string prosao)
+        bool provjeraTehnickogPregleda(string line, int rBrReda)
         {
-            if (prosao == "True")
+            string[] podaci = line.Split(',');
+            string novaLinija = "";
+            for (int i = 0; i < 10; i++)
+            {
+                novaLinija += podaci[i] + ",";
+            }
+            if (podaci[12] == "True")
             {
                 return true;
             }
-            else
+            else if (podaci[10] == "True")
             {
-                DateTime datumTehnickog = DateTime.ParseExact(datum, "dd/mm/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                DateTime danas = DateTime.Now;
-                if (datumTehnickog < danas)
+                DateTime.TryParseExact(podaci[9], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime datumTehnickog);
+                if (datumTehnickog.AddMonths(1) < DateTime.Now)
                 {
+                    novaLinija += "False,";
+                    for (int i = 11; i < podaci.Length - 1; i++)
+                    {
+                        novaLinija += podaci[i] + ",";
+                    }
+                    novaLinija += podaci[podaci.Length - 1];
+                    funkcije f = new funkcije();
+                    f.ChangeLineInFile("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt", rBrReda, novaLinija);
                     return false;
                 }
                 else
                 {
                     return true;
                 }
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -927,46 +945,36 @@ namespace sistem_za_tehnicki_pregled
             string kategorija = ((KeyValuePair<string, List<string>>)KategorijaComboBox.SelectedItem).Key;
             if (KategorijaComboBox.SelectedItem != null && PotkategorijaComboBox.SelectedItem == null)
             {
-                using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt"))
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt");
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
+                    string[] podaci = lines[i].Split(',');
+                    string kategorijaVozila = podaci[0].Trim();
+                    if (proslaIliNe == true && kategorijaVozila[0] == kategorija[11] && provjeraTehnickogPregleda(lines[i], i))
                     {
-                        string[] podaci = line.Split(',');
-                        string kategorijaVozila = podaci[0].Trim();
-                        string prosaoTehnicki = podaci[10].Trim();
-                        string datumTehnickog = podaci[9].Trim();
-                        if (proslaIliNe == true && kategorijaVozila[0] == kategorija[11] && provjeraTehnickogPregleda(datumTehnickog, prosaoTehnicki))
-                        {
-                            StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
-                        }
-                        else if (proslaIliNe == false && kategorijaVozila[0] == kategorija[11] && !provjeraTehnickogPregleda(datumTehnickog, prosaoTehnicki))
-                        {
-                            StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
-                        }
+                        StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
+                    }
+                    else if (proslaIliNe == false && kategorijaVozila[0] == kategorija[11] && !provjeraTehnickogPregleda(lines[i], i))
+                    {
+                        StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
                     }
                 }
             }
             else if (KategorijaComboBox.SelectedItem != null && PotkategorijaComboBox.SelectedItem != null)
             {
-                using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt"))
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt");
+                for (int i = 0; i < lines.Length; i++)
                 {
-                    string line;
-                    while ((line = sr.ReadLine()) != null)
+                    string[] podaci = lines[i].Split(',');
+                    string kategorijaVozila = podaci[0].Trim();
+                    string podkategorijaVozila = podaci[1].Trim();
+                    if (proslaIliNe == true && kategorijaVozila[0] == kategorija[11] && podkategorijaVozila == PotkategorijaComboBox.SelectedItem.ToString().Split(" ")[1] && provjeraTehnickogPregleda(lines[i], i))
                     {
-                        string[] podaci = line.Split(',');
-                        string kategorijaVozila = podaci[0].Trim();
-                        string podkategorijaVozila = podaci[1].Trim();
-                        string prosaoTehnicki = podaci[10].Trim();
-                        string datumTehnickog = podaci[9].Trim();
-                        if (proslaIliNe == true && kategorijaVozila[0] == kategorija[11] && podkategorijaVozila == PotkategorijaComboBox.SelectedItem.ToString().Split(" ")[1] && provjeraTehnickogPregleda(datumTehnickog, prosaoTehnicki))
-                        {
-                            StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
-                        }
-                        else if (proslaIliNe == false && kategorijaVozila[0] == kategorija[11] && podkategorijaVozila == PotkategorijaComboBox.SelectedItem.ToString().Split(" ")[1] && !provjeraTehnickogPregleda(datumTehnickog, prosaoTehnicki))
-                        {
-                            StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
-                        }
+                        StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
+                    }
+                    else if (proslaIliNe == false && kategorijaVozila[0] == kategorija[11] && podkategorijaVozila == PotkategorijaComboBox.SelectedItem.ToString().Split(" ")[1] && !provjeraTehnickogPregleda(lines[i], i))
+                    {
+                        StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
                     }
                 }
             }

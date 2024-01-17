@@ -801,6 +801,30 @@ return true;
             }
             return istorija;
         }
+        public void ChangeLineInFile(string filePath, int lineNumber, string newLineValue)
+        {
+            // Čitanje svih linija iz fajla
+            string[] lines = File.ReadAllLines(filePath);
 
+            // Provera da li je zadati red unutar opsega fajla
+            if (lineNumber >= 0 && lineNumber <= lines.Length - 1)
+            {
+                // Postavljanje nove vrednosti linije
+                lines[lineNumber] = newLineValue;
+
+                // Pisanje izmenjenih linija nazad u fajl
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    foreach (string line in lines)
+                    {
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Zadati red ne postoji u fajlu.");
+            }
+        }
     }
 }
