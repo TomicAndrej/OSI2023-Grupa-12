@@ -1,4 +1,6 @@
 ﻿using Microsoft.VisualBasic;
+using System.Globalization;
+using System.Windows.Forms;
 
 namespace sistem_za_tehnicki_pregled
 {
@@ -811,6 +813,181 @@ namespace sistem_za_tehnicki_pregled
             IndikatorNaKomStePanelu.Text = "";
             KlijentPanel.Visible = false;
             IzborniPanel.Visible = true;
+        }
+
+        private void NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton_Click(object sender, EventArgs e)
+        {
+            PracenjeStatistikePanel.Visible = false;
+        }
+
+        private void PracenjeStatistikeButton_Click(object sender, EventArgs e)
+        {
+            PracenjeStatistikePanel.Visible = true;
+            PracenjeStatistikePanel.BringToFront();
+            PracenjeStatistikePanel.ResumeLayout();
+            InicijalizujPodatke();
+            KategorijaComboBox.DataSource = new BindingSource(vozilaKategorije, null);
+            KategorijaComboBox.DisplayMember = "Key";
+        }
+
+        private Dictionary<string, List<string>> vozilaKategorije = new Dictionary<string, List<string>>();
+        public bool proslaIliNe;
+
+        private void InicijalizujPodatke()
+        {
+            vozilaKategorije.Add("Izaberi kategoriju", new List<string>());
+            vozilaKategorije.Add("KATEGORIJA M – Vozila za prevoz putnika", new List<string> { "Kategorija M1 – Putničko vozilo", "Kategorija M2 – Laki autobus", "Kategorija M3- Teški autobus" });
+            vozilaKategorije.Add("KATEGORIJA L – Mopedi, Motocikli, Tricikli i Četvorocikli", new List<string> { "Kategorija L1 – Moped", "Kategorija L2 – Laki tricikl", "Kategorija L3 – Motocikl", "Kategorija L4 – Motocikl sa bočnim sedištem", "Kategorija L5 – Teški tricikl", "Kategorija L6 – Laki četvorocikl (quad)", "Kategorija L7 – Teški četvorocikl (quad)" });
+            vozilaKategorije.Add("KATEGORIJA N – Teretna vozila", new List<string> { "Kategorija N1 - Vozila namenjena za prevoz robe čija najveća masa ne prelazi 3,5t.", "Kategorija N2 - Vozila namenjena za prevoz robe čija je najveća masa veća od 3,5t, ali manja od 12t.", "Kategorija N3 - Vozila namenjena za prevoz robe čija najveća masa prelazi 12t." });
+            vozilaKategorije.Add("KATEGORIJA O – Priključna vozila", new List<string> { "Kategorija O1 – Prikolice čija najveća masa ne prelazi 0,75t.", "Kategorija O2 – Prikolice čija je najveća masa veća od 0,75t, ali ne prelazi iznad 3,5t.", "Kategorija O3 – Prikolice čija je masa veća od 3,5t, ali ne prelazi iznad 10t.", "Kategorija O4 – Prikolice čija najveća masa prelazi 10t." });
+            vozilaKategorije.Add("KATEGORIJA T – Traktori", new List<string>());
+            vozilaKategorije.Add("KATEGORIJA R – Priključno vozilo traktora", new List<string>());
+            vozilaKategorije.Add("KATEGORIJA G – Terenska vozila", new List<string>());
+        }
+
+        private void VozilaKojaNisuProslaTehnickiButton_Click(object sender, EventArgs e)
+        {
+            PrikazStatistikePanel.Visible = true;
+            PrikazStatistikePanel.BringToFront();
+            PrikazStatistikePanel.ResumeLayout();
+            StatistikaRichTextBox.Clear();
+            proslaIliNe = false;
+        }
+
+        private void VozilaKojaSuProslaTehnickiButton_Click(object sender, EventArgs e)
+        {
+            PrikazStatistikePanel.Visible = true;
+            PrikazStatistikePanel.BringToFront();
+            PrikazStatistikePanel.ResumeLayout();
+            StatistikaRichTextBox.Clear();
+            proslaIliNe = true;
+        }
+
+        private void NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton_Click(object sender, EventArgs e)
+        {
+            PrikazStatistikePanel.Visible = false;
+        }
+
+        bool provjeraTehnickogPregleda(string datum, string prosao)
+        {
+            if (prosao == "True")
+            {
+                return true;
+            }
+            else
+            {
+                DateTime datumTehnickog = DateTime.ParseExact(datum, "dd/mm/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                DateTime danas = DateTime.Now;
+                if (datumTehnickog < danas)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        public string ispis(string[] podaci)
+        {
+            string klijentIme = "", klijentPrezime = "", jmbg = "";
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    if (line.Split(',')[6] == podaci[2])
+                    {
+                        klijentIme = line.Split(',')[2];
+                        klijentPrezime = line.Split(',')[3];
+                        jmbg = line.Split(',')[6];
+                        break;
+                    }
+                }
+            }
+            string result = "";
+            result += klijentIme + " ";
+            result += klijentPrezime + "(" + jmbg + "): ";
+            result += podaci[0].Trim() + " ";
+            if (podaci[1].Length > 0)
+            {
+                result += podaci[1].Trim() + " ";
+            }
+            result += podaci[3].Trim() + " ";
+            result += podaci[4].Trim() + " ";
+            result += podaci[5].Trim() + " ";
+            result += podaci[11].Trim() + " ";
+            return result;
+        }
+
+        private void PrikazStatistikeUPrikazuStatistikeButton_Click(object sender, EventArgs e)
+        {
+            string kategorija = ((KeyValuePair<string, List<string>>)KategorijaComboBox.SelectedItem).Key;
+            if (KategorijaComboBox.SelectedItem != null && PotkategorijaComboBox.SelectedItem == null)
+            {
+                using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt"))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] podaci = line.Split(',');
+                        string kategorijaVozila = podaci[0].Trim();
+                        string prosaoTehnicki = podaci[10].Trim();
+                        string datumTehnickog = podaci[9].Trim();
+                        if (proslaIliNe == true && kategorijaVozila[0] == kategorija[11] && provjeraTehnickogPregleda(datumTehnickog, prosaoTehnicki))
+                        {
+                            StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
+                        }
+                        else if (proslaIliNe == false && kategorijaVozila[0] == kategorija[11] && !provjeraTehnickogPregleda(datumTehnickog, prosaoTehnicki))
+                        {
+                            StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
+                        }
+                    }
+                }
+            }
+            else if (KategorijaComboBox.SelectedItem != null && PotkategorijaComboBox.SelectedItem != null)
+            {
+                using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt"))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        string[] podaci = line.Split(',');
+                        string kategorijaVozila = podaci[0].Trim();
+                        string podkategorijaVozila = podaci[1].Trim();
+                        string prosaoTehnicki = podaci[10].Trim();
+                        string datumTehnickog = podaci[9].Trim();
+                        if (proslaIliNe == true && kategorijaVozila[0] == kategorija[11] && podkategorijaVozila == PotkategorijaComboBox.SelectedItem.ToString().Split(" ")[1] && provjeraTehnickogPregleda(datumTehnickog, prosaoTehnicki))
+                        {
+                            StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
+                        }
+                        else if (proslaIliNe == false && kategorijaVozila[0] == kategorija[11] && podkategorijaVozila == PotkategorijaComboBox.SelectedItem.ToString().Split(" ")[1] && !provjeraTehnickogPregleda(datumTehnickog, prosaoTehnicki))
+                        {
+                            StatistikaRichTextBox.AppendText(ispis(podaci) + "\n");
+                        }
+                    }
+                }
+            }
+        }
+
+        private void KategorijaComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (KategorijaComboBox.SelectedItem != null)
+            {
+                string odabranaKategorija = ((KeyValuePair<string, List<string>>)KategorijaComboBox.SelectedItem).Key;
+                if (vozilaKategorije[odabranaKategorija].Any())
+                {
+                    List<string> podkategorije = vozilaKategorije[odabranaKategorija];
+                    PotkategorijaComboBox.DataSource = podkategorije;
+                    PotkategorijaComboBox.Enabled = true;
+                }
+                else
+                {
+                    PotkategorijaComboBox.DataSource = null;
+                    PotkategorijaComboBox.Enabled = false;
+                }
+            }
         }
     }
 }

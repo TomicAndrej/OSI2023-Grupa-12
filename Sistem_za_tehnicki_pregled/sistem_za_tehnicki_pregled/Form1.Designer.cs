@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Windows.Forms;
 
 namespace sistem_za_tehnicki_pregled
 {
@@ -73,6 +74,16 @@ namespace sistem_za_tehnicki_pregled
             LogovanAdministratorPanel = new Panel();
             OdjavaLogovanogAdministratoraButton = new Button();
             PracenjeStatistikeButton = new Button();
+            PracenjeStatistikePanel = new Panel();
+            NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton = new Button();
+            VozilaKojaSuProslaTehnickiButton = new Button();
+            VozilaKojaNisuProslaTehnickiButton = new Button();
+            PrikazStatistikePanel = new Panel();
+            KategorijaComboBox = new ComboBox();
+            PotkategorijaComboBox = new ComboBox();
+            PrikazStatistikeUPrikazuStatistikeButton = new Button();
+            StatistikaRichTextBox = new RichTextBox();
+            NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton = new Button();
             PregledPostojecihNalogaButton = new Button();
             BrisanjeRadnickihNalogaButton = new Button();
             BrisanjeAdministratorskihNalogaButton = new Button();
@@ -186,6 +197,8 @@ namespace sistem_za_tehnicki_pregled
             LogovanKlijentPanel.SuspendLayout();
             AdministratorPanel.SuspendLayout();
             LogovanAdministratorPanel.SuspendLayout();
+            PracenjeStatistikePanel.SuspendLayout();
+            PrikazStatistikePanel.SuspendLayout();
             RegistracijaAdministratorskihNalogaPanel.SuspendLayout();
             PregledPostojecihNalogaPanel.SuspendLayout();
             RegistracijaRadnickihNalogaPanel.SuspendLayout();
@@ -590,6 +603,7 @@ namespace sistem_za_tehnicki_pregled
             // 
             LogovanAdministratorPanel.Controls.Add(OdjavaLogovanogAdministratoraButton);
             LogovanAdministratorPanel.Controls.Add(PracenjeStatistikeButton);
+            LogovanAdministratorPanel.Controls.Add(PracenjeStatistikePanel);
             LogovanAdministratorPanel.Controls.Add(PregledPostojecihNalogaButton);
             LogovanAdministratorPanel.Controls.Add(BrisanjeRadnickihNalogaButton);
             LogovanAdministratorPanel.Controls.Add(BrisanjeAdministratorskihNalogaButton);
@@ -624,6 +638,111 @@ namespace sistem_za_tehnicki_pregled
             PracenjeStatistikeButton.TabIndex = 5;
             PracenjeStatistikeButton.Text = "Praćenje statistike";
             PracenjeStatistikeButton.UseVisualStyleBackColor = true;
+            PracenjeStatistikeButton.Click += PracenjeStatistikeButton_Click;
+            // 
+            // PracenjeStatistikePanel
+            // 
+            PracenjeStatistikePanel.Controls.Add(NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton);
+            PracenjeStatistikePanel.Controls.Add(VozilaKojaSuProslaTehnickiButton);
+            PracenjeStatistikePanel.Controls.Add(VozilaKojaNisuProslaTehnickiButton);
+            PracenjeStatistikePanel.Controls.Add(PrikazStatistikePanel);
+            PracenjeStatistikePanel.Dock = DockStyle.Fill;
+            PracenjeStatistikePanel.Location = new Point(0, 0);
+            PracenjeStatistikePanel.Name = "PracenjeStatistikePanel";
+            PracenjeStatistikePanel.Size = new Size(800, 450);
+            PracenjeStatistikePanel.TabIndex = 7;
+            PracenjeStatistikePanel.Visible = false;
+            // 
+            // NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton
+            // 
+            NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton.Location = new Point(694, 409);
+            NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton.Name = "NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton";
+            NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton.Size = new Size(94, 29);
+            NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton.TabIndex = 20;
+            NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton.Text = "Nazad";
+            NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton.UseVisualStyleBackColor = true;
+            NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton.Click += NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton_Click;
+            // 
+            // VozilaKojaSuProslaTehnickiButton
+            // 
+            VozilaKojaSuProslaTehnickiButton.Location = new Point(120, 166);
+            VozilaKojaSuProslaTehnickiButton.Name = "VozilaKojaSuProslaTehnickiButton";
+            VozilaKojaSuProslaTehnickiButton.Size = new Size(267, 71);
+            VozilaKojaSuProslaTehnickiButton.TabIndex = 2;
+            VozilaKojaSuProslaTehnickiButton.Text = "Vozila koja su prošla tehnički pregled";
+            VozilaKojaSuProslaTehnickiButton.UseVisualStyleBackColor = true;
+            VozilaKojaSuProslaTehnickiButton.Click += VozilaKojaSuProslaTehnickiButton_Click;
+            // 
+            // VozilaKojaNisuProslaTehnickiButton
+            // 
+            VozilaKojaNisuProslaTehnickiButton.Location = new Point(436, 166);
+            VozilaKojaNisuProslaTehnickiButton.Name = "VozilaKojaNisuProslaTehnickiButton";
+            VozilaKojaNisuProslaTehnickiButton.Size = new Size(283, 71);
+            VozilaKojaNisuProslaTehnickiButton.TabIndex = 3;
+            VozilaKojaNisuProslaTehnickiButton.Text = "Vozila koja nisu prošla tehnički pregled";
+            VozilaKojaNisuProslaTehnickiButton.UseVisualStyleBackColor = true;
+            VozilaKojaNisuProslaTehnickiButton.Click += VozilaKojaNisuProslaTehnickiButton_Click;
+            // 
+            // PrikazStatistikePanel
+            // 
+            PrikazStatistikePanel.Controls.Add(KategorijaComboBox);
+            PrikazStatistikePanel.Controls.Add(PotkategorijaComboBox);
+            PrikazStatistikePanel.Controls.Add(PrikazStatistikeUPrikazuStatistikeButton);
+            PrikazStatistikePanel.Controls.Add(StatistikaRichTextBox);
+            PrikazStatistikePanel.Controls.Add(NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton);
+            PrikazStatistikePanel.Dock = DockStyle.Fill;
+            PrikazStatistikePanel.Location = new Point(0, 0);
+            PrikazStatistikePanel.Name = "PrikazStatistikePanel";
+            PrikazStatistikePanel.Size = new Size(800, 450);
+            PrikazStatistikePanel.TabIndex = 1;
+            PrikazStatistikePanel.Visible = false;
+            // 
+            // KategorijaComboBox
+            // 
+            KategorijaComboBox.FormattingEnabled = true;
+            KategorijaComboBox.Location = new Point(222, 43);
+            KategorijaComboBox.Name = "KategorijaComboBox";
+            KategorijaComboBox.Size = new Size(378, 28);
+            KategorijaComboBox.TabIndex = 1;
+            KategorijaComboBox.SelectedIndexChanged += KategorijaComboBox_SelectedIndexChanged;
+            // 
+            // PotkategorijaComboBox
+            // 
+            PotkategorijaComboBox.FormattingEnabled = true;
+            PotkategorijaComboBox.Location = new Point(222, 91);
+            PotkategorijaComboBox.Name = "PotkategorijaComboBox";
+            PotkategorijaComboBox.Size = new Size(378, 28);
+            PotkategorijaComboBox.TabIndex = 2;
+            // 
+            // PrikazStatistikeUPrikazuStatistikeButton
+            // 
+            PrikazStatistikeUPrikazuStatistikeButton.Location = new Point(334, 165);
+            PrikazStatistikeUPrikazuStatistikeButton.Name = "PrikazStatistikeUPrikazuStatistikeButton";
+            PrikazStatistikeUPrikazuStatistikeButton.Size = new Size(175, 31);
+            PrikazStatistikeUPrikazuStatistikeButton.TabIndex = 3;
+            PrikazStatistikeUPrikazuStatistikeButton.Text = "Prikaz statistike";
+            PrikazStatistikeUPrikazuStatistikeButton.UseVisualStyleBackColor = true;
+            PrikazStatistikeUPrikazuStatistikeButton.Click += PrikazStatistikeUPrikazuStatistikeButton_Click;
+            // 
+            // StatistikaRichTextBox
+            // 
+            StatistikaRichTextBox.Location = new Point(30, 250);
+            StatistikaRichTextBox.Name = "StatistikaRichTextBox";
+            StatistikaRichTextBox.ReadOnly = true;
+            StatistikaRichTextBox.Size = new Size(640, 190);
+            StatistikaRichTextBox.TabIndex = 2;
+            StatistikaRichTextBox.Text = "";
+            StatistikaRichTextBox.WordWrap = false;
+            // 
+            // NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton
+            // 
+            NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton.Location = new Point(694, 409);
+            NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton.Name = "NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton";
+            NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton.Size = new Size(94, 29);
+            NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton.TabIndex = 6;
+            NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton.Text = "Nazad";
+            NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton.UseVisualStyleBackColor = true;
+            NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton.Click += NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton_Click;
             // 
             // PregledPostojecihNalogaButton
             // 
@@ -1397,11 +1516,11 @@ namespace sistem_za_tehnicki_pregled
             panel_zakazivanjeTermina2.Controls.Add(button_zakazivanjeTermina2_dalje);
             panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_rokRegistracije);
             panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_datumReg);
-            panel_zakazivanjeTermina2.Visible = false;
             panel_zakazivanjeTermina2.Location = new Point(53, 55);
             panel_zakazivanjeTermina2.Name = "panel_zakazivanjeTermina2";
             panel_zakazivanjeTermina2.Size = new Size(359, 322);
             panel_zakazivanjeTermina2.TabIndex = 10;
+            panel_zakazivanjeTermina2.Visible = false;
             // 
             // label_zakazivanjeTermina_kategorija
             // 
@@ -1699,6 +1818,8 @@ namespace sistem_za_tehnicki_pregled
             AdministratorPanel.ResumeLayout(false);
             AdministratorPanel.PerformLayout();
             LogovanAdministratorPanel.ResumeLayout(false);
+            PracenjeStatistikePanel.ResumeLayout(false);
+            PrikazStatistikePanel.ResumeLayout(false);
             RegistracijaAdministratorskihNalogaPanel.ResumeLayout(false);
             RegistracijaAdministratorskihNalogaPanel.PerformLayout();
             PregledPostojecihNalogaPanel.ResumeLayout(false);
@@ -1728,6 +1849,13 @@ namespace sistem_za_tehnicki_pregled
 
         #endregion
 
+        private ComboBox KategorijaComboBox;
+        private ComboBox PotkategorijaComboBox;
+        private Button PrikazStatistikeUPrikazuStatistikeButton;
+        private RichTextBox StatistikaRichTextBox;
+        private Button NazadSaPanelaZaPrikazStatistikeNaPanelZaPracenjeStatistikeButton;
+        private Button VozilaKojaNisuProslaTehnickiButton;
+        private Button VozilaKojaSuProslaTehnickiButton;
         private Panel IzborniPanel;
         private Label SistemZaTehnickiPregledLabel;
         private Button AdministratorButton;
@@ -1741,6 +1869,7 @@ namespace sistem_za_tehnicki_pregled
         private Label KorisnickoImeLabelLogin;
         private Button NazadRadnikButton;
         private TextBox KorisnickoImeTextBoxLogin;
+        private Panel PrikazStatistikePanel;
         private Label LozinkaLabelLogin;
         private TextBox LozinkaTextBoxLogin;
         private Button RegistrujSeButton;
@@ -1789,6 +1918,7 @@ namespace sistem_za_tehnicki_pregled
         private Button PracenjeStatistikeButton;
         private Button PregledPostojecihNalogaButton;
         private Panel PregledPostojecihNalogaPanel;
+        private Panel PracenjeStatistikePanel;
         private ListBox PregledPostojecihNalogaKlijentListBox;
         private Label PregledPostojecihNalogaKlijentLabel;
         private Label PregledPostojecihNalogaRadnikLabel;
@@ -1830,6 +1960,7 @@ namespace sistem_za_tehnicki_pregled
         private Label IndikatorNaKomStePanelu;
         private Button NazadSaPanelaZaRegisteracijuAdministratoraNaPanelPrijavljenogAdministratoraButton;
         private Button NazadSaPanelaZaPregledPostojecihNalogaNaPanelPrijavljenogAdministratoraButton;
+        private Button NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton;
         private Button NazadSaPanelaZaRegisteracijuRadnikaNaPanelPrijavljenogAdministratoraButton;
         private Button NazadSaPanelaZaBrisanjeRadnickihNalogaNaPanelPrijavljenogAdministratoraButton;
         private Button NazadSaPanelaZaBrisanjeAdministratorskihNalogaNaPanelPrijavljenogAdministratoraButton;
