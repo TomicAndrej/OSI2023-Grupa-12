@@ -819,5 +819,18 @@ return true;
             }
             return vozila;
         }
+        public string pronadjiKategorijuNaOsnovuBrojaSasije(string brojSasije)
+        {
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[7] == brojSasije)
+                {
+                    return parts[0];
+                }
+            }
+            return "";
+        }
     }
 }
