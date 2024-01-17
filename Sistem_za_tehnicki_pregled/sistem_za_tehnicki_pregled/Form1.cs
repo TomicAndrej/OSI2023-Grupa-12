@@ -7,12 +7,6 @@ namespace sistem_za_tehnicki_pregled
         public Form1()
         {
             InitializeComponent();
-            panel_zakazivanjeTermina2.Visible = false;
-            panel_zakazivanjeTermina1.Visible = false;
-            panel_zakazivanjeTermina3.Visible = false;
-            panel_obavljanjeTehnickog.Visible = false;
-            panel_prikazArhive.Visible = false;
-            panel_pregledIstorije.Visible = false;
         }
         string trenutniNalog = "";
 

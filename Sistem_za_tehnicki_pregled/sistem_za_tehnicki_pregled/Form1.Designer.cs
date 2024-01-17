@@ -1203,6 +1203,7 @@ namespace sistem_za_tehnicki_pregled
             panel_pregledIstorije.Name = "panel_pregledIstorije";
             panel_pregledIstorije.Size = new Size(800, 450);
             panel_pregledIstorije.TabIndex = 15;
+            panel_pregledIstorije.Visible = false;
             // 
             // button_pregledIstorije_nazad
             // 
@@ -1243,6 +1244,7 @@ namespace sistem_za_tehnicki_pregled
             panel_prikazArhive.Name = "panel_prikazArhive";
             panel_prikazArhive.Size = new Size(800, 450);
             panel_prikazArhive.TabIndex = 14;
+            panel_prikazArhive.Visible = false;
             // 
             // button_prikazArhive_nazad
             // 
@@ -1283,6 +1285,7 @@ namespace sistem_za_tehnicki_pregled
             panel_obavljanjeTehnickog.Name = "panel_obavljanjeTehnickog";
             panel_obavljanjeTehnickog.Size = new Size(800, 450);
             panel_obavljanjeTehnickog.TabIndex = 13;
+            panel_obavljanjeTehnickog.Visible = false;
             // 
             // button_obavljanjeTehnickog_otkazi
             // 
@@ -1327,6 +1330,7 @@ namespace sistem_za_tehnicki_pregled
             panel_zakazivanjeTermina1.Name = "panel_zakazivanjeTermina1";
             panel_zakazivanjeTermina1.Size = new Size(800, 450);
             panel_zakazivanjeTermina1.TabIndex = 6;
+            panel_zakazivanjeTermina1.Visible = false;
             // 
             // panel_zakazivanjeTermina3
             // 
@@ -1338,6 +1342,7 @@ namespace sistem_za_tehnicki_pregled
             panel_zakazivanjeTermina3.Name = "panel_zakazivanjeTermina3";
             panel_zakazivanjeTermina3.Size = new Size(408, 325);
             panel_zakazivanjeTermina3.TabIndex = 12;
+            panel_zakazivanjeTermina3.Visible = false;
             // 
             // button_zakazivanjeTermina3_nazad
             // 
@@ -1392,6 +1397,7 @@ namespace sistem_za_tehnicki_pregled
             panel_zakazivanjeTermina2.Controls.Add(button_zakazivanjeTermina2_dalje);
             panel_zakazivanjeTermina2.Controls.Add(textBox_zakazivanjeTermina2_rokRegistracije);
             panel_zakazivanjeTermina2.Controls.Add(label_zakazivanjeTermina_datumReg);
+            panel_zakazivanjeTermina2.Visible = false;
             panel_zakazivanjeTermina2.Location = new Point(53, 55);
             panel_zakazivanjeTermina2.Name = "panel_zakazivanjeTermina2";
             panel_zakazivanjeTermina2.Size = new Size(359, 322);
