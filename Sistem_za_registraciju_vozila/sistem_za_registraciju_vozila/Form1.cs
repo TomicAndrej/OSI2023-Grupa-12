@@ -603,10 +603,12 @@ namespace sistem_za_registraciju_vozila
         {
             panel_registracijaVozila.Visible = false;
             textBox_registracijaVozila_brojSasije.Text = string.Empty;
+            label_registracijaVozila_generisanaTablica.Text = string.Empty;
             panel1_placanjeKazne.Visible = false;
             panel_registracijaVozila_provjeraKazne.Visible = true;
-            label_registracijaVozila_generisanaTablica.Text = string.Empty;
             label_registracijaVozila_generisanStiker.Text = string.Empty;
+            textbox_registracijaVozila_unosPolise.Text = string.Empty;
+            textBox_registracijaVozila_brojSasije.Enabled = true;
         }
 
         private void button_registracijaVozila_registruj_Click(object sender, EventArgs e)
@@ -643,6 +645,7 @@ namespace sistem_za_registraciju_vozila
                     if (listaKazni.Items.Count == 0)
                     {
                         panel_registracijaVozila_provjeraKazne.Visible = false;
+                        textBox_registracijaVozila_brojSasije.Enabled = false;
                     }
                     else
                     {
@@ -653,16 +656,22 @@ namespace sistem_za_registraciju_vozila
                 else
                 {
                     panel_registracijaVozila_provjeraKazne.Visible = false;
+                    textBox_registracijaVozila_brojSasije.Enabled = false;
                 }
             }
             else
             {
-                funkcije.registracijaVozila(textBox_registracijaVozila_brojSasije.Text, label_registracijaVozila_generisanStiker.Text, label_registracijaVozila_generisanaTablica.Text);
-                textBox_registracijaVozila_brojSasije.Text = string.Empty;
-                label_registracijaVozila_generisanaTablica.Text = string.Empty;
-                label_registracijaVozila_generisanStiker.Text = string.Empty;
-                panel_registracijaVozila_provjeraKazne.Visible = true;
-                panel1_placanjeKazne.Visible = false;
+                if (funkcije.registracijaVozila(textBox_registracijaVozila_brojSasije.Text, label_registracijaVozila_generisanStiker.Text, label_registracijaVozila_generisanaTablica.Text, textbox_registracijaVozila_unosPolise.Text))
+                {
+                    panel_registracijaVozila.Visible = false;
+                    textBox_registracijaVozila_brojSasije.Text = string.Empty;
+                    label_registracijaVozila_generisanaTablica.Text = string.Empty;
+                    panel1_placanjeKazne.Visible = false;
+                    panel_registracijaVozila_provjeraKazne.Visible = true;
+                    label_registracijaVozila_generisanStiker.Text = string.Empty;
+                    textbox_registracijaVozila_unosPolise.Text = string.Empty;
+                    textBox_registracijaVozila_brojSasije.Enabled = true;
+                }
             }
         }
         private void textBox_registracijaVozila_brojSasije_KeyPress(object sender, KeyPressEventArgs e)
@@ -746,6 +755,7 @@ namespace sistem_za_registraciju_vozila
             {
                 GenerisiTabliceDugme.Enabled = true;
             }
+            else GenerisiTabliceDugme.Enabled = false;
         }
 
         private void CustomUnos_KeyPress(object sender, KeyPressEventArgs e)
@@ -829,9 +839,85 @@ namespace sistem_za_registraciju_vozila
             panel_pregledPodatakaoRegistracijama.Visible = false;
         }
 
-        private void button_to_prikazStatusaoKaznama_Click(object sender, EventArgs e)
+        private void button_to_placanjeKazniKlijent_Click(object sender, EventArgs e)
         {
+            //Dodati string koji cuva maticni broj logovanog klijenta
+            funkcije f = new funkcije();
+            string maticniBroj = f.PronadjiJmbNaOsnovuNaloga(trenutniNalog);
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\kazne\\" + maticniBroj + ".txt"))
+            {
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    string[] podaci = line.Split(',');
+                    if (podaci[2] == "N")
+                        listbox_placanjeKazniKlijent.Items.Add(podaci[0] + " - Cijena: " + podaci[1] + "KM");
+                }
+            }
 
+            if (listbox_placanjeKazniKlijent.Items.Count == 0)
+            {
+                MessageBox.Show("Nemate kazni za plaćanje!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                panel_placanjeKazniKlijent.Visible = true;
+            }
+        }
+        private void listbox_placanjeKazniKlijent_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listbox_placanjeKazniKlijent.SelectedIndex != -1)
+            {
+                List<string[]> podaci = new List<string[]>();
+
+                DialogResult result = MessageBox.Show("Da li želite platiti kaznu?", "Plaćanje kazne", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                funkcije f = new funkcije();
+                string maticniBroj = f.PronadjiJmbNaOsnovuNaloga(trenutniNalog);
+                if (result == DialogResult.Yes)
+                {
+                    using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\kazne\\" + maticniBroj + ".txt"))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            string line = sr.ReadLine();
+                            podaci.Add(line.Split(','));
+                        }
+                    }
+                    using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\kazne\\" + maticniBroj + ".txt"))
+                    {
+                        string kazna = listbox_placanjeKazniKlijent.SelectedItem.ToString();
+                        for (int i = 0; i < podaci.Count; i++)
+                        {
+                            if (kazna.Contains(podaci[i][0]))
+                            {
+                                sw.WriteLine(podaci[i][0] + "," + podaci[i][1] + "," + "P");
+                            }
+                            else
+                            {
+                                sw.WriteLine(podaci[i][0] + "," + podaci[i][1] + "," + podaci[i][2]);
+                            }
+                        }
+                    }
+
+                    listbox_placanjeKazniKlijent.Items.RemoveAt(listbox_placanjeKazniKlijent.SelectedIndex);
+                    if (listbox_placanjeKazniKlijent.Items.Count == 0)
+                    {
+                        MessageBox.Show("Nemate kazni za plaćanje!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        panel_placanjeKazniKlijent.Visible = false;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Niste izabrali kaznu", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void button_placanjeKazniKlijent_nazad_Click(object sender, EventArgs e)
+        {
+            panel_placanjeKazniKlijent.Visible = false;
+            listbox_placanjeKazniKlijent.Items.Clear();
         }
 
 

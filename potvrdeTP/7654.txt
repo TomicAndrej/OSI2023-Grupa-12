@@ -1,0 +1,5 @@
+Broj šasije: 7654
+Marka: mercedes
+Model: c
+Datum i vrijeme tehničkog pregleda: 18/01/2024 18:06
+Ime i prezime:  

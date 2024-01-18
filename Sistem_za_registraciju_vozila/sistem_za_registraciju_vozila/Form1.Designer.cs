@@ -134,6 +134,7 @@ namespace sistem_za_registraciju_vozila
             label_registracijaVozila_generisanaTablica = new Label();
             label_registracijaVozila_stiker = new Label();
             label_registracijaVozila_tablica = new Label();
+            label_registracijaVozila_polisa = new Label();
             button_registracijaVozila_generisiStiker = new Button();
             button_registracijaVozila_generisiTablicu = new Button();
             button_registracijaVozila_otkazi = new Button();
@@ -159,7 +160,7 @@ namespace sistem_za_registraciju_vozila
             KlijentButton = new Button();
             button_to_pregledPodatakaoRegistracijama = new Button();
             PromjenaPodatakaButton = new Button();
-            button_to_prikazStatusaoKaznama = new Button();
+            button_to_placanjeKazniKlijent = new Button();
             BrisanjeNalogaButton = new Button();
             PromjenaPodatakaPanel = new Panel();
             PromjenaKorisnickogImenaRadioButton = new RadioButton();
@@ -176,7 +177,12 @@ namespace sistem_za_registraciju_vozila
             panel_pregledPodatakaoRegistracijama = new Panel();
             label_pregledPodatakaoRegistracijama = new Label();
             listbox_pregledPodatakaoRegistracijama = new ListBox();
+            textbox_registracijaVozila_unosPolise = new TextBox();
             button_pregledPodatakaoRegistracijama_nazad = new Button();
+            button_to_placanjeKazniKlijent = new Button();
+            panel_placanjeKazniKlijent = new Panel();
+            button_placanjeKazniKlijent_nazad = new Button();
+            listbox_placanjeKazniKlijent = new ListBox();
             IzborniPanel.SuspendLayout();
             KlijentPanel.SuspendLayout();
             RegistracijaNalogaPanel.SuspendLayout();
@@ -196,6 +202,7 @@ namespace sistem_za_registraciju_vozila
             panel_generisanjeTablice.SuspendLayout();
             PromjenaPodatakaPanel.SuspendLayout();
             panel_pregledPodatakaoRegistracijama.SuspendLayout();
+            panel_placanjeKazniKlijent.SuspendLayout();
             SuspendLayout();
             // 
             // IzborniPanel
@@ -497,13 +504,15 @@ namespace sistem_za_registraciju_vozila
             // 
             // LogovanKlijentPanel
             // 
+            LogovanKlijentPanel.Controls.Add(panel_placanjeKazniKlijent);
             LogovanKlijentPanel.Controls.Add(panel_pregledPodatakaoRegistracijama);
             LogovanKlijentPanel.Controls.Add(OdjavaLogovanogKlijentaButton);
             LogovanKlijentPanel.Controls.Add(button_to_pregledPodatakaoRegistracijama);
             LogovanKlijentPanel.Controls.Add(PromjenaPodatakaButton);
-            LogovanKlijentPanel.Controls.Add(button_to_prikazStatusaoKaznama);
+            LogovanKlijentPanel.Controls.Add(button_to_placanjeKazniKlijent);
             LogovanKlijentPanel.Controls.Add(BrisanjeNalogaButton);
             LogovanKlijentPanel.Controls.Add(PromjenaPodatakaPanel);
+            LogovanKlijentPanel.Controls.Add(button_to_placanjeKazniKlijent);
             LogovanKlijentPanel.Location = new Point(0, 0);
             LogovanKlijentPanel.Name = "LogovanKlijentPanel";
             LogovanKlijentPanel.Size = new Size(800, 450);
@@ -570,15 +579,15 @@ namespace sistem_za_registraciju_vozila
             PromjenaPodatakaButton.UseVisualStyleBackColor = true;
             PromjenaPodatakaButton.Click += PromjenaPodatakaButton_Click;
             // 
-            // button_to_prikazStatusaoKaznama
+            // button_to_placanjeKazniKlijent
             // 
-            button_to_prikazStatusaoKaznama.Location = new Point(150, 200);
-            button_to_prikazStatusaoKaznama.Name = "button_to_prikazStatusaoKaznama";
-            button_to_prikazStatusaoKaznama.Size = new Size(200, 60);
-            button_to_prikazStatusaoKaznama.TabIndex = 8;
-            button_to_prikazStatusaoKaznama.Text = "Prikaz statusa o kaznama";
-            button_to_prikazStatusaoKaznama.UseVisualStyleBackColor = true;
-            button_to_prikazStatusaoKaznama.Click += button_to_prikazStatusaoKaznama_Click;
+            button_to_placanjeKazniKlijent.Location = new Point(150, 200);
+            button_to_placanjeKazniKlijent.Name = "button_to_placanjeKazniKlijent";
+            button_to_placanjeKazniKlijent.Size = new Size(200, 60);
+            button_to_placanjeKazniKlijent.TabIndex = 8;
+            button_to_placanjeKazniKlijent.Text = "Prikaz statusa o kaznama";
+            button_to_placanjeKazniKlijent.UseVisualStyleBackColor = true;
+            button_to_placanjeKazniKlijent.Click += button_to_placanjeKazniKlijent_Click;
             // 
             // BrisanjeNalogaButton
             // 
@@ -1264,6 +1273,8 @@ namespace sistem_za_registraciju_vozila
             panel_registracijaVozila.Controls.Add(label_registracijaVozila_generisanaTablica);
             panel_registracijaVozila.Controls.Add(label_registracijaVozila_stiker);
             panel_registracijaVozila.Controls.Add(label_registracijaVozila_tablica);
+            panel_registracijaVozila.Controls.Add(textbox_registracijaVozila_unosPolise);
+            panel_registracijaVozila.Controls.Add(label_registracijaVozila_polisa);
             panel_registracijaVozila.Controls.Add(button_registracijaVozila_generisiStiker);
             panel_registracijaVozila.Controls.Add(button_registracijaVozila_generisiTablicu);
             panel_registracijaVozila.Controls.Add(button_registracijaVozila_otkazi);
@@ -1277,6 +1288,13 @@ namespace sistem_za_registraciju_vozila
             panel_registracijaVozila.Size = new Size(800, 450);
             panel_registracijaVozila.TabIndex = 1;
             panel_registracijaVozila.Visible = false;
+            //
+            // textbox_registracijaVozila_unosPolise
+            //
+            textbox_registracijaVozila_unosPolise.Location = new Point(120, 240);
+            textbox_registracijaVozila_unosPolise.Name = "textbox_registracijaVozila_unosPolise";
+            textbox_registracijaVozila_unosPolise.Size = new Size(80, 20);
+            textbox_registracijaVozila_unosPolise.TabIndex = 4;
             // 
             // button_registracijaVozila_registruj
             // 
@@ -1321,6 +1339,15 @@ namespace sistem_za_registraciju_vozila
             label_registracijaVozila_tablica.Size = new Size(58, 20);
             label_registracijaVozila_tablica.TabIndex = 19;
             label_registracijaVozila_tablica.Text = "Tablica:";
+            // 
+            // label_registracijaVozila_polisa
+            // 
+            label_registracijaVozila_polisa.AutoSize = true;
+            label_registracijaVozila_polisa.Location = new Point(30, 240);
+            label_registracijaVozila_polisa.Name = "label_registracijaVozila_polisa";
+            label_registracijaVozila_polisa.Size = new Size(58, 20);
+            label_registracijaVozila_polisa.TabIndex = 19;
+            label_registracijaVozila_polisa.Text = "ID polise:";
             // 
             // button_registracijaVozila_generisiStiker
             // 
@@ -1678,6 +1705,46 @@ namespace sistem_za_registraciju_vozila
             NazadSaPromjenePodatakaNaLogovanogKlijenta.UseVisualStyleBackColor = true;
             NazadSaPromjenePodatakaNaLogovanogKlijenta.Click += NazadSaPromjenePodatakaNaLogovanogKlijenta_Click;
             // 
+            // button_to_placanjeKazniKlijent
+            // 
+            button_to_placanjeKazniKlijent.Location = new Point(150, 200);
+            button_to_placanjeKazniKlijent.Name = "button_to_placanjeKazniKlijent";
+            button_to_placanjeKazniKlijent.Size = new Size(200, 60);
+            button_to_placanjeKazniKlijent.TabIndex = 0;
+            button_to_placanjeKazniKlijent.Text = "Placanje kazne";
+            button_to_placanjeKazniKlijent.UseVisualStyleBackColor = true;
+            button_to_placanjeKazniKlijent.Click += button_to_placanjeKazniKlijent_Click;
+            // 
+            // panel_placanjeKazniKlijent
+            // 
+            panel_placanjeKazniKlijent.Controls.Add(button_placanjeKazniKlijent_nazad);
+            panel_placanjeKazniKlijent.Controls.Add(listbox_placanjeKazniKlijent);
+            panel_placanjeKazniKlijent.Dock = DockStyle.Fill;
+            panel_placanjeKazniKlijent.Location = new Point(0, 0);
+            panel_placanjeKazniKlijent.Name = "panel_placanjeKazniKlijent";
+            panel_placanjeKazniKlijent.Size = new Size(800, 450);
+            panel_placanjeKazniKlijent.TabIndex = 1;
+            panel_placanjeKazniKlijent.Visible = false;
+            // 
+            // button_placanjeKazniKlijent_nazad
+            // 
+            button_placanjeKazniKlijent_nazad.Location = new Point(694, 409);
+            button_placanjeKazniKlijent_nazad.Name = "button_placanjeKazniKlijent_nazad";
+            button_placanjeKazniKlijent_nazad.Size = new Size(94, 29);
+            button_placanjeKazniKlijent_nazad.TabIndex = 2;
+            button_placanjeKazniKlijent_nazad.Text = "Nazad";
+            button_placanjeKazniKlijent_nazad.UseVisualStyleBackColor = true;
+            button_placanjeKazniKlijent_nazad.Click += button_placanjeKazniKlijent_nazad_Click;
+            // 
+            // listbox_placanjeKazniKlijent
+            // 
+            listbox_placanjeKazniKlijent.FormattingEnabled = true;
+            listbox_placanjeKazniKlijent.Location = new Point(186, 64);
+            listbox_placanjeKazniKlijent.Name = "listbox_placanjeKazniKlijent";
+            listbox_placanjeKazniKlijent.Size = new Size(400, 304);
+            listbox_placanjeKazniKlijent.TabIndex = 1;
+            listbox_placanjeKazniKlijent.MouseDoubleClick += listbox_placanjeKazniKlijent_MouseDoubleClick;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1843,6 +1910,7 @@ namespace sistem_za_registraciju_vozila
         private Label label_registracijaVozila_generisanaTablica;
         private Label label_registracijaVozila_stiker;
         private Label label_registracijaVozila_tablica;
+        private Label label_registracijaVozila_polisa;
         private Button button_registracijaVozila_registruj;
         private Panel panel1_placanjeKazne;
         private ListBox listaKazni;
@@ -1855,7 +1923,7 @@ namespace sistem_za_registraciju_vozila
         private TextBox RegistarskeTablice;
         private Button button_generisanjeTablice_nazad;
         private Button button_to_pregledPodatakaoRegistracijama;
-        private Button button_to_prikazStatusaoKaznama;
+        private Button button_to_placanjeKazniKlijent;
         private Button BrisanjeNalogaButton;
         private Button PromjenaPodatakaButton;
         private Panel PromjenaPodatakaPanel;
@@ -1873,5 +1941,9 @@ namespace sistem_za_registraciju_vozila
         private Label label_pregledPodatakaoRegistracijama;
         private ListBox listbox_pregledPodatakaoRegistracijama;
         private Button button_pregledPodatakaoRegistracijama_nazad;
+        private TextBox textbox_registracijaVozila_unosPolise;
+        private Panel panel_placanjeKazniKlijent;
+        private ListBox listbox_placanjeKazniKlijent;
+        private Button button_placanjeKazniKlijent_nazad;
     }
 }

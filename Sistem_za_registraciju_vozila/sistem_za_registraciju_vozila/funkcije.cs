@@ -39,6 +39,8 @@ namespace sistem_za_registraciju_vozila
         private string izvjestajiOIspravnostiFilePath = "..\\..\\..\\..\\..\\Fajlovi\\izvjestajiOIspravnosti.txt";
         private string istorijaTPFilePath = "..\\..\\..\\..\\..\\Fajlovi\\istorijaTP.txt";
         private string kazneFilePath = "..\\..\\..\\..\\..\\Fajlovi\\kazne.txt";
+        private string poliseFilePath = "..\\..\\..\\..\\..\\Fajlovi\\polise.txt";
+        private string saobracajneFilePath = "..\\..\\..\\..\\..\\Fajlovi\\saobracajne.txt";
         public bool provjeraKorisnickogImena(string username, string putanja)
         {
             if (username.Length < 5 || username.Length > 32)
@@ -802,8 +804,114 @@ return true;
             }
             return istorija;
         }
-        public void registracijaVozila(string brojSasije, string stiker, string tablica)
+        private bool polisaValidna(string brojSasije, string IDpolise)
         {
+            string[] lines = File.ReadAllLines(poliseFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[0] == IDpolise)
+                {
+                    return parts[4]==brojSasije;
+                }
+            }
+            return false;
+        }
+        private string pronadjiDatumRegNaOsnovuBrojaSasijeUFajluVozila(string brojSasije)
+        {
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[7] == brojSasije)
+                {
+                    return parts[9];
+                }
+            }
+            return "";
+        }
+        private void kreiranjeIprikazSaobracajne(string brojSasije)
+        {
+            string saobracajna = "";
+            bool found = false;
+            string[] lines = File.ReadAllLines(saobracajneFilePath);
+
+            string tempFile = Path.GetTempFileName();
+            using (StreamWriter writer = new StreamWriter(tempFile))
+            {
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(',');
+
+                    if (parts.Length > 0 && parts[0] == brojSasije)
+                    {
+                        found = true;
+                        //DateTime datumReg = DateTime.Parse(parts[6]);
+                        //parts[6] = datumReg.AddYears(1).ToString("dd/MM/yyyy");
+                        parts[6] = pronadjiDatumRegNaOsnovuBrojaSasijeUFajluVozila(parts[0]);
+                        saobracajna = $"Broj šasije: {parts[0]}\n" +
+                                      $"Vlasnik: {pronadjiImeNaOsnovuJmb(parts[1])} {pronadjiPrezimeNaOsnovuJmb(parts[1])}\n" +
+                                      $"Registarski Broj: {parts[2]}\n" +
+                                      $"Marka: {parts[3]}\n" +
+                                      $"Model: {parts[4]}\n" +
+                                      $"Godište: {parts[5]}\n" +
+                                      $"Datum registracije: {pronadjiDatumRegNaOsnovuBrojaSasijeUFajluVozila(parts[0])}\n";
+                        writer.WriteLine(string.Join(",", parts));
+                    }
+                    else
+                    {
+                        // Write other lines to the temporary file
+                        writer.WriteLine(line);
+                    }
+                }
+                if (!found)
+                {
+                    string[] lines1 = File.ReadAllLines(vozilaFilePath);
+                    foreach (string line in lines1)
+                    {
+                        string[] parts = line.Split(',');
+                        if (parts.Length > 0 && parts[7] == brojSasije)
+                        {
+                            //kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,tablica,prosaoReg
+                            //brojSasije,jmbVlasnika,tablica,marka,model,godiste,datumReg
+                            string str = $"{brojSasije},{parts[2]},{parts[11]},{parts[3]},{parts[4]},{parts[5]},{parts[9]}";
+                            writer.WriteLine(str);
+                            saobracajna = $"Broj šasije: {brojSasije}\n" +
+                                      $"Vlasnik: {pronadjiImeNaOsnovuJmb(parts[2])} {pronadjiPrezimeNaOsnovuJmb(parts[2])}\n" +
+                                      $"Registarski Broj: {parts[11]}\n" +
+                                      $"Marka: {parts[3]}\n" +
+                                      $"Model: {parts[4]}\n" +
+                                      $"Godište: {parts[5]}\n" +
+                                      $"Datum registracije: {parts[9]}\n";
+                        }
+                    }
+                }
+            }
+            File.Delete(saobracajneFilePath);
+            File.Move(tempFile, saobracajneFilePath);
+            MessageBox.Show(saobracajna,"Saobraćajna");
+        }
+        private string izracunajNoviDatumReg(string datumReg)
+        {
+            if (datumReg == "") return DateTime.Now.AddYears(1).ToString("dd/MM/yyyy");
+
+            DateTime datum = DateTime.Parse(datumReg);
+            if(DateTime.Now < datum)
+            {
+                return datum.AddYears(1).ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                return DateTime.Now.AddYears(1).ToString("dd/MM/yyyy");
+            }
+        }
+        public bool registracijaVozila(string brojSasije, string stiker, string tablica, string IDpolise)
+        {
+            if(!polisaValidna(brojSasije,IDpolise))
+            {
+                MessageBox.Show("Polisa se ne poklapa sa brojem šasije datog vozila!");
+                return false;
+            }
             string[] lines = File.ReadAllLines(vozilaFilePath);
             // Create a temporary file to store updated account information
             string tempFile = Path.GetTempFileName();
@@ -818,6 +926,7 @@ return true;
                     if (parts.Length > 0 && parts[7] == brojSasije)
                     {
                         parts[8] = stiker;
+                        parts[9] = izracunajNoviDatumReg(parts[9]);
                         parts[11] = tablica;
                         parts[12] = "True";
                         writer.WriteLine(string.Join(",", parts));
@@ -829,13 +938,13 @@ return true;
                     }
                 }
             }
-            // TODO da li se treba dodati vozilo u fajl vozila ako nije do tada postojalo (jer na potvrdi o uspjesnom
-            // tehnickom pregledu pise tablica a ako vozilo nije u fajlu vozila ne mozemo doci do te tablice
 
             // Replace the original file with the temporary file
             File.Delete(vozilaFilePath);
             File.Move(tempFile, vozilaFilePath);
             MessageBox.Show("Vozilo uspješno registrovano!");
+            kreiranjeIprikazSaobracajne(brojSasije);
+            return true;
         }
         public string PronadjiJmbPrekoBrojaSasije(string brojSasije)
         {

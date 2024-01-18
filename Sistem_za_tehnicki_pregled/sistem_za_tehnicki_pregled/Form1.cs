@@ -1644,7 +1644,7 @@ namespace sistem_za_tehnicki_pregled
                 MessageBox.Show("Niste unijeli kubikažu vozila!", "Kubikaža vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            using (StreamReader sw = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\klijenti.txt"))
+            using (StreamReader sw = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
             {
                 string red;
                 while ((red = sw.ReadLine()) != null)
