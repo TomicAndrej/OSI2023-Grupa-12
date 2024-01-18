@@ -1,0 +1,6 @@
+Broj šasije: 3333
+Marka: JohnDeer
+Model: Fe440
+Datum i vrijeme tehničkog pregleda: 01/18/2024 17:08
+Ime i prezime: Boris Matić
+ID polise osiguranja: 178077

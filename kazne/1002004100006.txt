@@ -1,4 +1,1 @@
-Kais,25.00,P
-Spao remen,1000.00,N
-Ugasena svetla,100.00,P
-Presao preko pune,500.00,N
+kais,120,P

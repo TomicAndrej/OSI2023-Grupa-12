@@ -1,6 +1,7 @@
 admin,admin,admin,admin
-daco1234,1234,Danilo,Todorović
-admin1,admin1,admin1,admin1
-sdasd,aaa,asdas,dsa
-admin31231,adminadmin,admin,admin
-isidora,isidora123,Isidora,Radić
+danilot,12345678,Danilo,Todorović
+andrejt,00000000,Andrej,Tomić
+borism,11112222,Boris,Matić
+marijat,12345678,Marija,Tadić
+isidorar,iriririr,Isidora,Radić
+mmarko,mmarko123,Marko,Markovic

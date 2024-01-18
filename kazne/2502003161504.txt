@@ -1,0 +1,2 @@
+vozio u alkoholisanom stanju,5,P
+nije stao na crveno,80,P

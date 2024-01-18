@@ -46,6 +46,8 @@ namespace sistem_za_tehnicki_pregled
         {
             KlijentPanel.Visible = false;
             IndikatorNaKomStePanelu.Text = "";
+            LozinkaTextBoxLogin.Text = "";
+            KorisnickoImeTextBoxLogin.Text = "";
         }
 
         private void NazadRadnikButton_Click(object sender, EventArgs e)
@@ -67,6 +69,8 @@ namespace sistem_za_tehnicki_pregled
         {
             AdministratorPanel.Visible = false;
             IndikatorNaKomStePanelu.Text = "";
+            LozinkaAdministratorTextBoxLogin.Text = "";
+            KorisnickoImeAdministratorTextBoxLogin.Text = "";
         }
 
         private void RegistrujNalogButton_Click(object sender, EventArgs e)
@@ -560,7 +564,7 @@ namespace sistem_za_tehnicki_pregled
             bool voziloPostoji = funkcije.PretragaVozilaUFajluVozila(uneseniBrojSasije);
 
             DateTime selectedDate = monthCalendar_zakazivanjeTermina3.SelectionStart;
-            string selectedDateFormatted = selectedDate.ToString("dd/MM/yyyy");
+            string selectedDateFormatted = selectedDate.ToString("MM/dd/yyyy");
 
             DateTime selectedTime = dateTimePicker_zakazivanjeTermina3.Value;
             string selectedTimeFormatted = selectedTime.ToString("HH:mm");
@@ -684,6 +688,7 @@ namespace sistem_za_tehnicki_pregled
             }
         }
 
+
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
         private void button_obavljanjeTehnickog_Click(object sender, EventArgs e)
@@ -720,7 +725,7 @@ namespace sistem_za_tehnicki_pregled
                 {
                     MessageBox.Show("Niste prosli tehnicki pregled");
                 }
-                //funkcije.RemoveTermin(brojSasije);
+                funkcije.RemoveTermin(brojSasije);
                 listBox_obavljanjeTehnickog.DataSource = funkcije.GetAllTermini();
             }
         }
@@ -818,6 +823,8 @@ namespace sistem_za_tehnicki_pregled
         {
             LoginRadnikaPanel.Visible = false;
             IndikatorNaKomStePanelu.Text = "";
+            LozinkaRadnikaTextBoxLogin.Text = "";
+            KorisnickoImeRadnikaTextBoxLogin.Text = "";
         }
 
         private void OdjavaLogovanogKlijentaButton_Click(object sender, EventArgs e)
@@ -923,7 +930,7 @@ namespace sistem_za_tehnicki_pregled
             }
             else if (podaci[10] == "True")
             {
-                DateTime.TryParseExact(podaci[13], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime datumTehnickog);
+                DateTime.TryParseExact(podaci[13], "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime datumTehnickog);
                 if (datumTehnickog.AddMonths(1) < DateTime.Now)
                 {
                     novaLinija += "False,";
@@ -1098,6 +1105,39 @@ namespace sistem_za_tehnicki_pregled
             ZakazivanjeTerminaTehnickogPanel.Visible = false;
             UnosBrojaSasijeTextBox.Enabled = true;
             PokretanjeZakazivanjaTerminaButton.Enabled = true;
+            UnosBrojaSasijeTextBox.Text = "";
+
+
+            MarkaZakazivanjeTextBox.Text = "";
+            ModelZakazivanjeTextBox.Text = "";
+            GodisteZakazivanjeTextBox.Text = "";
+            KubikazaZakazivanjeTextBox.Text = "";
+            KategorijaZakazivanjeComboBox.SelectedIndex = -1;
+            KategorijaZakazivanjeComboBox.Text = "";
+            PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+            PotkategorijaZakazivanjeComboBox.Text = "";
+
+            ZakazivanjeTerminaMonthCalendar.Visible = false;
+            ZakazivanjeTerminaDateTimePicker.Visible = false;
+            ZakaziTerminAkoVoziloVecPostojiButton.Visible = false;
+
+            ZakaziTerminaAkoVoziloNePostojiButton.Visible = false;
+            KategorijaZakazivanjeComboBox.Visible = false;
+            KategorijaZakazivanjeLabel.Visible = false;
+            PotkategorijaZakazivanjeComboBox.Visible = false;
+            PotkategorijaZakazivanjeLabel.Visible = false;
+            MarkaZakazivanjeTextBox.Visible = false;
+            MarkaZakazivanjeLabel.Visible = false;
+            ModelZakazivanjeTextBox.Visible = false;
+            ModelZakazivanjeLabel.Visible = false;
+            GodisteZakazivanjeTextBox.Visible = false;
+            GodisteZakazivanjeLabel.Visible = false;
+            KubikazaZakazivanjeTextBox.Visible = false;
+            KubikazaZakazivanjeLabel.Visible = false;
+
+            UnosBrojaSasijeTextBox.Enabled = true;
+            PokretanjeZakazivanjaTerminaButton.Enabled = true;
+
         }
 
         private void BrisanjeNalogaButton_Click(object sender, EventArgs e)
@@ -1436,6 +1476,9 @@ namespace sistem_za_tehnicki_pregled
 
             UnosBrojaSasijeTextBox.Enabled = false;
             PokretanjeZakazivanjaTerminaButton.Enabled = false;
+            ZakazivanjeTerminaDateTimePicker.Value = DateTime.Now;
+            ZakazivanjeTerminaMonthCalendar.SelectionStart = DateTime.Today;
+            ZakazivanjeTerminaMonthCalendar.SelectionEnd = DateTime.Today;
         }
 
         public void nePostojiVozilo()
@@ -1469,10 +1512,23 @@ namespace sistem_za_tehnicki_pregled
 
             UnosBrojaSasijeTextBox.Enabled = false;
             PokretanjeZakazivanjaTerminaButton.Enabled = false;
+            ZakazivanjeTerminaDateTimePicker.Value = DateTime.Now;
+            ZakazivanjeTerminaMonthCalendar.SelectionStart = DateTime.Today;
+            ZakazivanjeTerminaMonthCalendar.SelectionEnd = DateTime.Today;
         }
 
         private void PokretanjeZakazivanjaTerminaButton_Click(object sender, EventArgs e)
         {
+            funkcije funkcije = new funkcije();
+            bool voziloImaTermin = funkcije.ProvjeraTerminaDatogVozila(UnosBrojaSasijeTextBox.Text);
+
+            if (voziloImaTermin)
+            {
+                MessageBox.Show("Ovo vozilo već ima zakazan termin", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta_Click(sender, e);
+                return;
+            }
+
             string sasija = "";
             using (StreamReader sw = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt"))
             {
@@ -1644,6 +1700,14 @@ namespace sistem_za_tehnicki_pregled
                 MessageBox.Show("Niste unijeli kubikažu vozila!", "Kubikaža vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (ZakazivanjeTerminaMonthCalendar.SelectionStart < DateTime.Today)
+            {
+                MessageBox.Show("Ne možete zakazati termin u prošlost!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (ZakazivanjeTerminaMonthCalendar.SelectionStart == DateTime.Today && ZakazivanjeTerminaDateTimePicker.Value < DateTime.Now)
+            {
+                MessageBox.Show("Ne možete zakazati termin u prošlost!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             using (StreamReader sw = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
             {
                 string red;
@@ -1657,11 +1721,59 @@ namespace sistem_za_tehnicki_pregled
                     }
                 }
             }
-            line = kategorija + "," + potkategorija + "," + jmbg + "," + MarkaZakazivanjeTextBox.Text + "," + ModelZakazivanjeTextBox.Text + "," + GodisteZakazivanjeTextBox.Text + "," + KubikazaZakazivanjeTextBox.Text + "," + UnosBrojaSasijeTextBox.Text + "," + "" + "," + "" + "," + "False" + "," + "" + "," + "False";
-            using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt", true))
+
+            line = jmbg + "," + ZakazivanjeTerminaMonthCalendar.SelectionStart.ToString("MM/dd/yyyy") + "," + ZakazivanjeTerminaDateTimePicker.Value.ToString("HH:mm") + "," + kategorija + "," + potkategorija + "," + MarkaZakazivanjeTextBox.Text + "," + ModelZakazivanjeTextBox.Text + "," + GodisteZakazivanjeTextBox.Text + "," + KubikazaZakazivanjeTextBox.Text + "," + UnosBrojaSasijeTextBox.Text;
+            using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\Fajlovi\\termini.txt", true))
             {
                 sw.WriteLine(line);
             }
+            MessageBox.Show("Uspješno ste zakazali termin!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta_Click(sender, e);
+        }
+        private void ZakaziTerminAkoVoziloVecPostojiButton_Click(object sender, EventArgs e)
+        {
+            funkcije funkcije = new funkcije();
+            bool voziloImaTermin = funkcije.ProvjeraTerminaDatogVozila(UnosBrojaSasijeTextBox.Text);
+            //MessageBox.Show(ZakazivanjeTerminaMonthCalendar.SelectionStart.ToString("MM/dd/yyyy") + " " + ZakazivanjeTerminaDateTimePicker.Value.ToString("HH:mm"));
+
+            if (voziloImaTermin)
+            {
+                MessageBox.Show("Ovo vozilo već ima zakazan termin", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (ZakazivanjeTerminaMonthCalendar.SelectionStart < DateTime.Today)
+            {
+                MessageBox.Show("Ne možete zakazati termin u prošlost!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (ZakazivanjeTerminaMonthCalendar.SelectionStart == DateTime.Today && ZakazivanjeTerminaDateTimePicker.Value < DateTime.Now)
+            {
+                MessageBox.Show("Ne možete zakazati termin u prošlost!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt");
+                int i = 0;
+                string[] rijeci = lines[i].Split(',');
+                i++;
+                for (; i < lines.Length; i++)
+                {
+                    rijeci = lines[i].Split(',');
+                    if (rijeci[7] == UnosBrojaSasijeTextBox.Text)
+                    {
+                        break;
+                    }
+                }
+                //kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,tablica,prosaoReg,datumTP
+                //jmb,datum,vrijeme,kategorija,potkategorija,marka,model,godiste,kubikaza,brojSasije
+                string line = rijeci[2] + ',' + ZakazivanjeTerminaMonthCalendar.SelectionStart.ToString("MM/dd/yyyy") + ',' + ZakazivanjeTerminaDateTimePicker.Value.ToString("HH:mm") + ',' + rijeci[0] + ',' + rijeci[1] + ',' + rijeci[3] + ',' + rijeci[4] + ',' + rijeci[5] + ',' + rijeci[6] + ',' + rijeci[7];
+                using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\Fajlovi\\termini.txt", true))
+                {
+                    sw.WriteLine(line);
+                }
+                MessageBox.Show("Uspješno ste zakazali termin!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta_Click(sender, e);
         }
 
         public void postojiVoziloRadnik()
@@ -1698,6 +1810,9 @@ namespace sistem_za_tehnicki_pregled
 
             UnosBrojaSasijeRadnikTextBox.Enabled = false;
             PokretanjeZakazivanjaTerminaRadnikButton.Enabled = false;
+            ZakazivanjeTerminaRadnikDateTimePicker.Value = DateTime.Now;
+            ZakazivanjeTerminaRadnikMonthCalendar.SelectionStart = DateTime.Today;
+            ZakazivanjeTerminaRadnikMonthCalendar.SelectionEnd = DateTime.Today;
         }
 
         public void nePostojiVoziloRadnik()
@@ -1734,6 +1849,9 @@ namespace sistem_za_tehnicki_pregled
 
             UnosBrojaSasijeRadnikTextBox.Enabled = false;
             PokretanjeZakazivanjaTerminaRadnikButton.Enabled = false;
+            ZakazivanjeTerminaRadnikDateTimePicker.Value = DateTime.Now;
+            ZakazivanjeTerminaRadnikMonthCalendar.SelectionStart = DateTime.Today;
+            ZakazivanjeTerminaRadnikMonthCalendar.SelectionEnd = DateTime.Today;
         }
 
         private void PokretanjeZakazivanjaTerminaRadnikButton_Click(object sender, EventArgs e)
@@ -1769,6 +1887,7 @@ namespace sistem_za_tehnicki_pregled
             PokretanjeZakazivanjaTerminaRadnikButton.Enabled = true;
 
 
+
             MarkaZakazivanjeRadnikTextBox.Text = "";
             ModelZakazivanjeRadnikTextBox.Text = "";
             GodisteZakazivanjeRadnikTextBox.Text = "";
@@ -1801,6 +1920,9 @@ namespace sistem_za_tehnicki_pregled
 
             UnosBrojaSasijeRadnikTextBox.Enabled = true;
             PokretanjeZakazivanjaTerminaRadnikButton.Enabled = true;
+            ZakazivanjeTerminaRadnikDateTimePicker.Value = DateTime.Now;
+            ZakazivanjeTerminaRadnikMonthCalendar.SelectionStart = DateTime.Today;
+            ZakazivanjeTerminaRadnikMonthCalendar.SelectionEnd = DateTime.Today;
         }
 
         private void KategorijaZakazivanjeRadnikComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -2008,10 +2130,85 @@ namespace sistem_za_tehnicki_pregled
                 MessageBox.Show("JMBG mora imati 13 cifara!", "JMBG", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            line = kategorija + "," + potkategorija + "," + JMBGZakazivanjeRadnikTextBox.Text + "," + MarkaZakazivanjeRadnikTextBox.Text + "," + ModelZakazivanjeRadnikTextBox.Text + "," + GodisteZakazivanjeRadnikTextBox.Text + "," + KubikazaZakazivanjeRadnikTextBox.Text + "," + UnosBrojaSasijeRadnikTextBox.Text + "," + "" + "," + "" + "," + "False" + "," + "" + "," + "False";
-            using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt", true))
+            if (ZakazivanjeTerminaRadnikMonthCalendar.SelectionStart < DateTime.Today)
             {
-                sw.WriteLine(line);
+                MessageBox.Show("Ne možete zakazati termin u prošlost!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (ZakazivanjeTerminaRadnikMonthCalendar.SelectionStart == DateTime.Today && ZakazivanjeTerminaRadnikDateTimePicker.Value < DateTime.Now)
+            {
+                MessageBox.Show("Ne možete zakazati termin u prošlost!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                line = JMBGZakazivanjeRadnikTextBox.Text + "," + ZakazivanjeTerminaMonthCalendar.SelectionStart.ToString("MM/dd/yyyy") + "," + ZakazivanjeTerminaDateTimePicker.Value.ToString("HH:mm") + "," + kategorija + "," + potkategorija + "," + MarkaZakazivanjeRadnikTextBox.Text + "," + ModelZakazivanjeRadnikTextBox.Text + "," + GodisteZakazivanjeRadnikTextBox.Text + "," + KubikazaZakazivanjeRadnikTextBox.Text + "," + UnosBrojaSasijeRadnikTextBox.Text;
+                using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\Fajlovi\\termini.txt", true))
+                {
+                    sw.WriteLine(line);
+                }
+                MessageBox.Show("Uspješno ste zakazali termin!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton_Click(sender, e);
+        }
+
+        private void ZakaziTerminAkoVoziloVecPostojiRadnikButton_Click(object sender, EventArgs e)
+        {
+            funkcije funkcije = new funkcije();
+            bool voziloImaTermin = funkcije.ProvjeraTerminaDatogVozila(UnosBrojaSasijeRadnikTextBox.Text);
+
+            if (voziloImaTermin)
+            {
+                MessageBox.Show("Ovo vozilo već ima zakazan termin", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (ZakazivanjeTerminaRadnikMonthCalendar.SelectionStart < DateTime.Today)
+            {
+                MessageBox.Show("Ne možete zakazati termin u prošlost!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (ZakazivanjeTerminaRadnikMonthCalendar.SelectionStart == DateTime.Today && ZakazivanjeTerminaRadnikDateTimePicker.Value < DateTime.Now)
+            {
+                MessageBox.Show("Ne možete zakazati termin u prošlost!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt");
+                int i = 0;
+                string[] rijeci = lines[i].Split(',');
+                i++;
+                for (; i < lines.Length; i++)
+                {
+                    if (rijeci[7] == UnosBrojaSasijeRadnikTextBox.Text)
+                    {
+                        break;
+                    }
+                    rijeci = lines[i].Split(',');
+                }
+                //kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,tablica,prosaoReg,datumTP
+                //jmb,datum,vrijeme,kategorija,potkategorija,marka,model,godiste,kubikaza,brojSasije
+                string line = rijeci[2] + "," + ZakazivanjeTerminaRadnikMonthCalendar.SelectionStart.ToString("MM/dd/yyyy") + "," + ZakazivanjeTerminaRadnikDateTimePicker.Value.ToString("HH:mm") + "," + rijeci[0] + "," + rijeci[1] + "," + rijeci[3] + "," + rijeci[4] + "," + rijeci[5] + "," + rijeci[6] + "," + rijeci[7];
+                using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\Fajlovi\\termini.txt", true))
+                {
+                    sw.WriteLine(line);
+                }
+                MessageBox.Show("Uspješno ste zakazali termin!", "Zakazivanje termina", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton_Click(sender, e);
+        }
+        
+        private void UnosBrojaSasijeRadnikTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                PokretanjeZakazivanjaTerminaRadnikButton_Click(sender, e);
+                e.Handled = true; // Prevent the "ding" sound
+            }
+        }
+
+        private void UnosBrojaSasijeTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                PokretanjeZakazivanjaTerminaButton_Click(sender, e);
+                e.Handled = true; // Prevent the "ding" sound
             }
         }
     }

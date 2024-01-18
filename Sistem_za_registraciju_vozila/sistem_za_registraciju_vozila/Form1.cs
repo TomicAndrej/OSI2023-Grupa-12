@@ -8,8 +8,39 @@ namespace sistem_za_registraciju_vozila
         public Form1()
         {
             InitializeComponent();
+            ProvjeraTehnickogIRegistracije();
         }
         string trenutniNalog = "";
+        public void ProvjeraTehnickogIRegistracije()
+        {
+            string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt");
+            bool pomjena = false;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].Split(",")[12] == "True")
+                {
+                    DateTime datumRegistracije = DateTime.Parse(lines[i].Split(",")[9]);
+                    if (datumRegistracije < DateTime.Now)
+                    {
+                        lines[i].Split(",")[12] = "False";
+                        pomjena = true;
+                    }
+                }
+                if (lines[i].Split(",")[10] == "True")
+                {
+                    DateTime datumTehnickog = DateTime.Parse(lines[i].Split(",")[13]);
+                    if (datumTehnickog.AddMonths(1) < DateTime.Now)
+                    {
+                        lines[i].Split(",")[10] = "False";
+                        pomjena = true;
+                    }
+                }
+            }
+            if (pomjena)
+            {
+                File.WriteAllLines("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt", lines);
+            }
+        }
 
         private void KlijentButton_Click(object sender, EventArgs e)
         {
@@ -189,7 +220,7 @@ namespace sistem_za_registraciju_vozila
         private void PrijaviSeAdministratorButton_Click(object sender, EventArgs e)
         {
             funkcije f = new funkcije();
-            if (f.provjeraLogInPodataka(KorisnickoImeAdministratorTextBoxLogin.Text, LozinkaAdministratorTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            if (f.provjeraLogInPodataka(KorisnickoImeAdministratorTextBoxLogin.Text, LozinkaAdministratorTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\administrator1.txt"))
             {
                 //MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LogovanAdministratorPanel.Visible = true;
@@ -246,7 +277,7 @@ namespace sistem_za_registraciju_vozila
                 MessageBox.Show("Korisničko ime nije validno!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!f.provjeraKorisnickogImena(KorisnickoImeAdminRegistracijaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            if (!f.provjeraKorisnickogImena(KorisnickoImeAdminRegistracijaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\administrator1.txt"))
             {
                 //MessageBox.Show("Korisničko ime već postoji!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -265,7 +296,7 @@ namespace sistem_za_registraciju_vozila
                 "," + LozinkaAdminRegistracijaTextBox.Text +
                 "," + ImeAdminRegistracijaTextBox.Text +
                 "," + PrezimeAdminRegistracijaTextBox.Text;
-            using (StreamWriter writer = File.AppendText("..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            using (StreamWriter writer = File.AppendText("..\\..\\..\\..\\..\\Fajlovi\\administrator1.txt"))
             {
                 writer.WriteLine(red);
             }
@@ -335,7 +366,7 @@ namespace sistem_za_registraciju_vozila
                 MessageBox.Show("Korisničko ime nije validno!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (!f.provjeraKorisnickogImena(KorisnickoImeRadnikRegistracijaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            if (!f.provjeraKorisnickogImena(KorisnickoImeRadnikRegistracijaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\radnik1.txt"))
             {
                 //MessageBox.Show("Korisničko ime već postoji!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -354,7 +385,7 @@ namespace sistem_za_registraciju_vozila
                 "," + LozinkaRadnikRegistracijaTextBox.Text +
                 "," + ImeRadnikRegistracijaTextBox.Text +
                 "," + PrezimeRadnikRegistracijaTextBox.Text;
-            using (StreamWriter writer = File.AppendText("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            using (StreamWriter writer = File.AppendText("..\\..\\..\\..\\..\\Fajlovi\\radnik1.txt"))
             {
                 writer.WriteLine(red);
             }
@@ -381,7 +412,7 @@ namespace sistem_za_registraciju_vozila
         public void UcitajAdministratore()
         {
             administratori.Clear();
-            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\administrator1.txt"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -398,7 +429,7 @@ namespace sistem_za_registraciju_vozila
         public void UcitajRadnike()
         {
             radnici.Clear();
-            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik1.txt"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -489,7 +520,7 @@ namespace sistem_za_registraciju_vozila
                 DialogResult dr = MessageBox.Show($"Da li ste sigurni da želite da uklonite nalog '{radnik.PrikaziFormat}'?", "Brisanje radnika", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    UkloniRadnickiNalog(radnik.Username, "..\\..\\..\\..\\..\\Fajlovi\\radnik.txt");
+                    UkloniRadnickiNalog(radnik.Username, "..\\..\\..\\..\\..\\Fajlovi\\radnik1.txt");
                     ListaRadnickihNalogaComboBox.DataSource = null;
                     radnici.Remove(radnik);
                     ListaRadnickihNalogaComboBox.DataSource = radnici;
@@ -552,7 +583,7 @@ namespace sistem_za_registraciju_vozila
                 DialogResult dr = MessageBox.Show($"Da li ste sigurni da želite da uklonite nalog '{admin.PrikaziFormat}'?", "Brisanje administratora", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dr == DialogResult.Yes)
                 {
-                    UkloniRadnickiNalog(admin.Username, "..\\..\\..\\..\\..\\Fajlovi\\administrator.txt");
+                    UkloniRadnickiNalog(admin.Username, "..\\..\\..\\..\\..\\Fajlovi\\administrator1.txt");
                     ListaAdministratorskihNalogaComboBox.DataSource = null;
                     administratori.Remove(admin);
                     ListaAdministratorskihNalogaComboBox.DataSource = administratori;
@@ -566,7 +597,7 @@ namespace sistem_za_registraciju_vozila
         private void PrijaviSeRadnikButton_Click(object sender, EventArgs e)
         {
             funkcije f = new funkcije();
-            if (f.provjeraLogInPodataka(KorisnickoImeRadnikaTextBoxLogin.Text, LozinkaRadnikaTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            if (f.provjeraLogInPodataka(KorisnickoImeRadnikaTextBoxLogin.Text, LozinkaRadnikaTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\radnik1.txt"))
             {
                 //MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RadnikPanel.Visible = true;
@@ -638,7 +669,8 @@ namespace sistem_za_registraciju_vozila
                         {
                             string line = sr.ReadLine();
                             string[] podaci = line.Split(',');
-                            listaKazni.Items.Add(podaci[0] + " - Cijena: " + podaci[1] + "KM");
+                            if(podaci.Length > 0 && podaci[2] == "N")
+                                listaKazni.Items.Add(podaci[0] + " - Cijena: " + podaci[1] + "KM");
                         }
                     }
 
@@ -841,6 +873,7 @@ namespace sistem_za_registraciju_vozila
 
         private void button_to_placanjeKazniKlijent_Click(object sender, EventArgs e)
         {
+            listbox_placanjeKazniKlijent.Items.Clear();
             //Dodati string koji cuva maticni broj logovanog klijenta
             funkcije f = new funkcije();
             string maticniBroj = f.PronadjiJmbNaOsnovuNaloga(trenutniNalog);

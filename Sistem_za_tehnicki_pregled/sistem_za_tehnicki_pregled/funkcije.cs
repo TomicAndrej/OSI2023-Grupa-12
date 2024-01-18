@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.LinkLabel;
 /*
 fajl sa vozilima:
 kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,tablica,registracija,datumTehnickog
@@ -38,6 +40,7 @@ namespace sistem_za_tehnicki_pregled
         private string vozilaFilePath = "..\\..\\..\\..\\..\\Fajlovi\\vozila.txt";
         private string izvjestajiOIspravnostiFilePath = "..\\..\\..\\..\\..\\Fajlovi\\izvjestajiOIspravnosti.txt";
         private string istorijaTPFilePath = "..\\..\\..\\..\\..\\Fajlovi\\istorijaTP.txt";
+        private string poliseFilePath = "..\\..\\..\\..\\..\\Fajlovi\\polise.txt";
         public bool provjeraKorisnickogImena(string username, string putanja)
         {
             if (username.Length < 5 || username.Length > 32)
@@ -497,12 +500,12 @@ return true;
             {
                 string[] parts = line.Split(',');
 
-                //jmb,datum,vrijeme,kategorija,potkategorija,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg
+                //jmb,datum,vrijeme,kategorija,potkategorija,marka,model,godiste,kubikaza,brojSasije
                 if (parts.Length > 0)
                 {
-                    termini.Add($"Datum:{parts[1]}, Vrijeme:{parts[2]}, Marka:{parts[5]},Model:{parts[6]},Broj Šasije:{parts[9]}");
+                    termini.Add($"Datum:{parts[1]}, Vrijeme:{parts[2]}, Marka:{parts[5]}, Model:{parts[6]}, Broj Šasije:{parts[9]}");
                 }
-            }
+            }//Datum:12/12/1212, Vrijeme:12:12, Marka:BMW, Model:320, Broj Šasije:123456789
             return termini;
         }
 
@@ -682,6 +685,37 @@ return true;
             }
             return "";
         }
+        private string generisiPolisu(string brojSasije)
+        {
+            string polisa;
+            //randomly generate polisa ID
+            Random random = new Random();
+            int polisaID = random.Next(100000, 999999);
+            polisa = polisaID.ToString();
+
+            //randomly generate datum isteka polise
+            int year = random.Next(2024, 2026);
+            int month = random.Next(1, 13);
+            int day = random.Next(1, 29);
+            string datumIsteka = month.ToString() + "/" + day.ToString() + "/" + year.ToString();
+
+            //randomly generate datum pocetka polise
+            year = random.Next(2022, 2023);
+            month = random.Next(1, 13);
+            day = random.Next(1, 29);
+            string datumPocetka = month.ToString() + "/" + day.ToString() + "/" + year.ToString();
+
+            //randomly generate iznos polise
+            int iznos = random.Next(100, 1000);
+            string line = $"{polisa},{datumIsteka},{datumPocetka},{iznos},{brojSasije}";
+
+            using (StreamWriter writer = new StreamWriter(poliseFilePath, true))
+            {
+                writer.WriteLine(line);
+            }
+
+            return polisa;
+        }
 
         public void IzdajPotvrduTP(string brojSasije)
         {
@@ -696,7 +730,8 @@ return true;
                                          $"Marka: {parts[5]}\n" +
                                          $"Model: {parts[6]}\n" +
                                          $"Datum i vrijeme tehničkog pregleda: {parts[1]} {parts[2]}\n" +
-                                         $"Ime i prezime: {pronadjiImeNaOsnovuJmb(parts[0])} {pronadjiPrezimeNaOsnovuJmb(parts[0])}";   
+                                         $"Ime i prezime: {pronadjiImeNaOsnovuJmb(parts[0])} {pronadjiPrezimeNaOsnovuJmb(parts[0])}\n" +
+                                         $"ID polise osiguranja: {generisiPolisu(parts[9])}";
                     //create a file in a folder 
                     string potvrdaTPFilePath = "..\\..\\..\\..\\..\\potvrdeTP\\" + brojSasije + ".txt";
                     using (StreamWriter writer = new StreamWriter(potvrdaTPFilePath, true))
@@ -726,22 +761,37 @@ return true;
 
         public void DodavanjeVozilaUFajl(string brojSasije, string prosaoTp)
         {
-            string[] lines = File.ReadAllLines(vozilaFilePath);
-            // Create a temporary file to store updated account information
+            string[] parts = {};
+            string[] linesTermin = File.ReadAllLines(terminiFilePath);
+            foreach (string line in linesTermin)
+            {
+                parts = line.Split(',');
+                if (parts.Length > 0 && parts[9] == brojSasije)
+                {
+                    break;
+                }
+            }
+            
+
+
             string tempFile = Path.GetTempFileName();
+
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            bool found = false;
+            string str="";
 
             using (StreamWriter writer = new StreamWriter(tempFile))
             {
                 foreach (string line in lines)
                 {
-                    string[] parts = line.Split(',');
+                    string[] parts1 = line.Split(',');
 
                     // Check if the line contains the provided username
-                    if (parts.Length > 0 && parts[7] == brojSasije)
-                    {
-                        
-                        parts[10] = prosaoTp;
-                        writer.WriteLine(string.Join(",", parts));
+                    if (parts1.Length > 0 && parts1[7] == brojSasije)
+                    { 
+                        found = true;
+                        str = parts1[0] + "," + parts1[1] + "," + parts1[2] + "," + parts1[3] + "," + parts1[4] + "," + parts1[5] + "," + parts1[6] + "," + parts1[7] + "," + parts1[8] + "," + parts1[9] + ",True," + parts1[11] + "," + parts1[12] + "," + parts[1] ;
+                        writer.WriteLine(str);
                     }
                     else
                     {
@@ -749,10 +799,14 @@ return true;
                         writer.WriteLine(line);
                     }
                 }
+                if(!found)
+                {
+                    str = parts[3] + "," + parts[4] + "," + parts[0] + "," + parts[5] + "," + parts[6] + "," + parts[7] + "," + parts[8] + "," + parts[9] + ",,,True,,," + parts[1];
+                    writer.WriteLine(str);
+                }
             }
-            // TODO da li se treba dodati vozilo u fajl vozila ako nije do tada postojalo (jer na potvrdi o uspjesnom
-            // tehnickom pregledu pise tablica a ako vozilo nije u fajlu vozila ne mozemo doci do te tablice
-
+            // kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,tablica,prosaoReg,datumTP
+            // jmb,datum,vrijeme,kategorija,potkategorija,marka,model,godiste,kubikaza,brojSasije
             // Replace the original file with the temporary file
             File.Delete(vozilaFilePath);
             File.Move(tempFile, vozilaFilePath);
@@ -794,7 +848,7 @@ return true;
                 if (parts.Length > 0)
                 {
                     istorija.Add($"Vozilo: {parts[0]}, datum: {parts[1]}, vrijeme: {parts[2]}, " +
-                                 $"prosao tehnicki pregled: {((parts[3] == "1") ? "da" : "ne")}");
+                                 $"prosao tehnicki pregled: {((parts[3] == "True") ? "da" : "ne")}");
                 }
             }
             return istorija;

@@ -1273,8 +1273,6 @@ namespace sistem_za_registraciju_vozila
             panel_registracijaVozila.Controls.Add(label_registracijaVozila_generisanaTablica);
             panel_registracijaVozila.Controls.Add(label_registracijaVozila_stiker);
             panel_registracijaVozila.Controls.Add(label_registracijaVozila_tablica);
-            panel_registracijaVozila.Controls.Add(textbox_registracijaVozila_unosPolise);
-            panel_registracijaVozila.Controls.Add(label_registracijaVozila_polisa);
             panel_registracijaVozila.Controls.Add(button_registracijaVozila_generisiStiker);
             panel_registracijaVozila.Controls.Add(button_registracijaVozila_generisiTablicu);
             panel_registracijaVozila.Controls.Add(button_registracijaVozila_otkazi);

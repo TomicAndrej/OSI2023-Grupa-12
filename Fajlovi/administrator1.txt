@@ -1,0 +1,6 @@
+admin,admin,admin,admin
+todorovicd,12345678,Danilo,Todorović
+tomica,12345678,Andrej,Tomić
+maticb,87654321,Boris,Matić
+tadicm,87654321,Marija,Tadić
+radici,12348765,Isidora,Radić

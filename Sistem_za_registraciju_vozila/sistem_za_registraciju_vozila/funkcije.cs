@@ -511,7 +511,7 @@ return true;
 
         public void UcitajNaloge(List<Radnik> radnici)
         {
-            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik1.txt"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -541,7 +541,7 @@ return true;
         public List<string> GetListOfAllAccountsRadnik()
         {
             List<string> accounts = new List<string>();
-            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik.txt"))
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\radnik1.txt"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -555,7 +555,7 @@ return true;
         public List<string> GetListOfAllAccountsAdmin()
         {
             List<string> accounts = new List<string>();
-            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\administrator.txt"))
+            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\administrator1.txt"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -804,19 +804,6 @@ return true;
             }
             return istorija;
         }
-        private bool polisaValidna(string brojSasije, string IDpolise)
-        {
-            string[] lines = File.ReadAllLines(poliseFilePath);
-            foreach (string line in lines)
-            {
-                string[] parts = line.Split(',');
-                if (parts.Length > 0 && parts[0] == IDpolise)
-                {
-                    return parts[4]==brojSasije;
-                }
-            }
-            return false;
-        }
         private string pronadjiDatumRegNaOsnovuBrojaSasijeUFajluVozila(string brojSasije)
         {
             string[] lines = File.ReadAllLines(vozilaFilePath);
@@ -846,8 +833,6 @@ return true;
                     if (parts.Length > 0 && parts[0] == brojSasije)
                     {
                         found = true;
-                        //DateTime datumReg = DateTime.Parse(parts[6]);
-                        //parts[6] = datumReg.AddYears(1).ToString("dd/MM/yyyy");
                         parts[6] = pronadjiDatumRegNaOsnovuBrojaSasijeUFajluVozila(parts[0]);
                         saobracajna = $"Broj šasije: {parts[0]}\n" +
                                       $"Vlasnik: {pronadjiImeNaOsnovuJmb(parts[1])} {pronadjiPrezimeNaOsnovuJmb(parts[1])}\n" +
@@ -893,25 +878,20 @@ return true;
         }
         private string izracunajNoviDatumReg(string datumReg)
         {
-            if (datumReg == "") return DateTime.Now.AddYears(1).ToString("dd/MM/yyyy");
+            if (datumReg == "") return DateTime.Now.AddYears(1).ToString("MM/dd/yyyy");
 
             DateTime datum = DateTime.Parse(datumReg);
             if(DateTime.Now < datum)
             {
-                return datum.AddYears(1).ToString("dd/MM/yyyy");
+                return datum.AddYears(1).ToString("MM/dd/yyyy");
             }
             else
             {
-                return DateTime.Now.AddYears(1).ToString("dd/MM/yyyy");
+                return DateTime.Now.AddYears(1).ToString("MM/dd/yyyy");
             }
         }
         public bool registracijaVozila(string brojSasije, string stiker, string tablica, string IDpolise)
         {
-            if(!polisaValidna(brojSasije,IDpolise))
-            {
-                MessageBox.Show("Polisa se ne poklapa sa brojem šasije datog vozila!");
-                return false;
-            }
             string[] lines = File.ReadAllLines(vozilaFilePath);
             // Create a temporary file to store updated account information
             string tempFile = Path.GetTempFileName();

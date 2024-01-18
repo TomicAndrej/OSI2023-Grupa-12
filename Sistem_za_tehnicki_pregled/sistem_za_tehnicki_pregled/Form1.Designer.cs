@@ -189,8 +189,6 @@ namespace sistem_za_tehnicki_pregled
             button_obavljanjeTehnickog_otkazi = new Button();
             label_obavljanjeTehnickog_naslov = new Label();
             listBox_obavljanjeTehnickog = new ListBox();
-            JMBGZakazivanjeRadnikLabel= new Label();
-            JMBGZakazivanjeRadnikTextBox = new TextBox();
             panel_zakazivanjeTermina1 = new Panel();
             UnosBrojaSasijeRadnikTextBox = new TextBox();
             UnosBrojaSasijeRadnikLabel = new Label();
@@ -211,6 +209,8 @@ namespace sistem_za_tehnicki_pregled
             GodisteZakazivanjeRadnikLabel = new Label();
             KubikazaZakazivanjeRadnikLabel = new Label();
             ZakaziTerminaAkoVoziloNePostojiRadnikButton = new Button();
+            JMBGZakazivanjeRadnikTextBox = new TextBox();
+            JMBGZakazivanjeRadnikLabel = new Label();
             NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton = new Button();
             button_prikazArhive = new Button();
             button_zakazivanjeTehnickog = new Button();
@@ -782,6 +782,7 @@ namespace sistem_za_tehnicki_pregled
             UnosBrojaSasijeTextBox.Name = "UnosBrojaSasijeTextBox";
             UnosBrojaSasijeTextBox.Size = new Size(200, 27);
             UnosBrojaSasijeTextBox.TabIndex = 0;
+            UnosBrojaSasijeTextBox.KeyPress += UnosBrojaSasijeTextBox_KeyPress;
             // 
             // UnosBrojaSasijeLabel
             // 
@@ -811,6 +812,7 @@ namespace sistem_za_tehnicki_pregled
             // 
             // ZakazivanjeTerminaDateTimePicker
             // 
+            ZakazivanjeTerminaDateTimePicker.Format = DateTimePickerFormat.Time;
             ZakazivanjeTerminaDateTimePicker.Location = new Point(40, 309);
             ZakazivanjeTerminaDateTimePicker.Name = "ZakazivanjeTerminaDateTimePicker";
             ZakazivanjeTerminaDateTimePicker.Size = new Size(262, 27);
@@ -826,6 +828,7 @@ namespace sistem_za_tehnicki_pregled
             ZakaziTerminAkoVoziloVecPostojiButton.Text = "Zakaži termin";
             ZakaziTerminAkoVoziloVecPostojiButton.UseVisualStyleBackColor = true;
             ZakaziTerminAkoVoziloVecPostojiButton.Visible = false;
+            ZakaziTerminAkoVoziloVecPostojiButton.Click += ZakaziTerminAkoVoziloVecPostojiButton_Click;
             // 
             // MarkaZakazivanjeTextBox
             // 
@@ -1771,7 +1774,7 @@ namespace sistem_za_tehnicki_pregled
             listBox_pregledIstorije.ItemHeight = 20;
             listBox_pregledIstorije.Location = new Point(50, 73);
             listBox_pregledIstorije.Name = "listBox_pregledIstorije";
-            listBox_pregledIstorije.Size = new Size(527, 324);
+            listBox_pregledIstorije.Size = new Size(650, 324);
             listBox_pregledIstorije.TabIndex = 1;
             // 
             // label_pregledIstorije_naslov
@@ -1812,7 +1815,7 @@ namespace sistem_za_tehnicki_pregled
             listBox_prikazArhive.ItemHeight = 20;
             listBox_prikazArhive.Location = new Point(50, 73);
             listBox_prikazArhive.Name = "listBox_prikazArhive";
-            listBox_prikazArhive.Size = new Size(614, 344);
+            listBox_prikazArhive.Size = new Size(650, 344);
             listBox_prikazArhive.TabIndex = 1;
             // 
             // label_prikazArhive_naslov
@@ -1862,7 +1865,7 @@ namespace sistem_za_tehnicki_pregled
             listBox_obavljanjeTehnickog.ItemHeight = 20;
             listBox_obavljanjeTehnickog.Location = new Point(60, 73);
             listBox_obavljanjeTehnickog.Name = "listBox_obavljanjeTehnickog";
-            listBox_obavljanjeTehnickog.Size = new Size(420, 324);
+            listBox_obavljanjeTehnickog.Size = new Size(650, 324);
             listBox_obavljanjeTehnickog.TabIndex = 0;
             listBox_obavljanjeTehnickog.DoubleClick += listBox_obavljanjeTehnickog_DoubleClick;
             // 
@@ -1903,6 +1906,7 @@ namespace sistem_za_tehnicki_pregled
             UnosBrojaSasijeRadnikTextBox.Name = "UnosBrojaSasijeRadnikTextBox";
             UnosBrojaSasijeRadnikTextBox.Size = new Size(200, 27);
             UnosBrojaSasijeRadnikTextBox.TabIndex = 0;
+            UnosBrojaSasijeRadnikTextBox.KeyPress += UnosBrojaSasijeRadnikTextBox_KeyPress;
             // 
             // UnosBrojaSasijeRadnikLabel
             // 
@@ -1932,6 +1936,7 @@ namespace sistem_za_tehnicki_pregled
             // 
             // ZakazivanjeTerminaRadnikDateTimePicker
             // 
+            ZakazivanjeTerminaRadnikDateTimePicker.Format = DateTimePickerFormat.Time;
             ZakazivanjeTerminaRadnikDateTimePicker.Location = new Point(40, 309);
             ZakazivanjeTerminaRadnikDateTimePicker.Name = "ZakazivanjeTerminaRadnikDateTimePicker";
             ZakazivanjeTerminaRadnikDateTimePicker.Size = new Size(262, 27);
@@ -1947,6 +1952,7 @@ namespace sistem_za_tehnicki_pregled
             ZakaziTerminAkoVoziloVecPostojiRadnikButton.Text = "Zakaži termin";
             ZakaziTerminAkoVoziloVecPostojiRadnikButton.UseVisualStyleBackColor = true;
             ZakaziTerminAkoVoziloVecPostojiRadnikButton.Visible = false;
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Click += ZakaziTerminAkoVoziloVecPostojiRadnikButton_Click;
             // 
             // MarkaZakazivanjeRadnikTextBox
             // 
@@ -1979,14 +1985,6 @@ namespace sistem_za_tehnicki_pregled
             KubikazaZakazivanjeRadnikTextBox.Size = new Size(280, 27);
             KubikazaZakazivanjeRadnikTextBox.TabIndex = 11;
             KubikazaZakazivanjeRadnikTextBox.Visible = false;
-            //
-            // JMBGZakazivanjeRadnikTextBox
-            //
-            JMBGZakazivanjeRadnikTextBox.Location = new Point(480, 318);
-            JMBGZakazivanjeRadnikTextBox.Name = "JMBGZakazivanjeRadnikTextBox";
-            JMBGZakazivanjeRadnikTextBox.Size = new Size(280, 27);
-            JMBGZakazivanjeRadnikTextBox.TabIndex = 12;
-            JMBGZakazivanjeRadnikTextBox.Visible = false;
             // 
             // KategorijaZakazivanjeRadnikComboBox
             // 
@@ -2067,16 +2065,6 @@ namespace sistem_za_tehnicki_pregled
             KubikazaZakazivanjeRadnikLabel.TabIndex = 17;
             KubikazaZakazivanjeRadnikLabel.Text = "Kubikaža:";
             KubikazaZakazivanjeRadnikLabel.Visible = false;
-            //
-            // JMBGZakazivanjeRadnikLabel
-            //
-            JMBGZakazivanjeRadnikLabel.AutoSize = true;
-            JMBGZakazivanjeRadnikLabel.Location = new Point(374, 321);
-            JMBGZakazivanjeRadnikLabel.Name = "JMBGZakazivanjeRadnikLabel";
-            JMBGZakazivanjeRadnikLabel.Size = new Size(53, 20);
-            JMBGZakazivanjeRadnikLabel.TabIndex = 18;
-            JMBGZakazivanjeRadnikLabel.Text = "JMBG:";
-            JMBGZakazivanjeRadnikLabel.Visible = false;
             // 
             // ZakaziTerminaAkoVoziloNePostojiRadnikButton
             // 
@@ -2088,6 +2076,24 @@ namespace sistem_za_tehnicki_pregled
             ZakaziTerminaAkoVoziloNePostojiRadnikButton.UseVisualStyleBackColor = true;
             ZakaziTerminaAkoVoziloNePostojiRadnikButton.Visible = false;
             ZakaziTerminaAkoVoziloNePostojiRadnikButton.Click += ZakaziTerminaAkoVoziloNePostojiRadnikButton_Click;
+            // 
+            // JMBGZakazivanjeRadnikTextBox
+            // 
+            JMBGZakazivanjeRadnikTextBox.Location = new Point(480, 318);
+            JMBGZakazivanjeRadnikTextBox.Name = "JMBGZakazivanjeRadnikTextBox";
+            JMBGZakazivanjeRadnikTextBox.Size = new Size(280, 27);
+            JMBGZakazivanjeRadnikTextBox.TabIndex = 12;
+            JMBGZakazivanjeRadnikTextBox.Visible = false;
+            // 
+            // JMBGZakazivanjeRadnikLabel
+            // 
+            JMBGZakazivanjeRadnikLabel.AutoSize = true;
+            JMBGZakazivanjeRadnikLabel.Location = new Point(374, 321);
+            JMBGZakazivanjeRadnikLabel.Name = "JMBGZakazivanjeRadnikLabel";
+            JMBGZakazivanjeRadnikLabel.Size = new Size(49, 20);
+            JMBGZakazivanjeRadnikLabel.TabIndex = 18;
+            JMBGZakazivanjeRadnikLabel.Text = "JMBG:";
+            JMBGZakazivanjeRadnikLabel.Visible = false;
             // 
             // NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton
             // 
