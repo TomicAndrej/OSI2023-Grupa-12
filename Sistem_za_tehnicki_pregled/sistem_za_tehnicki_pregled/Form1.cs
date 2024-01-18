@@ -656,6 +656,7 @@ namespace sistem_za_tehnicki_pregled
                     else
                     {
                         panel_zakazivanjeTermina3.Visible = true;
+                        panel_zakazivanjeTermina2.Visible = false;
                     }
                 }
 
@@ -671,8 +672,13 @@ namespace sistem_za_tehnicki_pregled
 
         private void button_zakazivanjeTermina3_nazad_Click(object sender, EventArgs e)
         {
-            panel_zakazivanjeTermina3.Visible = false;
-            panel_zakazivanjeTermina2.Visible = true;
+            funkcije funkcije = new funkcije();
+            bool voziloPostoji = funkcije.PretragaVozilaUFajluVozila(textBox_zakazivanjeTermina1_brojSasije.Text);
+            if(!voziloPostoji)
+            {
+                panel_zakazivanjeTermina3.Visible = false;
+                panel_zakazivanjeTermina2.Visible = true;
+            }
         }
 
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

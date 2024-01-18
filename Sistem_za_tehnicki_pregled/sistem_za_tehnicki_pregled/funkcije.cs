@@ -685,7 +685,6 @@ return true;
 
         public void IzdajPotvrduTP(string brojSasije)
         {
-            MessageBox.Show("Pozvanana f-ja izdajPotvrdu");
             string[] lines = File.ReadAllLines(terminiFilePath);
             foreach (string line in lines)
             {
@@ -693,18 +692,17 @@ return true;
                 if (parts.Length > 0 && parts[9] == brojSasije)
                 {
                     //jmb,datum,vrijeme,kategorija,potkategorija,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg
-                    string potvrdaText = $"Registarska oznaka: {pronadjiTablicu(parts[9])}\n" +
-                                         $"Broj šasije: {parts[9]}\n" +
+                    string potvrdaText = $"Broj šasije: {parts[9]}\n" +
                                          $"Marka: {parts[5]}\n" +
                                          $"Model: {parts[6]}\n" +
                                          $"Datum i vrijeme tehničkog pregleda: {parts[1]} {parts[2]}\n" +
                                          $"Ime i prezime: {pronadjiImeNaOsnovuJmb(parts[0])} {pronadjiPrezimeNaOsnovuJmb(parts[0])}";   
-                    // create a .txt file in potvrdeTP folder
-                    /*string potvrdaTPFilePath = "C:\\Users\\daco0\\Desktop\\tehnpregledTest\\TehnickiTest\\potvrdeTP\\" + brojSasije + ".txt";
+                    //create a file in a folder 
+                    string potvrdaTPFilePath = "..\\..\\..\\..\\..\\potvrdeTP\\" + brojSasije + ".txt";
                     using (StreamWriter writer = new StreamWriter(potvrdaTPFilePath, true))
                     {
                         writer.WriteLine(potvrdaText);
-                    }*/ //TODO vidjeti sta sa ovim
+                    } 
                     MessageBox.Show(potvrdaText,"Potvrda za tehnički pregled");
                 }
             }
