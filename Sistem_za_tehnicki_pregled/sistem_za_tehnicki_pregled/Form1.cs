@@ -528,6 +528,8 @@ namespace sistem_za_tehnicki_pregled
             panel_zakazivanjeTermina1.Visible = !panel_zakazivanjeTermina1.Visible;
             button_zakazivanjeTermina1_pokreni.Enabled = true;
             textBox_zakazivanjeTermina1_brojSasije.Enabled = true;
+            UnosBrojaSasijeRadnikTextBox.Enabled = true;
+            UnosBrojaSasijeRadnikTextBox.Text = "";
         }
 
         private void button_zakazivanjeTermina1_otkazi_click(object sender, EventArgs e)
@@ -674,7 +676,7 @@ namespace sistem_za_tehnicki_pregled
         {
             funkcije funkcije = new funkcije();
             bool voziloPostoji = funkcije.PretragaVozilaUFajluVozila(textBox_zakazivanjeTermina1_brojSasije.Text);
-            if(!voziloPostoji)
+            if (!voziloPostoji)
             {
                 panel_zakazivanjeTermina3.Visible = false;
                 panel_zakazivanjeTermina2.Visible = true;
@@ -1062,6 +1064,8 @@ namespace sistem_za_tehnicki_pregled
         private void NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta_Click(object sender, EventArgs e)
         {
             ZakazivanjeTerminaTehnickogPanel.Visible = false;
+            UnosBrojaSasijeTextBox.Enabled = true;
+            PokretanjeZakazivanjaTerminaButton.Enabled = true;
         }
 
         private void BrisanjeNalogaButton_Click(object sender, EventArgs e)
@@ -1142,7 +1146,6 @@ namespace sistem_za_tehnicki_pregled
                     MessageBox.Show("Korisničko ime nije validno!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                /////////////////////
                 if (!f.provjeraKorisnickogImena(PromjenaPodatakaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
                 {
                     return;
@@ -1150,7 +1153,7 @@ namespace sistem_za_tehnicki_pregled
                 string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt");
                 for (int i = 0; i < lines.Length; i++)
                 {
-                    
+
                     string[] podaci = lines[i].Split(',');
                     if (podaci[0] == trenutniNalog)
                     {
@@ -1161,7 +1164,7 @@ namespace sistem_za_tehnicki_pregled
                             novaLinija += podaci[j] + ",";
                         }
                         novaLinija += podaci[podaci.Length - 1];
-                        
+
                         f.ChangeLineInFile("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt", i, novaLinija);
                         trenutniNalog = PromjenaPodatakaTextBox.Text;
                         break;
@@ -1315,7 +1318,669 @@ namespace sistem_za_tehnicki_pregled
                 PotvrdaPromjeneLozinkeLabel.Visible = false;
                 PromjenaPodatakaLabel.Visible = false;
                 PromjenaPodatakaTextBox.Text = "";
-            }   
+            }
+        }
+        private void KategorijaZakazivanjeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (KategorijaZakazivanjeComboBox.SelectedIndex == 0)
+            {
+                PotkategorijaZakazivanjeComboBox.Items.Clear();
+                PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeComboBox.Text = "";
+                PotkategorijaZakazivanjeComboBox.Items.AddRange(new object[] { "M1 – Putničko vozilo", "M2 – Laki autobus", "M3- Teški autobus" });
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 1)
+            {
+                PotkategorijaZakazivanjeComboBox.Items.Clear();
+                PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeComboBox.Text = "";
+                PotkategorijaZakazivanjeComboBox.Items.AddRange(new object[] { "L1 – Moped", "L2 – Laki tricikl", "L3 – Motocikl", "L4 – Motocikl sa bočnim sedištem", "L5 – Teški tricikl", "L6 – Laki četvorocikl (quad)", "L7 – Teški četvorocikl (quad)" });
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 2)
+            {
+                PotkategorijaZakazivanjeComboBox.Items.Clear();
+                PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeComboBox.Text = "";
+                PotkategorijaZakazivanjeComboBox.Items.AddRange(new object[] { "N1 - Vozila za prevoz robe do 3,5t", "N2 - Vozila za prevoz robe od 3,5t od 12t", "N3 - Vozila za prevoz robe preko 12t" });
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 3)
+            {
+                PotkategorijaZakazivanjeComboBox.Items.Clear();
+                PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeComboBox.Text = "";
+                PotkategorijaZakazivanjeComboBox.Items.AddRange(new object[] { "O1 – Prikolice mase do 0,75t.", "O2 – Prikolice mase od 0,75t do 3,5t", "O3 – Prikolice mase od 3,5t do 10t", "O4 – Prikolice mase preko 10t" });
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 4)
+            {
+                PotkategorijaZakazivanjeComboBox.Items.Clear();
+                PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeComboBox.Text = "";
+                PotkategorijaZakazivanjeComboBox.Items.AddRange(new object[] { "" });
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 5)
+            {
+                PotkategorijaZakazivanjeComboBox.Items.Clear();
+                PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeComboBox.Text = "";
+                PotkategorijaZakazivanjeComboBox.Items.AddRange(new object[] { "" });
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 6)
+            {
+                PotkategorijaZakazivanjeComboBox.Items.Clear();
+                PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeComboBox.Text = "";
+                PotkategorijaZakazivanjeComboBox.Items.AddRange(new object[] { "" });
+            }
+        }
+
+        public void postojiVozilo()
+        {
+            MarkaZakazivanjeTextBox.Text = "";
+            ModelZakazivanjeTextBox.Text = "";
+            GodisteZakazivanjeTextBox.Text = "";
+            KubikazaZakazivanjeTextBox.Text = "";
+            KategorijaZakazivanjeComboBox.SelectedIndex = -1;
+            KategorijaZakazivanjeComboBox.Text = "";
+            PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+            PotkategorijaZakazivanjeComboBox.Text = "";
+
+            ZakazivanjeTerminaMonthCalendar.Visible = true;
+            ZakazivanjeTerminaDateTimePicker.Visible = true;
+            ZakaziTerminAkoVoziloVecPostojiButton.Visible = true;
+
+            ZakaziTerminaAkoVoziloNePostojiButton.Visible = false;
+            KategorijaZakazivanjeComboBox.Visible = false;
+            KategorijaZakazivanjeLabel.Visible = false;
+            PotkategorijaZakazivanjeComboBox.Visible = false;
+            PotkategorijaZakazivanjeLabel.Visible = false;
+            MarkaZakazivanjeTextBox.Visible = false;
+            MarkaZakazivanjeLabel.Visible = false;
+            ModelZakazivanjeTextBox.Visible = false;
+            ModelZakazivanjeLabel.Visible = false;
+            GodisteZakazivanjeTextBox.Visible = false;
+            GodisteZakazivanjeLabel.Visible = false;
+            KubikazaZakazivanjeTextBox.Visible = false;
+            KubikazaZakazivanjeLabel.Visible = false;
+
+            UnosBrojaSasijeTextBox.Enabled = false;
+            PokretanjeZakazivanjaTerminaButton.Enabled = false;
+        }
+
+        public void nePostojiVozilo()
+        {
+            MarkaZakazivanjeTextBox.Text = "";
+            ModelZakazivanjeTextBox.Text = "";
+            GodisteZakazivanjeTextBox.Text = "";
+            KubikazaZakazivanjeTextBox.Text = "";
+            KategorijaZakazivanjeComboBox.SelectedIndex = -1;
+            KategorijaZakazivanjeComboBox.Text = "";
+            PotkategorijaZakazivanjeComboBox.SelectedIndex = -1;
+            PotkategorijaZakazivanjeComboBox.Text = "";
+
+            ZakazivanjeTerminaMonthCalendar.Visible = true;
+            ZakazivanjeTerminaDateTimePicker.Visible = true;
+            ZakaziTerminAkoVoziloVecPostojiButton.Visible = false;
+
+            ZakaziTerminaAkoVoziloNePostojiButton.Visible = true;
+            KategorijaZakazivanjeComboBox.Visible = true;
+            KategorijaZakazivanjeLabel.Visible = true;
+            PotkategorijaZakazivanjeComboBox.Visible = true;
+            PotkategorijaZakazivanjeLabel.Visible = true;
+            MarkaZakazivanjeTextBox.Visible = true;
+            MarkaZakazivanjeLabel.Visible = true;
+            ModelZakazivanjeTextBox.Visible = true;
+            ModelZakazivanjeLabel.Visible = true;
+            GodisteZakazivanjeTextBox.Visible = true;
+            GodisteZakazivanjeLabel.Visible = true;
+            KubikazaZakazivanjeTextBox.Visible = true;
+            KubikazaZakazivanjeLabel.Visible = true;
+
+            UnosBrojaSasijeTextBox.Enabled = false;
+            PokretanjeZakazivanjaTerminaButton.Enabled = false;
+        }
+
+        private void PokretanjeZakazivanjaTerminaButton_Click(object sender, EventArgs e)
+        {
+            string sasija = "";
+            using (StreamReader sw = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt"))
+            {
+                string red;
+                while ((red = sw.ReadLine()) != null)
+                {
+                    string[] rijeci = red.Split(',');
+                    if (rijeci[7] == UnosBrojaSasijeTextBox.Text)
+                    {
+                        sasija = rijeci[7];
+                        break;
+                    }
+                }
+            }
+            if (UnosBrojaSasijeTextBox.Text == sasija)
+            {
+                postojiVozilo();
+            }
+            else
+            {
+                nePostojiVozilo();
+            }
+        }
+
+        private void ZakaziTerminaAkoVoziloNePostojiButton_Click(object sender, EventArgs e)
+        {
+            string line = "", kategorija, potkategorija, jmbg = "";
+            if (KategorijaZakazivanjeComboBox.SelectedIndex == 0)
+            {
+                kategorija = "M";
+                if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 0)
+                {
+                    potkategorija = "M1";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 1)
+                {
+                    potkategorija = "M2";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 2)
+                {
+                    potkategorija = "M3";
+                }
+                else
+                {
+                    MessageBox.Show("Niste izabrali potkategoriju vozila!", "Potkategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 1)
+            {
+                kategorija = "L";
+                if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 0)
+                {
+                    potkategorija = "L1";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 1)
+                {
+                    potkategorija = "L2";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 2)
+                {
+                    potkategorija = "L3";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 3)
+                {
+                    potkategorija = "L4";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 4)
+                {
+                    potkategorija = "L5";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 5)
+                {
+                    potkategorija = "L6";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 6)
+                {
+                    potkategorija = "L7";
+                }
+                else
+                {
+                    MessageBox.Show("Niste izabrali potkategoriju vozila!", "Potkategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 2)
+            {
+                kategorija = "N";
+                if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 0)
+                {
+                    potkategorija = "N1";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 1)
+                {
+                    potkategorija = "N2";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 2)
+                {
+                    potkategorija = "N3";
+                }
+                else
+                {
+                    MessageBox.Show("Niste izabrali potkategoriju vozila!", "Potkategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 3)
+            {
+                kategorija = "O";
+                if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 0)
+                {
+                    potkategorija = "O1";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 1)
+                {
+                    potkategorija = "O2";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 2)
+                {
+                    potkategorija = "O3";
+                }
+                else if (PotkategorijaZakazivanjeComboBox.SelectedIndex == 3)
+                {
+                    potkategorija = "O4";
+                }
+                else
+                {
+                    MessageBox.Show("Niste izabrali potkategoriju vozila!", "Potkategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 4)
+            {
+                kategorija = "T";
+                potkategorija = "";
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 5)
+            {
+                kategorija = "R";
+                potkategorija = "";
+            }
+            else if (KategorijaZakazivanjeComboBox.SelectedIndex == 6)
+            {
+                kategorija = "G";
+                potkategorija = "";
+            }
+            else
+            {
+                MessageBox.Show("Niste izabrali kategoriju vozila!", "Kategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (MarkaZakazivanjeTextBox.Text == "")
+            {
+                MessageBox.Show("Niste unijeli marku vozila!", "Marka vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (ModelZakazivanjeTextBox.Text == "")
+            {
+                MessageBox.Show("Niste unijeli model vozila!", "Model vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (GodisteZakazivanjeTextBox.Text == "")
+            {
+                MessageBox.Show("Niste unijeli godište vozila!", "Godište vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (KubikazaZakazivanjeTextBox.Text == "")
+            {
+                MessageBox.Show("Niste unijeli kubikažu vozila!", "Kubikaža vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            using (StreamReader sw = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\klijenti.txt"))
+            {
+                string red;
+                while ((red = sw.ReadLine()) != null)
+                {
+                    string[] rijeci = red.Split(',');
+                    if (rijeci[0] == trenutniNalog)
+                    {
+                        jmbg = rijeci[6];
+                        break;
+                    }
+                }
+            }
+            line = kategorija + "," + potkategorija + "," + jmbg + "," + MarkaZakazivanjeTextBox.Text + "," + ModelZakazivanjeTextBox.Text + "," + GodisteZakazivanjeTextBox.Text + "," + KubikazaZakazivanjeTextBox.Text + "," + UnosBrojaSasijeTextBox.Text + "," + "" + "," + "" + "," + "False" + "," + "" + "," + "False";
+            using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt", true))
+            {
+                sw.WriteLine(line);
+            }
+        }
+
+        public void postojiVoziloRadnik()
+        {
+            MarkaZakazivanjeRadnikTextBox.Text = "";
+            ModelZakazivanjeRadnikTextBox.Text = "";
+            GodisteZakazivanjeRadnikTextBox.Text = "";
+            KubikazaZakazivanjeRadnikTextBox.Text = "";
+            KategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+            KategorijaZakazivanjeRadnikComboBox.Text = "";
+            PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+            PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+            JMBGZakazivanjeRadnikTextBox.Text = "";
+
+            ZakazivanjeTerminaRadnikMonthCalendar.Visible = true;
+            ZakazivanjeTerminaRadnikDateTimePicker.Visible = true;
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Visible = true;
+
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Visible = false;
+            KategorijaZakazivanjeRadnikComboBox.Visible = false;
+            KategorijaZakazivanjeRadnikLabel.Visible = false;
+            PotkategorijaZakazivanjeRadnikComboBox.Visible = false;
+            PotkategorijaZakazivanjeRadnikLabel.Visible = false;
+            MarkaZakazivanjeRadnikTextBox.Visible = false;
+            MarkaZakazivanjeRadnikLabel.Visible = false;
+            ModelZakazivanjeRadnikTextBox.Visible = false;
+            ModelZakazivanjeRadnikLabel.Visible = false;
+            GodisteZakazivanjeRadnikTextBox.Visible = false;
+            GodisteZakazivanjeRadnikLabel.Visible = false;
+            KubikazaZakazivanjeRadnikTextBox.Visible = false;
+            KubikazaZakazivanjeRadnikLabel.Visible = false;
+            JMBGZakazivanjeRadnikTextBox.Visible = false;
+            JMBGZakazivanjeRadnikLabel.Visible = false;
+
+            UnosBrojaSasijeRadnikTextBox.Enabled = false;
+            PokretanjeZakazivanjaTerminaRadnikButton.Enabled = false;
+        }
+
+        public void nePostojiVoziloRadnik()
+        {
+            MarkaZakazivanjeRadnikTextBox.Text = "";
+            ModelZakazivanjeRadnikTextBox.Text = "";
+            GodisteZakazivanjeRadnikTextBox.Text = "";
+            KubikazaZakazivanjeRadnikTextBox.Text = "";
+            KategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+            KategorijaZakazivanjeRadnikComboBox.Text = "";
+            PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+            PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+            JMBGZakazivanjeRadnikTextBox.Text = "";
+
+            ZakazivanjeTerminaRadnikMonthCalendar.Visible = true;
+            ZakazivanjeTerminaRadnikDateTimePicker.Visible = true;
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Visible = false;
+
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Visible = true;
+            KategorijaZakazivanjeRadnikComboBox.Visible = true;
+            KategorijaZakazivanjeRadnikLabel.Visible = true;
+            PotkategorijaZakazivanjeRadnikComboBox.Visible = true;
+            PotkategorijaZakazivanjeRadnikLabel.Visible = true;
+            MarkaZakazivanjeRadnikTextBox.Visible = true;
+            MarkaZakazivanjeRadnikLabel.Visible = true;
+            ModelZakazivanjeRadnikTextBox.Visible = true;
+            ModelZakazivanjeRadnikLabel.Visible = true;
+            GodisteZakazivanjeRadnikTextBox.Visible = true;
+            GodisteZakazivanjeRadnikLabel.Visible = true;
+            KubikazaZakazivanjeRadnikTextBox.Visible = true;
+            KubikazaZakazivanjeRadnikLabel.Visible = true;
+            JMBGZakazivanjeRadnikTextBox.Visible = true;
+            JMBGZakazivanjeRadnikLabel.Visible = true;
+
+            UnosBrojaSasijeRadnikTextBox.Enabled = false;
+            PokretanjeZakazivanjaTerminaRadnikButton.Enabled = false;
+        }
+
+        private void PokretanjeZakazivanjaTerminaRadnikButton_Click(object sender, EventArgs e)
+        {
+            string sasija = "";
+            using (StreamReader sw = new StreamReader("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt"))
+            {
+                string red;
+                while ((red = sw.ReadLine()) != null)
+                {
+                    string[] rijeci = red.Split(',');
+                    if (rijeci[7] == UnosBrojaSasijeRadnikTextBox.Text)
+                    {
+                        sasija = rijeci[7];
+                        break;
+                    }
+                }
+            }
+            if (UnosBrojaSasijeRadnikTextBox.Text == sasija)
+            {
+                postojiVoziloRadnik();
+            }
+            else
+            {
+                nePostojiVoziloRadnik();
+            }
+        }
+
+        private void NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton_Click(object sender, EventArgs e)
+        {
+            panel_zakazivanjeTermina1.Visible = false;
+            UnosBrojaSasijeRadnikTextBox.Enabled = true;
+            PokretanjeZakazivanjaTerminaRadnikButton.Enabled = true;
+
+
+            MarkaZakazivanjeRadnikTextBox.Text = "";
+            ModelZakazivanjeRadnikTextBox.Text = "";
+            GodisteZakazivanjeRadnikTextBox.Text = "";
+            KubikazaZakazivanjeRadnikTextBox.Text = "";
+            KategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+            KategorijaZakazivanjeRadnikComboBox.Text = "";
+            PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+            PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+            JMBGZakazivanjeRadnikTextBox.Text = "";
+
+            ZakazivanjeTerminaRadnikMonthCalendar.Visible = false;
+            ZakazivanjeTerminaRadnikDateTimePicker.Visible = false;
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Visible = false;
+
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Visible = false;
+            KategorijaZakazivanjeRadnikComboBox.Visible = false;
+            KategorijaZakazivanjeRadnikLabel.Visible = false;
+            PotkategorijaZakazivanjeRadnikComboBox.Visible = false;
+            PotkategorijaZakazivanjeRadnikLabel.Visible = false;
+            MarkaZakazivanjeRadnikTextBox.Visible = false;
+            MarkaZakazivanjeRadnikLabel.Visible = false;
+            ModelZakazivanjeRadnikTextBox.Visible = false;
+            ModelZakazivanjeRadnikLabel.Visible = false;
+            GodisteZakazivanjeRadnikTextBox.Visible = false;
+            GodisteZakazivanjeRadnikLabel.Visible = false;
+            KubikazaZakazivanjeRadnikTextBox.Visible = false;
+            KubikazaZakazivanjeRadnikLabel.Visible = false;
+            JMBGZakazivanjeRadnikTextBox.Visible = false;
+            JMBGZakazivanjeRadnikLabel.Visible = false;
+
+            UnosBrojaSasijeRadnikTextBox.Enabled = true;
+            PokretanjeZakazivanjaTerminaRadnikButton.Enabled = true;
+        }
+
+        private void KategorijaZakazivanjeRadnikComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 0)
+            {
+                PotkategorijaZakazivanjeRadnikComboBox.Items.Clear();
+                PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+                PotkategorijaZakazivanjeRadnikComboBox.Items.AddRange(new object[] { "M1 – Putničko vozilo", "M2 – Laki autobus", "M3- Teški autobus" });
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 1)
+            {
+                PotkategorijaZakazivanjeRadnikComboBox.Items.Clear();
+                PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+                PotkategorijaZakazivanjeRadnikComboBox.Items.AddRange(new object[] { "L1 – Moped", "L2 – Laki tricikl", "L3 – Motocikl", "L4 – Motocikl sa bočnim sedištem", "L5 – Teški tricikl", "L6 – Laki četvorocikl (quad)", "L7 – Teški četvorocikl (quad)" });
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 2)
+            {
+                PotkategorijaZakazivanjeRadnikComboBox.Items.Clear();
+                PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+                PotkategorijaZakazivanjeRadnikComboBox.Items.AddRange(new object[] { "N1 - Vozila za prevoz robe do 3,5t", "N2 - Vozila za prevoz robe od 3,5t od 12t", "N3 - Vozila za prevoz robe preko 12t" });
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 3)
+            {
+                PotkategorijaZakazivanjeRadnikComboBox.Items.Clear();
+                PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+                PotkategorijaZakazivanjeRadnikComboBox.Items.AddRange(new object[] { "O1 – Prikolice mase do 0,75t.", "O2 – Prikolice mase od 0,75t do 3,5t", "O3 – Prikolice mase od 3,5t do 10t", "O4 – Prikolice mase preko 10t" });
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 4)
+            {
+                PotkategorijaZakazivanjeRadnikComboBox.Items.Clear();
+                PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+                PotkategorijaZakazivanjeRadnikComboBox.Items.AddRange(new object[] { "" });
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 5)
+            {
+                PotkategorijaZakazivanjeRadnikComboBox.Items.Clear();
+                PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+                PotkategorijaZakazivanjeRadnikComboBox.Items.AddRange(new object[] { "" });
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 6)
+            {
+                PotkategorijaZakazivanjeRadnikComboBox.Items.Clear();
+                PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex = -1;
+                PotkategorijaZakazivanjeRadnikComboBox.Text = "";
+                PotkategorijaZakazivanjeRadnikComboBox.Items.AddRange(new object[] { "" });
+            }
+        }
+
+        private void ZakaziTerminaAkoVoziloNePostojiRadnikButton_Click(object sender, EventArgs e)
+        {
+            string line = "", kategorija, potkategorija;
+            if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 0)
+            {
+                kategorija = "M";
+                if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 0)
+                {
+                    potkategorija = "M1";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 1)
+                {
+                    potkategorija = "M2";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 2)
+                {
+                    potkategorija = "M3";
+                }
+                else
+                {
+                    MessageBox.Show("Niste izabrali potkategoriju vozila!", "Potkategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 1)
+            {
+                kategorija = "L";
+                if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 0)
+                {
+                    potkategorija = "L1";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 1)
+                {
+                    potkategorija = "L2";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 2)
+                {
+                    potkategorija = "L3";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 3)
+                {
+                    potkategorija = "L4";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 4)
+                {
+                    potkategorija = "L5";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 5)
+                {
+                    potkategorija = "L6";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 6)
+                {
+                    potkategorija = "L7";
+                }
+                else
+                {
+                    MessageBox.Show("Niste izabrali potkategoriju vozila!", "Potkategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 2)
+            {
+                kategorija = "N";
+                if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 0)
+                {
+                    potkategorija = "N1";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 1)
+                {
+                    potkategorija = "N2";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 2)
+                {
+                    potkategorija = "N3";
+                }
+                else
+                {
+                    MessageBox.Show("Niste izabrali potkategoriju vozila!", "Potkategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 3)
+            {
+                kategorija = "O";
+                if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 0)
+                {
+                    potkategorija = "O1";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 1)
+                {
+                    potkategorija = "O2";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 2)
+                {
+                    potkategorija = "O3";
+                }
+                else if (PotkategorijaZakazivanjeRadnikComboBox.SelectedIndex == 3)
+                {
+                    potkategorija = "O4";
+                }
+                else
+                {
+                    MessageBox.Show("Niste izabrali potkategoriju vozila!", "Potkategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 4)
+            {
+                kategorija = "T";
+                potkategorija = "";
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 5)
+            {
+                kategorija = "R";
+                potkategorija = "";
+            }
+            else if (KategorijaZakazivanjeRadnikComboBox.SelectedIndex == 6)
+            {
+                kategorija = "G";
+                potkategorija = "";
+            }
+            else
+            {
+                MessageBox.Show("Niste izabrali kategoriju vozila!", "Kategorija vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (MarkaZakazivanjeRadnikTextBox.Text == "")
+            {
+                MessageBox.Show("Niste unijeli marku vozila!", "Marka vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (ModelZakazivanjeRadnikTextBox.Text == "")
+            {
+                MessageBox.Show("Niste unijeli model vozila!", "Model vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (GodisteZakazivanjeRadnikTextBox.Text == "")
+            {
+                MessageBox.Show("Niste unijeli godište vozila!", "Godište vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (KubikazaZakazivanjeRadnikTextBox.Text == "")
+            {
+                MessageBox.Show("Niste unijeli kubikažu vozila!", "Kubikaža vozila", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (JMBGZakazivanjeRadnikTextBox.Text.Length != 13)
+            {
+                MessageBox.Show("JMBG mora imati 13 cifara!", "JMBG", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            line = kategorija + "," + potkategorija + "," + JMBGZakazivanjeRadnikTextBox.Text + "," + MarkaZakazivanjeRadnikTextBox.Text + "," + ModelZakazivanjeRadnikTextBox.Text + "," + GodisteZakazivanjeRadnikTextBox.Text + "," + KubikazaZakazivanjeRadnikTextBox.Text + "," + UnosBrojaSasijeRadnikTextBox.Text + "," + "" + "," + "" + "," + "False" + "," + "" + "," + "False";
+            using (StreamWriter sw = new StreamWriter("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt", true))
+            {
+                sw.WriteLine(line);
+            }
         }
     }
 }

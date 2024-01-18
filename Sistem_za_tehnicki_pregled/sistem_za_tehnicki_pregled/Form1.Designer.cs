@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Net.Http.Headers;
 using System.Windows.Forms;
 
 namespace sistem_za_tehnicki_pregled
@@ -74,9 +75,30 @@ namespace sistem_za_tehnicki_pregled
             PromjenaBrojaLicneKarteRadioButton = new RadioButton();
             PromjenaLozinkeRadioButton = new RadioButton();
             PromjenaKorisnickogImenaRadioButton = new RadioButton();
+            PromjenaPodatakaLabel = new Label();
+            PotvrdaPromjeneLozinkeLabel = new Label();
             BrisanjeNalogaButton = new Button();
             ZakazivanjeTerminaTehnickogButton = new Button();
             ZakazivanjeTerminaTehnickogPanel = new Panel();
+            UnosBrojaSasijeTextBox = new TextBox();
+            UnosBrojaSasijeLabel = new Label();
+            PokretanjeZakazivanjaTerminaButton = new Button();
+            ZakazivanjeTerminaMonthCalendar = new MonthCalendar();
+            ZakazivanjeTerminaDateTimePicker = new DateTimePicker();
+            ZakaziTerminAkoVoziloVecPostojiButton = new Button();
+            MarkaZakazivanjeTextBox = new TextBox();
+            ModelZakazivanjeTextBox = new TextBox();
+            GodisteZakazivanjeTextBox = new TextBox();
+            KubikazaZakazivanjeTextBox = new TextBox();
+            KategorijaZakazivanjeComboBox = new ComboBox();
+            PotkategorijaZakazivanjeComboBox = new ComboBox();
+            KategorijaZakazivanjeLabel = new Label();
+            PotkategorijaZakazivanjeLabel = new Label();
+            MarkaZakazivanjeLabel = new Label();
+            ModelZakazivanjeLabel = new Label();
+            GodisteZakazivanjeLabel = new Label();
+            KubikazaZakazivanjeLabel = new Label();
+            ZakaziTerminaAkoVoziloNePostojiButton = new Button();
             NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta = new Button();
             AdministratorPanel = new Panel();
             KorisnickoImeAdministratorLabelLogin = new Label();
@@ -92,8 +114,6 @@ namespace sistem_za_tehnicki_pregled
             NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton = new Button();
             VozilaKojaSuProslaTehnickiButton = new Button();
             VozilaKojaNisuProslaTehnickiButton = new Button();
-            PotvrdaPromjeneLozinkeLabel = new Label();
-            PromjenaPodatakaLabel = new Label();
             PrikazStatistikePanel = new Panel();
             KategorijaComboBox = new ComboBox();
             PotkategorijaComboBox = new ComboBox();
@@ -169,7 +189,39 @@ namespace sistem_za_tehnicki_pregled
             button_obavljanjeTehnickog_otkazi = new Button();
             label_obavljanjeTehnickog_naslov = new Label();
             listBox_obavljanjeTehnickog = new ListBox();
+            JMBGZakazivanjeRadnikLabel= new Label();
+            JMBGZakazivanjeRadnikTextBox = new TextBox();
             panel_zakazivanjeTermina1 = new Panel();
+            UnosBrojaSasijeRadnikTextBox = new TextBox();
+            UnosBrojaSasijeRadnikLabel = new Label();
+            PokretanjeZakazivanjaTerminaRadnikButton = new Button();
+            ZakazivanjeTerminaRadnikMonthCalendar = new MonthCalendar();
+            ZakazivanjeTerminaRadnikDateTimePicker = new DateTimePicker();
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton = new Button();
+            MarkaZakazivanjeRadnikTextBox = new TextBox();
+            ModelZakazivanjeRadnikTextBox = new TextBox();
+            GodisteZakazivanjeRadnikTextBox = new TextBox();
+            KubikazaZakazivanjeRadnikTextBox = new TextBox();
+            KategorijaZakazivanjeRadnikComboBox = new ComboBox();
+            PotkategorijaZakazivanjeRadnikComboBox = new ComboBox();
+            KategorijaZakazivanjeRadnikLabel = new Label();
+            PotkategorijaZakazivanjeRadnikLabel = new Label();
+            MarkaZakazivanjeRadnikLabel = new Label();
+            ModelZakazivanjeRadnikLabel = new Label();
+            GodisteZakazivanjeRadnikLabel = new Label();
+            KubikazaZakazivanjeRadnikLabel = new Label();
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton = new Button();
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton = new Button();
+            button_prikazArhive = new Button();
+            button_zakazivanjeTehnickog = new Button();
+            button_obavljanjeTehnickog = new Button();
+            button_pregledIstorije = new Button();
+            NazadRadnikButton = new Button();
+            PrijavljujemSeKaoLabel = new Label();
+            SistemZaTehnickiPregledLabel = new Label();
+            AdministratorButton = new Button();
+            RadnikButton = new Button();
+            KlijentButton = new Button();
             panel_zakazivanjeTermina3 = new Panel();
             button_zakazivanjeTermina3_nazad = new Button();
             monthCalendar_zakazivanjeTermina3 = new MonthCalendar();
@@ -197,16 +249,6 @@ namespace sistem_za_tehnicki_pregled
             textBox_zakazivanjeTermina1_brojSasije = new TextBox();
             label_zakazivanjeTermina_unosBrojaSasije = new Label();
             button_zakazivanjeTermina1_otkazi = new Button();
-            button_prikazArhive = new Button();
-            button_zakazivanjeTehnickog = new Button();
-            button_obavljanjeTehnickog = new Button();
-            button_pregledIstorije = new Button();
-            NazadRadnikButton = new Button();
-            PrijavljujemSeKaoLabel = new Label();
-            SistemZaTehnickiPregledLabel = new Label();
-            AdministratorButton = new Button();
-            RadnikButton = new Button();
-            KlijentButton = new Button();
             IzborniPanel.SuspendLayout();
             KlijentPanel.SuspendLayout();
             RegistracijaNalogaPanel.SuspendLayout();
@@ -602,23 +644,6 @@ namespace sistem_za_tehnicki_pregled
             PotvrdiPromjenuPodatakaButton.Text = "Potvrdi";
             PotvrdiPromjenuPodatakaButton.UseVisualStyleBackColor = true;
             PotvrdiPromjenuPodatakaButton.Click += PotvrdiPromjenuPodatakaButton_Click;
-            //
-            // PromjenaPodatakaLabel
-            //
-            PromjenaPodatakaLabel.AutoSize = true;
-            PromjenaPodatakaLabel.Location = new Point(408, 118);
-            PromjenaPodatakaLabel.Name = "PromjenaPodatakaLabel";
-            PromjenaPodatakaLabel.Size = new Size(113, 20);
-            PromjenaPodatakaPanel.Visible = false;
-            //
-            // PotvrdaPromjeneLozinkeLabel
-            //
-            PotvrdaPromjeneLozinkeLabel.AutoSize = true;
-            PotvrdaPromjeneLozinkeLabel.Location = new Point(408, 166);
-            PotvrdaPromjeneLozinkeLabel.Name = "PotvrdaPromjeneLozinkeLabel";
-            PotvrdaPromjeneLozinkeLabel.Size = new Size(113, 20);
-            PotvrdaPromjeneLozinkeLabel.Text = "Potvrda lozinke:";
-            PotvrdaPromjeneLozinkeLabel.Visible = false;
             // 
             // PromjenaPodatakaTextBox
             // 
@@ -626,14 +651,14 @@ namespace sistem_za_tehnicki_pregled
             PromjenaPodatakaTextBox.Name = "PromjenaPodatakaTextBox";
             PromjenaPodatakaTextBox.Size = new Size(200, 27);
             PromjenaPodatakaTextBox.TabIndex = 4;
-            //
+            // 
             // PotvrdaPromjeneLozinkeTextBox
-            //
+            // 
             PotvrdaPromjeneLozinkeTextBox.Location = new Point(408, 186);
             PotvrdaPromjeneLozinkeTextBox.Name = "PotvrdaPromjeneLozinkeTextBox";
+            PotvrdaPromjeneLozinkeTextBox.PasswordChar = '*';
             PotvrdaPromjeneLozinkeTextBox.Size = new Size(200, 27);
             PotvrdaPromjeneLozinkeTextBox.TabIndex = 4;
-            PotvrdaPromjeneLozinkeTextBox.PasswordChar = '*';
             PotvrdaPromjeneLozinkeTextBox.Visible = false;
             // 
             // PromjenaBrojaZiroRacunaRadioButton
@@ -684,6 +709,24 @@ namespace sistem_za_tehnicki_pregled
             PromjenaKorisnickogImenaRadioButton.UseVisualStyleBackColor = true;
             PromjenaKorisnickogImenaRadioButton.CheckedChanged += PromjenaKorisnickogImenaRadioButton_CheckedChanged;
             // 
+            // PromjenaPodatakaLabel
+            // 
+            PromjenaPodatakaLabel.AutoSize = true;
+            PromjenaPodatakaLabel.Location = new Point(408, 118);
+            PromjenaPodatakaLabel.Name = "PromjenaPodatakaLabel";
+            PromjenaPodatakaLabel.Size = new Size(0, 20);
+            PromjenaPodatakaLabel.TabIndex = 9;
+            // 
+            // PotvrdaPromjeneLozinkeLabel
+            // 
+            PotvrdaPromjeneLozinkeLabel.AutoSize = true;
+            PotvrdaPromjeneLozinkeLabel.Location = new Point(408, 166);
+            PotvrdaPromjeneLozinkeLabel.Name = "PotvrdaPromjeneLozinkeLabel";
+            PotvrdaPromjeneLozinkeLabel.Size = new Size(113, 20);
+            PotvrdaPromjeneLozinkeLabel.TabIndex = 10;
+            PotvrdaPromjeneLozinkeLabel.Text = "Potvrda lozinke:";
+            PotvrdaPromjeneLozinkeLabel.Visible = false;
+            // 
             // BrisanjeNalogaButton
             // 
             BrisanjeNalogaButton.Location = new Point(275, 320);
@@ -706,7 +749,25 @@ namespace sistem_za_tehnicki_pregled
             // 
             // ZakazivanjeTerminaTehnickogPanel
             // 
-            //ZakazivanjeTerminaTehnickogPanel.Controls.Add()
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(UnosBrojaSasijeTextBox);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(UnosBrojaSasijeLabel);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(PokretanjeZakazivanjaTerminaButton);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(ZakazivanjeTerminaMonthCalendar);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(ZakazivanjeTerminaDateTimePicker);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(ZakaziTerminAkoVoziloVecPostojiButton);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(MarkaZakazivanjeTextBox);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(ModelZakazivanjeTextBox);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(GodisteZakazivanjeTextBox);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(KubikazaZakazivanjeTextBox);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(KategorijaZakazivanjeComboBox);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(PotkategorijaZakazivanjeComboBox);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(KategorijaZakazivanjeLabel);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(PotkategorijaZakazivanjeLabel);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(MarkaZakazivanjeLabel);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(ModelZakazivanjeLabel);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(GodisteZakazivanjeLabel);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(KubikazaZakazivanjeLabel);
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(ZakaziTerminaAkoVoziloNePostojiButton);
             ZakazivanjeTerminaTehnickogPanel.Controls.Add(NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta);
             ZakazivanjeTerminaTehnickogPanel.Dock = DockStyle.Fill;
             ZakazivanjeTerminaTehnickogPanel.Location = new Point(0, 0);
@@ -714,6 +775,180 @@ namespace sistem_za_tehnicki_pregled
             ZakazivanjeTerminaTehnickogPanel.Size = new Size(800, 450);
             ZakazivanjeTerminaTehnickogPanel.TabIndex = 9;
             ZakazivanjeTerminaTehnickogPanel.Visible = false;
+            // 
+            // UnosBrojaSasijeTextBox
+            // 
+            UnosBrojaSasijeTextBox.Location = new Point(530, 20);
+            UnosBrojaSasijeTextBox.Name = "UnosBrojaSasijeTextBox";
+            UnosBrojaSasijeTextBox.Size = new Size(200, 27);
+            UnosBrojaSasijeTextBox.TabIndex = 0;
+            // 
+            // UnosBrojaSasijeLabel
+            // 
+            UnosBrojaSasijeLabel.AutoSize = true;
+            UnosBrojaSasijeLabel.Location = new Point(392, 23);
+            UnosBrojaSasijeLabel.Name = "UnosBrojaSasijeLabel";
+            UnosBrojaSasijeLabel.Size = new Size(132, 20);
+            UnosBrojaSasijeLabel.TabIndex = 1;
+            UnosBrojaSasijeLabel.Text = "Unesite broj šasije:";
+            // 
+            // PokretanjeZakazivanjaTerminaButton
+            // 
+            PokretanjeZakazivanjaTerminaButton.Location = new Point(580, 53);
+            PokretanjeZakazivanjaTerminaButton.Name = "PokretanjeZakazivanjaTerminaButton";
+            PokretanjeZakazivanjaTerminaButton.Size = new Size(100, 29);
+            PokretanjeZakazivanjaTerminaButton.TabIndex = 2;
+            PokretanjeZakazivanjaTerminaButton.Text = "Pokreni";
+            PokretanjeZakazivanjaTerminaButton.UseVisualStyleBackColor = true;
+            PokretanjeZakazivanjaTerminaButton.Click += PokretanjeZakazivanjaTerminaButton_Click;
+            // 
+            // ZakazivanjeTerminaMonthCalendar
+            // 
+            ZakazivanjeTerminaMonthCalendar.Location = new Point(40, 90);
+            ZakazivanjeTerminaMonthCalendar.Name = "ZakazivanjeTerminaMonthCalendar";
+            ZakazivanjeTerminaMonthCalendar.TabIndex = 3;
+            ZakazivanjeTerminaMonthCalendar.Visible = false;
+            // 
+            // ZakazivanjeTerminaDateTimePicker
+            // 
+            ZakazivanjeTerminaDateTimePicker.Location = new Point(40, 309);
+            ZakazivanjeTerminaDateTimePicker.Name = "ZakazivanjeTerminaDateTimePicker";
+            ZakazivanjeTerminaDateTimePicker.Size = new Size(262, 27);
+            ZakazivanjeTerminaDateTimePicker.TabIndex = 4;
+            ZakazivanjeTerminaDateTimePicker.Visible = false;
+            // 
+            // ZakaziTerminAkoVoziloVecPostojiButton
+            // 
+            ZakaziTerminAkoVoziloVecPostojiButton.Location = new Point(105, 342);
+            ZakaziTerminAkoVoziloVecPostojiButton.Name = "ZakaziTerminAkoVoziloVecPostojiButton";
+            ZakaziTerminAkoVoziloVecPostojiButton.Size = new Size(130, 29);
+            ZakaziTerminAkoVoziloVecPostojiButton.TabIndex = 5;
+            ZakaziTerminAkoVoziloVecPostojiButton.Text = "Zakaži termin";
+            ZakaziTerminAkoVoziloVecPostojiButton.UseVisualStyleBackColor = true;
+            ZakaziTerminAkoVoziloVecPostojiButton.Visible = false;
+            // 
+            // MarkaZakazivanjeTextBox
+            // 
+            MarkaZakazivanjeTextBox.Location = new Point(480, 186);
+            MarkaZakazivanjeTextBox.Name = "MarkaZakazivanjeTextBox";
+            MarkaZakazivanjeTextBox.Size = new Size(280, 27);
+            MarkaZakazivanjeTextBox.TabIndex = 8;
+            MarkaZakazivanjeTextBox.Visible = false;
+            // 
+            // ModelZakazivanjeTextBox
+            // 
+            ModelZakazivanjeTextBox.Location = new Point(480, 219);
+            ModelZakazivanjeTextBox.Name = "ModelZakazivanjeTextBox";
+            ModelZakazivanjeTextBox.Size = new Size(280, 27);
+            ModelZakazivanjeTextBox.TabIndex = 9;
+            ModelZakazivanjeTextBox.Visible = false;
+            // 
+            // GodisteZakazivanjeTextBox
+            // 
+            GodisteZakazivanjeTextBox.Location = new Point(480, 252);
+            GodisteZakazivanjeTextBox.Name = "GodisteZakazivanjeTextBox";
+            GodisteZakazivanjeTextBox.Size = new Size(280, 27);
+            GodisteZakazivanjeTextBox.TabIndex = 10;
+            GodisteZakazivanjeTextBox.Visible = false;
+            // 
+            // KubikazaZakazivanjeTextBox
+            // 
+            KubikazaZakazivanjeTextBox.Location = new Point(480, 285);
+            KubikazaZakazivanjeTextBox.Name = "KubikazaZakazivanjeTextBox";
+            KubikazaZakazivanjeTextBox.Size = new Size(280, 27);
+            KubikazaZakazivanjeTextBox.TabIndex = 11;
+            KubikazaZakazivanjeTextBox.Visible = false;
+            // 
+            // KategorijaZakazivanjeComboBox
+            // 
+            KategorijaZakazivanjeComboBox.FormattingEnabled = true;
+            KategorijaZakazivanjeComboBox.Items.AddRange(new object[] { "M – Vozila za prevoz putnika", "L – Mopedi, Motocikli, Tricikli i Četvorocikli", "N – Teretna vozila", "O – priključna vozila", "T – Traktori", "R – Priključno vozilo traktora", "G – Terenska vozila" });
+            KategorijaZakazivanjeComboBox.Location = new Point(480, 119);
+            KategorijaZakazivanjeComboBox.Name = "KategorijaZakazivanjeComboBox";
+            KategorijaZakazivanjeComboBox.Size = new Size(280, 28);
+            KategorijaZakazivanjeComboBox.TabIndex = 18;
+            KategorijaZakazivanjeComboBox.Visible = false;
+            KategorijaZakazivanjeComboBox.SelectedIndexChanged += KategorijaZakazivanjeComboBox_SelectedIndexChanged;
+            // 
+            // PotkategorijaZakazivanjeComboBox
+            // 
+            PotkategorijaZakazivanjeComboBox.FormattingEnabled = true;
+            PotkategorijaZakazivanjeComboBox.Location = new Point(480, 153);
+            PotkategorijaZakazivanjeComboBox.Name = "PotkategorijaZakazivanjeComboBox";
+            PotkategorijaZakazivanjeComboBox.Size = new Size(280, 28);
+            PotkategorijaZakazivanjeComboBox.TabIndex = 19;
+            PotkategorijaZakazivanjeComboBox.Visible = false;
+            // 
+            // KategorijaZakazivanjeLabel
+            // 
+            KategorijaZakazivanjeLabel.AutoSize = true;
+            KategorijaZakazivanjeLabel.Location = new Point(374, 123);
+            KategorijaZakazivanjeLabel.Name = "KategorijaZakazivanjeLabel";
+            KategorijaZakazivanjeLabel.Size = new Size(81, 20);
+            KategorijaZakazivanjeLabel.TabIndex = 12;
+            KategorijaZakazivanjeLabel.Text = "Kategorija:";
+            KategorijaZakazivanjeLabel.Visible = false;
+            // 
+            // PotkategorijaZakazivanjeLabel
+            // 
+            PotkategorijaZakazivanjeLabel.AutoSize = true;
+            PotkategorijaZakazivanjeLabel.Location = new Point(374, 156);
+            PotkategorijaZakazivanjeLabel.Name = "PotkategorijaZakazivanjeLabel";
+            PotkategorijaZakazivanjeLabel.Size = new Size(100, 20);
+            PotkategorijaZakazivanjeLabel.TabIndex = 13;
+            PotkategorijaZakazivanjeLabel.Text = "Potkategorija:";
+            PotkategorijaZakazivanjeLabel.Visible = false;
+            // 
+            // MarkaZakazivanjeLabel
+            // 
+            MarkaZakazivanjeLabel.AutoSize = true;
+            MarkaZakazivanjeLabel.Location = new Point(374, 189);
+            MarkaZakazivanjeLabel.Name = "MarkaZakazivanjeLabel";
+            MarkaZakazivanjeLabel.Size = new Size(53, 20);
+            MarkaZakazivanjeLabel.TabIndex = 14;
+            MarkaZakazivanjeLabel.Text = "Marka:";
+            MarkaZakazivanjeLabel.Visible = false;
+            // 
+            // ModelZakazivanjeLabel
+            // 
+            ModelZakazivanjeLabel.AutoSize = true;
+            ModelZakazivanjeLabel.Location = new Point(374, 222);
+            ModelZakazivanjeLabel.Name = "ModelZakazivanjeLabel";
+            ModelZakazivanjeLabel.Size = new Size(55, 20);
+            ModelZakazivanjeLabel.TabIndex = 15;
+            ModelZakazivanjeLabel.Text = "Model:";
+            ModelZakazivanjeLabel.Visible = false;
+            // 
+            // GodisteZakazivanjeLabel
+            // 
+            GodisteZakazivanjeLabel.AutoSize = true;
+            GodisteZakazivanjeLabel.Location = new Point(374, 255);
+            GodisteZakazivanjeLabel.Name = "GodisteZakazivanjeLabel";
+            GodisteZakazivanjeLabel.Size = new Size(63, 20);
+            GodisteZakazivanjeLabel.TabIndex = 16;
+            GodisteZakazivanjeLabel.Text = "Godište:";
+            GodisteZakazivanjeLabel.Visible = false;
+            // 
+            // KubikazaZakazivanjeLabel
+            // 
+            KubikazaZakazivanjeLabel.AutoSize = true;
+            KubikazaZakazivanjeLabel.Location = new Point(374, 288);
+            KubikazaZakazivanjeLabel.Name = "KubikazaZakazivanjeLabel";
+            KubikazaZakazivanjeLabel.Size = new Size(72, 20);
+            KubikazaZakazivanjeLabel.TabIndex = 17;
+            KubikazaZakazivanjeLabel.Text = "Kubikaža:";
+            KubikazaZakazivanjeLabel.Visible = false;
+            // 
+            // ZakaziTerminaAkoVoziloNePostojiButton
+            // 
+            ZakaziTerminaAkoVoziloNePostojiButton.Location = new Point(335, 370);
+            ZakaziTerminaAkoVoziloNePostojiButton.Name = "ZakaziTerminaAkoVoziloNePostojiButton";
+            ZakaziTerminaAkoVoziloNePostojiButton.Size = new Size(130, 29);
+            ZakaziTerminaAkoVoziloNePostojiButton.TabIndex = 20;
+            ZakaziTerminaAkoVoziloNePostojiButton.Text = "Zakaži termin";
+            ZakaziTerminaAkoVoziloNePostojiButton.UseVisualStyleBackColor = true;
+            ZakaziTerminaAkoVoziloNePostojiButton.Visible = false;
+            ZakaziTerminaAkoVoziloNePostojiButton.Click += ZakaziTerminaAkoVoziloNePostojiButton_Click;
             // 
             // NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta
             // 
@@ -1633,18 +1868,336 @@ namespace sistem_za_tehnicki_pregled
             // 
             // panel_zakazivanjeTermina1
             // 
-            panel_zakazivanjeTermina1.Controls.Add(panel_zakazivanjeTermina3);
-            panel_zakazivanjeTermina1.Controls.Add(panel_zakazivanjeTermina2);
-            panel_zakazivanjeTermina1.Controls.Add(button_zakazivanjeTermina1_pokreni);
-            panel_zakazivanjeTermina1.Controls.Add(textBox_zakazivanjeTermina1_brojSasije);
-            panel_zakazivanjeTermina1.Controls.Add(label_zakazivanjeTermina_unosBrojaSasije);
-            panel_zakazivanjeTermina1.Controls.Add(button_zakazivanjeTermina1_otkazi);
+            panel_zakazivanjeTermina1.Controls.Add(UnosBrojaSasijeRadnikTextBox);
+            panel_zakazivanjeTermina1.Controls.Add(UnosBrojaSasijeRadnikLabel);
+            panel_zakazivanjeTermina1.Controls.Add(PokretanjeZakazivanjaTerminaRadnikButton);
+            panel_zakazivanjeTermina1.Controls.Add(ZakazivanjeTerminaRadnikMonthCalendar);
+            panel_zakazivanjeTermina1.Controls.Add(ZakazivanjeTerminaRadnikDateTimePicker);
+            panel_zakazivanjeTermina1.Controls.Add(ZakaziTerminAkoVoziloVecPostojiRadnikButton);
+            panel_zakazivanjeTermina1.Controls.Add(MarkaZakazivanjeRadnikTextBox);
+            panel_zakazivanjeTermina1.Controls.Add(ModelZakazivanjeRadnikTextBox);
+            panel_zakazivanjeTermina1.Controls.Add(GodisteZakazivanjeRadnikTextBox);
+            panel_zakazivanjeTermina1.Controls.Add(KubikazaZakazivanjeRadnikTextBox);
+            panel_zakazivanjeTermina1.Controls.Add(KategorijaZakazivanjeRadnikComboBox);
+            panel_zakazivanjeTermina1.Controls.Add(PotkategorijaZakazivanjeRadnikComboBox);
+            panel_zakazivanjeTermina1.Controls.Add(KategorijaZakazivanjeRadnikLabel);
+            panel_zakazivanjeTermina1.Controls.Add(PotkategorijaZakazivanjeRadnikLabel);
+            panel_zakazivanjeTermina1.Controls.Add(MarkaZakazivanjeRadnikLabel);
+            panel_zakazivanjeTermina1.Controls.Add(ModelZakazivanjeRadnikLabel);
+            panel_zakazivanjeTermina1.Controls.Add(GodisteZakazivanjeRadnikLabel);
+            panel_zakazivanjeTermina1.Controls.Add(KubikazaZakazivanjeRadnikLabel);
+            panel_zakazivanjeTermina1.Controls.Add(ZakaziTerminaAkoVoziloNePostojiRadnikButton);
+            panel_zakazivanjeTermina1.Controls.Add(JMBGZakazivanjeRadnikTextBox);
+            panel_zakazivanjeTermina1.Controls.Add(JMBGZakazivanjeRadnikLabel);
+            panel_zakazivanjeTermina1.Controls.Add(NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton);
             panel_zakazivanjeTermina1.Dock = DockStyle.Fill;
             panel_zakazivanjeTermina1.Location = new Point(0, 0);
             panel_zakazivanjeTermina1.Name = "panel_zakazivanjeTermina1";
             panel_zakazivanjeTermina1.Size = new Size(800, 450);
             panel_zakazivanjeTermina1.TabIndex = 6;
             panel_zakazivanjeTermina1.Visible = false;
+            // 
+            // UnosBrojaSasijeRadnikTextBox
+            // 
+            UnosBrojaSasijeRadnikTextBox.Location = new Point(530, 20);
+            UnosBrojaSasijeRadnikTextBox.Name = "UnosBrojaSasijeRadnikTextBox";
+            UnosBrojaSasijeRadnikTextBox.Size = new Size(200, 27);
+            UnosBrojaSasijeRadnikTextBox.TabIndex = 0;
+            // 
+            // UnosBrojaSasijeRadnikLabel
+            // 
+            UnosBrojaSasijeRadnikLabel.AutoSize = true;
+            UnosBrojaSasijeRadnikLabel.Location = new Point(392, 23);
+            UnosBrojaSasijeRadnikLabel.Name = "UnosBrojaSasijeRadnikLabel";
+            UnosBrojaSasijeRadnikLabel.Size = new Size(132, 20);
+            UnosBrojaSasijeRadnikLabel.TabIndex = 1;
+            UnosBrojaSasijeRadnikLabel.Text = "Unesite broj šasije:";
+            // 
+            // PokretanjeZakazivanjaTerminaRadnikButton
+            // 
+            PokretanjeZakazivanjaTerminaRadnikButton.Location = new Point(580, 53);
+            PokretanjeZakazivanjaTerminaRadnikButton.Name = "PokretanjeZakazivanjaTerminaRadnikButton";
+            PokretanjeZakazivanjaTerminaRadnikButton.Size = new Size(100, 29);
+            PokretanjeZakazivanjaTerminaRadnikButton.TabIndex = 2;
+            PokretanjeZakazivanjaTerminaRadnikButton.Text = "Pokreni";
+            PokretanjeZakazivanjaTerminaRadnikButton.UseVisualStyleBackColor = true;
+            PokretanjeZakazivanjaTerminaRadnikButton.Click += PokretanjeZakazivanjaTerminaRadnikButton_Click;
+            // 
+            // ZakazivanjeTerminaRadnikMonthCalendar
+            // 
+            ZakazivanjeTerminaRadnikMonthCalendar.Location = new Point(40, 90);
+            ZakazivanjeTerminaRadnikMonthCalendar.Name = "ZakazivanjeTerminaRadnikMonthCalendar";
+            ZakazivanjeTerminaRadnikMonthCalendar.TabIndex = 3;
+            ZakazivanjeTerminaRadnikMonthCalendar.Visible = false;
+            // 
+            // ZakazivanjeTerminaRadnikDateTimePicker
+            // 
+            ZakazivanjeTerminaRadnikDateTimePicker.Location = new Point(40, 309);
+            ZakazivanjeTerminaRadnikDateTimePicker.Name = "ZakazivanjeTerminaRadnikDateTimePicker";
+            ZakazivanjeTerminaRadnikDateTimePicker.Size = new Size(262, 27);
+            ZakazivanjeTerminaRadnikDateTimePicker.TabIndex = 4;
+            ZakazivanjeTerminaRadnikDateTimePicker.Visible = false;
+            // 
+            // ZakaziTerminAkoVoziloVecPostojiRadnikButton
+            // 
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Location = new Point(105, 342);
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Name = "ZakaziTerminAkoVoziloVecPostojiRadnikButton";
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Size = new Size(130, 29);
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.TabIndex = 5;
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Text = "Zakaži termin";
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.UseVisualStyleBackColor = true;
+            ZakaziTerminAkoVoziloVecPostojiRadnikButton.Visible = false;
+            // 
+            // MarkaZakazivanjeRadnikTextBox
+            // 
+            MarkaZakazivanjeRadnikTextBox.Location = new Point(480, 186);
+            MarkaZakazivanjeRadnikTextBox.Name = "MarkaZakazivanjeRadnikTextBox";
+            MarkaZakazivanjeRadnikTextBox.Size = new Size(280, 27);
+            MarkaZakazivanjeRadnikTextBox.TabIndex = 8;
+            MarkaZakazivanjeRadnikTextBox.Visible = false;
+            // 
+            // ModelZakazivanjeRadnikTextBox
+            // 
+            ModelZakazivanjeRadnikTextBox.Location = new Point(480, 219);
+            ModelZakazivanjeRadnikTextBox.Name = "ModelZakazivanjeRadnikTextBox";
+            ModelZakazivanjeRadnikTextBox.Size = new Size(280, 27);
+            ModelZakazivanjeRadnikTextBox.TabIndex = 9;
+            ModelZakazivanjeRadnikTextBox.Visible = false;
+            // 
+            // GodisteZakazivanjeRadnikTextBox
+            // 
+            GodisteZakazivanjeRadnikTextBox.Location = new Point(480, 252);
+            GodisteZakazivanjeRadnikTextBox.Name = "GodisteZakazivanjeRadnikTextBox";
+            GodisteZakazivanjeRadnikTextBox.Size = new Size(280, 27);
+            GodisteZakazivanjeRadnikTextBox.TabIndex = 10;
+            GodisteZakazivanjeRadnikTextBox.Visible = false;
+            // 
+            // KubikazaZakazivanjeRadnikTextBox
+            // 
+            KubikazaZakazivanjeRadnikTextBox.Location = new Point(480, 285);
+            KubikazaZakazivanjeRadnikTextBox.Name = "KubikazaZakazivanjeRadnikTextBox";
+            KubikazaZakazivanjeRadnikTextBox.Size = new Size(280, 27);
+            KubikazaZakazivanjeRadnikTextBox.TabIndex = 11;
+            KubikazaZakazivanjeRadnikTextBox.Visible = false;
+            //
+            // JMBGZakazivanjeRadnikTextBox
+            //
+            JMBGZakazivanjeRadnikTextBox.Location = new Point(480, 318);
+            JMBGZakazivanjeRadnikTextBox.Name = "JMBGZakazivanjeRadnikTextBox";
+            JMBGZakazivanjeRadnikTextBox.Size = new Size(280, 27);
+            JMBGZakazivanjeRadnikTextBox.TabIndex = 12;
+            JMBGZakazivanjeRadnikTextBox.Visible = false;
+            // 
+            // KategorijaZakazivanjeRadnikComboBox
+            // 
+            KategorijaZakazivanjeRadnikComboBox.FormattingEnabled = true;
+            KategorijaZakazivanjeRadnikComboBox.Items.AddRange(new object[] { "M – Vozila za prevoz putnika", "L – Mopedi, Motocikli, Tricikli i Četvorocikli", "N – Teretna vozila", "O – priključna vozila", "T – Traktori", "R – Priključno vozilo traktora", "G – Terenska vozila" });
+            KategorijaZakazivanjeRadnikComboBox.Location = new Point(480, 119);
+            KategorijaZakazivanjeRadnikComboBox.Name = "KategorijaZakazivanjeRadnikComboBox";
+            KategorijaZakazivanjeRadnikComboBox.Size = new Size(280, 28);
+            KategorijaZakazivanjeRadnikComboBox.TabIndex = 18;
+            KategorijaZakazivanjeRadnikComboBox.Visible = false;
+            KategorijaZakazivanjeRadnikComboBox.SelectedIndexChanged += KategorijaZakazivanjeRadnikComboBox_SelectedIndexChanged;
+            // 
+            // PotkategorijaZakazivanjeRadnikComboBox
+            // 
+            PotkategorijaZakazivanjeRadnikComboBox.FormattingEnabled = true;
+            PotkategorijaZakazivanjeRadnikComboBox.Location = new Point(480, 153);
+            PotkategorijaZakazivanjeRadnikComboBox.Name = "PotkategorijaZakazivanjeRadnikComboBox";
+            PotkategorijaZakazivanjeRadnikComboBox.Size = new Size(280, 28);
+            PotkategorijaZakazivanjeRadnikComboBox.TabIndex = 19;
+            PotkategorijaZakazivanjeRadnikComboBox.Visible = false;
+            // 
+            // KategorijaZakazivanjeRadnikLabel
+            // 
+            KategorijaZakazivanjeRadnikLabel.AutoSize = true;
+            KategorijaZakazivanjeRadnikLabel.Location = new Point(374, 123);
+            KategorijaZakazivanjeRadnikLabel.Name = "KategorijaZakazivanjeRadnikLabel";
+            KategorijaZakazivanjeRadnikLabel.Size = new Size(81, 20);
+            KategorijaZakazivanjeRadnikLabel.TabIndex = 12;
+            KategorijaZakazivanjeRadnikLabel.Text = "Kategorija:";
+            KategorijaZakazivanjeRadnikLabel.Visible = false;
+            // 
+            // PotkategorijaZakazivanjeRadnikLabel
+            // 
+            PotkategorijaZakazivanjeRadnikLabel.AutoSize = true;
+            PotkategorijaZakazivanjeRadnikLabel.Location = new Point(374, 156);
+            PotkategorijaZakazivanjeRadnikLabel.Name = "PotkategorijaZakazivanjeRadnikLabel";
+            PotkategorijaZakazivanjeRadnikLabel.Size = new Size(100, 20);
+            PotkategorijaZakazivanjeRadnikLabel.TabIndex = 13;
+            PotkategorijaZakazivanjeRadnikLabel.Text = "Potkategorija:";
+            PotkategorijaZakazivanjeRadnikLabel.Visible = false;
+            // 
+            // MarkaZakazivanjeRadnikLabel
+            // 
+            MarkaZakazivanjeRadnikLabel.AutoSize = true;
+            MarkaZakazivanjeRadnikLabel.Location = new Point(374, 189);
+            MarkaZakazivanjeRadnikLabel.Name = "MarkaZakazivanjeRadnikLabel";
+            MarkaZakazivanjeRadnikLabel.Size = new Size(53, 20);
+            MarkaZakazivanjeRadnikLabel.TabIndex = 14;
+            MarkaZakazivanjeRadnikLabel.Text = "Marka:";
+            MarkaZakazivanjeRadnikLabel.Visible = false;
+            // 
+            // ModelZakazivanjeRadnikLabel
+            // 
+            ModelZakazivanjeRadnikLabel.AutoSize = true;
+            ModelZakazivanjeRadnikLabel.Location = new Point(374, 222);
+            ModelZakazivanjeRadnikLabel.Name = "ModelZakazivanjeRadnikLabel";
+            ModelZakazivanjeRadnikLabel.Size = new Size(55, 20);
+            ModelZakazivanjeRadnikLabel.TabIndex = 15;
+            ModelZakazivanjeRadnikLabel.Text = "Model:";
+            ModelZakazivanjeRadnikLabel.Visible = false;
+            // 
+            // GodisteZakazivanjeRadnikLabel
+            // 
+            GodisteZakazivanjeRadnikLabel.AutoSize = true;
+            GodisteZakazivanjeRadnikLabel.Location = new Point(374, 255);
+            GodisteZakazivanjeRadnikLabel.Name = "GodisteZakazivanjeRadnikLabel";
+            GodisteZakazivanjeRadnikLabel.Size = new Size(63, 20);
+            GodisteZakazivanjeRadnikLabel.TabIndex = 16;
+            GodisteZakazivanjeRadnikLabel.Text = "Godište:";
+            GodisteZakazivanjeRadnikLabel.Visible = false;
+            // 
+            // KubikazaZakazivanjeRadnikLabel
+            // 
+            KubikazaZakazivanjeRadnikLabel.AutoSize = true;
+            KubikazaZakazivanjeRadnikLabel.Location = new Point(374, 288);
+            KubikazaZakazivanjeRadnikLabel.Name = "KubikazaZakazivanjeRadnikLabel";
+            KubikazaZakazivanjeRadnikLabel.Size = new Size(72, 20);
+            KubikazaZakazivanjeRadnikLabel.TabIndex = 17;
+            KubikazaZakazivanjeRadnikLabel.Text = "Kubikaža:";
+            KubikazaZakazivanjeRadnikLabel.Visible = false;
+            //
+            // JMBGZakazivanjeRadnikLabel
+            //
+            JMBGZakazivanjeRadnikLabel.AutoSize = true;
+            JMBGZakazivanjeRadnikLabel.Location = new Point(374, 321);
+            JMBGZakazivanjeRadnikLabel.Name = "JMBGZakazivanjeRadnikLabel";
+            JMBGZakazivanjeRadnikLabel.Size = new Size(53, 20);
+            JMBGZakazivanjeRadnikLabel.TabIndex = 18;
+            JMBGZakazivanjeRadnikLabel.Text = "JMBG:";
+            JMBGZakazivanjeRadnikLabel.Visible = false;
+            // 
+            // ZakaziTerminaAkoVoziloNePostojiRadnikButton
+            // 
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Location = new Point(335, 370);
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Name = "ZakaziTerminaAkoVoziloNePostojiRadnikButton";
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Size = new Size(130, 29);
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.TabIndex = 20;
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Text = "Zakaži termin";
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.UseVisualStyleBackColor = true;
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Visible = false;
+            ZakaziTerminaAkoVoziloNePostojiRadnikButton.Click += ZakaziTerminaAkoVoziloNePostojiRadnikButton_Click;
+            // 
+            // NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton
+            // 
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton.Location = new Point(694, 409);
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton.Name = "NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton";
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton.Size = new Size(94, 29);
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton.TabIndex = 8;
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton.Text = "Nazad";
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton.UseVisualStyleBackColor = true;
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton.Click += NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton_Click;
+            // 
+            // button_prikazArhive
+            // 
+            button_prikazArhive.Location = new Point(450, 200);
+            button_prikazArhive.Name = "button_prikazArhive";
+            button_prikazArhive.Size = new Size(200, 60);
+            button_prikazArhive.TabIndex = 1;
+            button_prikazArhive.Text = "Prikaz arhive sa izvještajima";
+            button_prikazArhive.UseVisualStyleBackColor = true;
+            button_prikazArhive.Click += button_prikazArhive_Click;
+            // 
+            // button_zakazivanjeTehnickog
+            // 
+            button_zakazivanjeTehnickog.Location = new Point(150, 70);
+            button_zakazivanjeTehnickog.Name = "button_zakazivanjeTehnickog";
+            button_zakazivanjeTehnickog.Size = new Size(200, 60);
+            button_zakazivanjeTehnickog.TabIndex = 3;
+            button_zakazivanjeTehnickog.Text = "Zakazivanje tehničkog pregleda";
+            button_zakazivanjeTehnickog.UseVisualStyleBackColor = true;
+            button_zakazivanjeTehnickog.Click += button_zakazivanjeTehnickog_Click;
+            // 
+            // button_obavljanjeTehnickog
+            // 
+            button_obavljanjeTehnickog.Location = new Point(150, 200);
+            button_obavljanjeTehnickog.Name = "button_obavljanjeTehnickog";
+            button_obavljanjeTehnickog.Size = new Size(200, 60);
+            button_obavljanjeTehnickog.TabIndex = 0;
+            button_obavljanjeTehnickog.Text = "Obavljanje tehničkog pregleda";
+            button_obavljanjeTehnickog.UseVisualStyleBackColor = true;
+            button_obavljanjeTehnickog.Click += button_obavljanjeTehnickog_Click;
+            // 
+            // button_pregledIstorije
+            // 
+            button_pregledIstorije.Location = new Point(450, 70);
+            button_pregledIstorije.Name = "button_pregledIstorije";
+            button_pregledIstorije.Size = new Size(200, 60);
+            button_pregledIstorije.TabIndex = 2;
+            button_pregledIstorije.Text = "Pregled istorije";
+            button_pregledIstorije.UseVisualStyleBackColor = true;
+            button_pregledIstorije.Click += button_pregledIstorije_Click;
+            // 
+            // NazadRadnikButton
+            // 
+            NazadRadnikButton.Location = new Point(694, 409);
+            NazadRadnikButton.Name = "NazadRadnikButton";
+            NazadRadnikButton.Size = new Size(94, 29);
+            NazadRadnikButton.TabIndex = 2;
+            NazadRadnikButton.Text = "Odjava";
+            NazadRadnikButton.UseVisualStyleBackColor = true;
+            NazadRadnikButton.Click += NazadRadnikButton_Click;
+            // 
+            // PrijavljujemSeKaoLabel
+            // 
+            PrijavljujemSeKaoLabel.AutoSize = true;
+            PrijavljujemSeKaoLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            PrijavljujemSeKaoLabel.Location = new Point(296, 245);
+            PrijavljujemSeKaoLabel.Name = "PrijavljujemSeKaoLabel";
+            PrijavljujemSeKaoLabel.Size = new Size(208, 31);
+            PrijavljujemSeKaoLabel.TabIndex = 4;
+            PrijavljujemSeKaoLabel.Text = "Prijavljujem se kao:";
+            // 
+            // SistemZaTehnickiPregledLabel
+            // 
+            SistemZaTehnickiPregledLabel.AutoSize = true;
+            SistemZaTehnickiPregledLabel.Font = new Font("Segoe UI", 30F, FontStyle.Regular, GraphicsUnit.Point);
+            SistemZaTehnickiPregledLabel.Location = new Point(47, 99);
+            SistemZaTehnickiPregledLabel.Name = "SistemZaTehnickiPregledLabel";
+            SistemZaTehnickiPregledLabel.Size = new Size(706, 67);
+            SistemZaTehnickiPregledLabel.TabIndex = 3;
+            SistemZaTehnickiPregledLabel.Text = "SISTEM ZA TEHNIČKI PREGLED";
+            // 
+            // AdministratorButton
+            // 
+            AdministratorButton.Location = new Point(569, 302);
+            AdministratorButton.Name = "AdministratorButton";
+            AdministratorButton.Size = new Size(124, 29);
+            AdministratorButton.TabIndex = 2;
+            AdministratorButton.Text = "Administrator";
+            AdministratorButton.UseVisualStyleBackColor = true;
+            AdministratorButton.Click += AdministratorButton_Click;
+            // 
+            // RadnikButton
+            // 
+            RadnikButton.Location = new Point(338, 302);
+            RadnikButton.Name = "RadnikButton";
+            RadnikButton.Size = new Size(124, 29);
+            RadnikButton.TabIndex = 1;
+            RadnikButton.Text = "Radnik";
+            RadnikButton.UseVisualStyleBackColor = true;
+            RadnikButton.Click += RadnikButton_Click;
+            // 
+            // KlijentButton
+            // 
+            KlijentButton.Location = new Point(107, 302);
+            KlijentButton.Name = "KlijentButton";
+            KlijentButton.Size = new Size(124, 29);
+            KlijentButton.TabIndex = 0;
+            KlijentButton.Text = "Klijent";
+            KlijentButton.UseVisualStyleBackColor = true;
+            KlijentButton.Click += KlijentButton_Click;
             // 
             // panel_zakazivanjeTermina3
             // 
@@ -1892,106 +2445,6 @@ namespace sistem_za_tehnicki_pregled
             button_zakazivanjeTermina1_otkazi.UseVisualStyleBackColor = true;
             button_zakazivanjeTermina1_otkazi.Click += button_zakazivanjeTermina1_otkazi_click;
             // 
-            // button_prikazArhive
-            // 
-            button_prikazArhive.Location = new Point(450, 200);
-            button_prikazArhive.Name = "button_prikazArhive";
-            button_prikazArhive.Size = new Size(200, 60);
-            button_prikazArhive.TabIndex = 1;
-            button_prikazArhive.Text = "Prikaz arhive sa izvještajima";
-            button_prikazArhive.UseVisualStyleBackColor = true;
-            button_prikazArhive.Click += button_prikazArhive_Click;
-            // 
-            // button_zakazivanjeTehnickog
-            // 
-            button_zakazivanjeTehnickog.Location = new Point(150, 70);
-            button_zakazivanjeTehnickog.Name = "button_zakazivanjeTehnickog";
-            button_zakazivanjeTehnickog.Size = new Size(200, 60);
-            button_zakazivanjeTehnickog.TabIndex = 3;
-            button_zakazivanjeTehnickog.Text = "Zakazivanje tehničkog pregleda";
-            button_zakazivanjeTehnickog.UseVisualStyleBackColor = true;
-            button_zakazivanjeTehnickog.Click += button_zakazivanjeTehnickog_Click;
-            // 
-            // button_obavljanjeTehnickog
-            // 
-            button_obavljanjeTehnickog.Location = new Point(150, 200);
-            button_obavljanjeTehnickog.Name = "button_obavljanjeTehnickog";
-            button_obavljanjeTehnickog.Size = new Size(200, 60);
-            button_obavljanjeTehnickog.TabIndex = 0;
-            button_obavljanjeTehnickog.Text = "Obavljanje tehničkog pregleda";
-            button_obavljanjeTehnickog.UseVisualStyleBackColor = true;
-            button_obavljanjeTehnickog.Click += button_obavljanjeTehnickog_Click;
-            // 
-            // button_pregledIstorije
-            // 
-            button_pregledIstorije.Location = new Point(450, 70);
-            button_pregledIstorije.Name = "button_pregledIstorije";
-            button_pregledIstorije.Size = new Size(200, 60);
-            button_pregledIstorije.TabIndex = 2;
-            button_pregledIstorije.Text = "Pregled istorije";
-            button_pregledIstorije.UseVisualStyleBackColor = true;
-            button_pregledIstorije.Click += button_pregledIstorije_Click;
-            // 
-            // NazadRadnikButton
-            // 
-            NazadRadnikButton.Location = new Point(694, 409);
-            NazadRadnikButton.Name = "NazadRadnikButton";
-            NazadRadnikButton.Size = new Size(94, 29);
-            NazadRadnikButton.TabIndex = 2;
-            NazadRadnikButton.Text = "Odjava";
-            NazadRadnikButton.UseVisualStyleBackColor = true;
-            NazadRadnikButton.Click += NazadRadnikButton_Click;
-            // 
-            // PrijavljujemSeKaoLabel
-            // 
-            PrijavljujemSeKaoLabel.AutoSize = true;
-            PrijavljujemSeKaoLabel.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            PrijavljujemSeKaoLabel.Location = new Point(296, 245);
-            PrijavljujemSeKaoLabel.Name = "PrijavljujemSeKaoLabel";
-            PrijavljujemSeKaoLabel.Size = new Size(208, 31);
-            PrijavljujemSeKaoLabel.TabIndex = 4;
-            PrijavljujemSeKaoLabel.Text = "Prijavljujem se kao:";
-            // 
-            // SistemZaTehnickiPregledLabel
-            // 
-            SistemZaTehnickiPregledLabel.AutoSize = true;
-            SistemZaTehnickiPregledLabel.Font = new Font("Segoe UI", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            SistemZaTehnickiPregledLabel.Location = new Point(47, 99);
-            SistemZaTehnickiPregledLabel.Name = "SistemZaTehnickiPregledLabel";
-            SistemZaTehnickiPregledLabel.Size = new Size(706, 67);
-            SistemZaTehnickiPregledLabel.TabIndex = 3;
-            SistemZaTehnickiPregledLabel.Text = "SISTEM ZA TEHNIČKI PREGLED";
-            // 
-            // AdministratorButton
-            // 
-            AdministratorButton.Location = new Point(569, 302);
-            AdministratorButton.Name = "AdministratorButton";
-            AdministratorButton.Size = new Size(124, 29);
-            AdministratorButton.TabIndex = 2;
-            AdministratorButton.Text = "Administrator";
-            AdministratorButton.UseVisualStyleBackColor = true;
-            AdministratorButton.Click += AdministratorButton_Click;
-            // 
-            // RadnikButton
-            // 
-            RadnikButton.Location = new Point(338, 302);
-            RadnikButton.Name = "RadnikButton";
-            RadnikButton.Size = new Size(124, 29);
-            RadnikButton.TabIndex = 1;
-            RadnikButton.Text = "Radnik";
-            RadnikButton.UseVisualStyleBackColor = true;
-            RadnikButton.Click += RadnikButton_Click;
-            // 
-            // KlijentButton
-            // 
-            KlijentButton.Location = new Point(107, 302);
-            KlijentButton.Name = "KlijentButton";
-            KlijentButton.Size = new Size(124, 29);
-            KlijentButton.TabIndex = 0;
-            KlijentButton.Text = "Klijent";
-            KlijentButton.UseVisualStyleBackColor = true;
-            KlijentButton.Click += KlijentButton_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -2013,6 +2466,7 @@ namespace sistem_za_tehnicki_pregled
             PromjenaPodatakaPanel.ResumeLayout(false);
             PromjenaPodatakaPanel.PerformLayout();
             ZakazivanjeTerminaTehnickogPanel.ResumeLayout(false);
+            ZakazivanjeTerminaTehnickogPanel.PerformLayout();
             AdministratorPanel.ResumeLayout(false);
             AdministratorPanel.PerformLayout();
             LogovanAdministratorPanel.ResumeLayout(false);
@@ -2112,6 +2566,7 @@ namespace sistem_za_tehnicki_pregled
         private Panel ZakazivanjeTerminaTehnickogPanel;
         private Button NazadSaPromjenePodatakaNaLogovanogKlijenta;
         private Button NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta;
+        private Button NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijentaRadnikButton;
         private ComboBox ListaRadnickihNalogaComboBox;
         private ComboBox ListaAdministratorskihNalogaComboBox;
         private Label HeaderListeRadnickihNaloga;
@@ -2222,5 +2677,45 @@ namespace sistem_za_tehnicki_pregled
         private Button PotvrdiPromjenuPodatakaButton;
         private Label PotvrdaPromjeneLozinkeLabel;
         private Label PromjenaPodatakaLabel;
+        private TextBox UnosBrojaSasijeTextBox;
+        private Label UnosBrojaSasijeLabel;
+        private Button PokretanjeZakazivanjaTerminaButton;
+        private MonthCalendar ZakazivanjeTerminaMonthCalendar;
+        private DateTimePicker ZakazivanjeTerminaDateTimePicker;
+        private Button ZakaziTerminAkoVoziloVecPostojiButton;
+        private TextBox MarkaZakazivanjeTextBox;
+        private TextBox ModelZakazivanjeTextBox;
+        private TextBox GodisteZakazivanjeTextBox;
+        private TextBox KubikazaZakazivanjeTextBox;
+        private Label KategorijaZakazivanjeLabel;
+        private Label PotkategorijaZakazivanjeLabel;
+        private Label MarkaZakazivanjeLabel;
+        private Label ModelZakazivanjeLabel;
+        private Label GodisteZakazivanjeLabel;
+        private Label KubikazaZakazivanjeLabel;
+        private ComboBox KategorijaZakazivanjeComboBox;
+        private ComboBox PotkategorijaZakazivanjeComboBox;
+        private Button ZakaziTerminaAkoVoziloNePostojiButton;
+        private Label JMBGZakazivanjeRadnikLabel;
+        private TextBox JMBGZakazivanjeRadnikTextBox;
+        private TextBox UnosBrojaSasijeRadnikTextBox;
+        private Label UnosBrojaSasijeRadnikLabel;
+        private Button PokretanjeZakazivanjaTerminaRadnikButton;
+        private MonthCalendar ZakazivanjeTerminaRadnikMonthCalendar;
+        private DateTimePicker ZakazivanjeTerminaRadnikDateTimePicker;
+        private Button ZakaziTerminAkoVoziloVecPostojiRadnikButton;
+        private TextBox MarkaZakazivanjeRadnikTextBox;
+        private TextBox ModelZakazivanjeRadnikTextBox;
+        private TextBox GodisteZakazivanjeRadnikTextBox;
+        private TextBox KubikazaZakazivanjeRadnikTextBox;
+        private Label KategorijaZakazivanjeRadnikLabel;
+        private Label PotkategorijaZakazivanjeRadnikLabel;
+        private Label MarkaZakazivanjeRadnikLabel;
+        private Label ModelZakazivanjeRadnikLabel;
+        private Label GodisteZakazivanjeRadnikLabel;
+        private Label KubikazaZakazivanjeRadnikLabel;
+        private ComboBox KategorijaZakazivanjeRadnikComboBox;
+        private ComboBox PotkategorijaZakazivanjeRadnikComboBox;
+        private Button ZakaziTerminaAkoVoziloNePostojiRadnikButton;
     }
 }
