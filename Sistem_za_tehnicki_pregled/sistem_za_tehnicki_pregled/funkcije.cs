@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 /*
 fajl sa vozilima:
-kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,tablica
+kategorija,potkategorija,jmb,marka,model,godiste,kubikaza,brojSasije,stiker,datumReg,prosaoTp,tablica,registracija,datumTehnickog
 
 fajl sa nalozima admin:
 korIme,lozinka,ime,prezime

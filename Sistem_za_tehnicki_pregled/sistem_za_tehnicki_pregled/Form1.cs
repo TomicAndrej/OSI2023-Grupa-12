@@ -10,6 +10,7 @@ namespace sistem_za_tehnicki_pregled
         public Form1()
         {
             InitializeComponent();
+            ProvjeraTehnickogIRegistracije();
             InicijalizujPodatke();
             KategorijaComboBox.DataSource = new BindingSource(vozilaKategorije, null);
             KategorijaComboBox.DisplayMember = "Key";
@@ -877,6 +878,37 @@ namespace sistem_za_tehnicki_pregled
             PrikazStatistikePanel.Visible = false;
         }
 
+        public void ProvjeraTehnickogIRegistracije()
+        {
+            string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt");
+            bool pomjena = false;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i].Split(",")[12] == "True")
+                {
+                    DateTime datumRegistracije = DateTime.Parse(lines[i].Split(",")[9]);
+                    if (datumRegistracije < DateTime.Now)
+                    {
+                        lines[i].Split(",")[12] = "False";
+                        pomjena = true;
+                    }
+                }
+                if (lines[i].Split(",")[10] == "True")
+                {
+                    DateTime datumTehnickog = DateTime.Parse(lines[i].Split(",")[13]);
+                    if (datumTehnickog.AddMonths(1) < DateTime.Now)
+                    {
+                        lines[i].Split(",")[10] = "False";
+                        pomjena = true;
+                    }
+                }
+            }
+            if (pomjena)
+            {
+                File.WriteAllLines("..\\..\\..\\..\\..\\Fajlovi\\vozila.txt", lines);
+            }
+        }
+
         bool provjeraTehnickogPregleda(string line, int rBrReda)
         {
             string[] podaci = line.Split(',');
@@ -891,7 +923,7 @@ namespace sistem_za_tehnicki_pregled
             }
             else if (podaci[10] == "True")
             {
-                DateTime.TryParseExact(podaci[9], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime datumTehnickog);
+                DateTime.TryParseExact(podaci[13], "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime datumTehnickog);
                 if (datumTehnickog.AddMonths(1) < DateTime.Now)
                 {
                     novaLinija += "False,";
