@@ -163,7 +163,7 @@ namespace sistem_za_registraciju_vozila
             funkcije f = new funkcije();
             if (f.provjeraLogInPodataka(KorisnickoImeTextBoxLogin.Text, LozinkaTextBoxLogin.Text, "..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
             {
-                //MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LogovanKlijentPanel.Visible = true;
                 LogovanKlijentPanel.BringToFront();
                 IndikatorNaKomStePanelu.Text = "Klijent: " + KorisnickoImeTextBoxLogin.Text;
@@ -516,227 +516,6 @@ namespace sistem_za_registraciju_vozila
             PregledPostojecihNalogaPanel.Visible = false;
         }
 
-        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        private void button_zakazivanjeTehnickog_Click(object sender, EventArgs e)
-        {
-            panel_zakazivanjeTermina1.Visible = !panel_zakazivanjeTermina1.Visible;
-            button_zakazivanjeTermina1_pokreni.Enabled = true;
-            textBox_zakazivanjeTermina1_brojSasije.Enabled = true;
-        }
-
-        private void button_zakazivanjeTermina1_otkazi_click(object sender, EventArgs e)
-        {
-            textBox_zakazivanjeTermina1_brojSasije.Text = string.Empty;
-            textBox_zakazivanjeTermina2_kategorija.Text = string.Empty;
-            textBox_zakazivanjeTermina2_potkategorija.Text = string.Empty;
-            textBox_zakazivanjeTermina2_marka.Text = string.Empty;
-            textBox_zakazivanjeTermina2_model.Text = string.Empty;
-            textBox_zakazivanjeTermina2_godiste.Text = string.Empty;
-            textBox_zakazivanjeTermina2_kubikaza.Text = string.Empty;
-            textBox_zakazivanjeTermina2_stiker.Text = string.Empty;
-            textBox_zakazivanjeTermina2_rokRegistracije.Text = string.Empty;
-            dateTimePicker_zakazivanjeTermina3.Value = DateTime.Now;
-            monthCalendar_zakazivanjeTermina3.SelectionStart = DateTime.Today;
-            monthCalendar_zakazivanjeTermina3.SelectionEnd = DateTime.Today;
-            panel_zakazivanjeTermina1.Visible = false;
-            panel_zakazivanjeTermina3.Visible = false;
-            panel_zakazivanjeTermina2.Visible = false;
-        }
-
-        private void button_zakazivanjeTermina3_zakaziTermin_click(object sender, EventArgs e)
-        {
-            string uneseniBrojSasije = textBox_zakazivanjeTermina1_brojSasije.Text;
-
-            funkcije funkcije = new funkcije();
-            bool voziloPostoji = funkcije.PretragaVozilaUFajluVozila(uneseniBrojSasije);
-
-            DateTime selectedDate = monthCalendar_zakazivanjeTermina3.SelectionStart;
-            string selectedDateFormatted = selectedDate.ToString("dd/MM/yyyy");
-
-            DateTime selectedTime = dateTimePicker_zakazivanjeTermina3.Value;
-            string selectedTimeFormatted = selectedTime.ToString("HH:mm");
-            //TODO radnik mora unijeti jmb klijenta...(kod klijentskog zakazivanja se automatski uzima jmb klijenta funkcije.PronadjiJmbNaOsnovuNaloga(trenutniNalog))
-
-            if (voziloPostoji)
-            {
-                if (funkcije.ZakaziTerminVoziloPostoji(uneseniBrojSasije, selectedDateFormatted, selectedTimeFormatted))
-                {
-                    textBox_zakazivanjeTermina1_brojSasije.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_kategorija.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_potkategorija.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_marka.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_model.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_godiste.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_kubikaza.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_stiker.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_rokRegistracije.Text = string.Empty;
-                    dateTimePicker_zakazivanjeTermina3.Value = DateTime.Now;
-                    monthCalendar_zakazivanjeTermina3.SelectionStart = DateTime.Today;
-                    monthCalendar_zakazivanjeTermina3.SelectionEnd = DateTime.Today;
-                    panel_zakazivanjeTermina1.Visible = false;
-                    panel_zakazivanjeTermina3.Visible = false;
-                    panel_zakazivanjeTermina2.Visible = false;
-                }
-            }
-            else
-            {
-                string jmbKlijenta = Interaction.InputBox("Unesite JMB klijenta", "JMB klijenta", "jmb", -1, -1);
-                if (funkcije.ZakaziTermin(jmbKlijenta, selectedDateFormatted, selectedTimeFormatted, textBox_zakazivanjeTermina2_kategorija.Text, textBox_zakazivanjeTermina2_potkategorija.Text, textBox_zakazivanjeTermina2_marka.Text, textBox_zakazivanjeTermina2_model.Text, textBox_zakazivanjeTermina2_godiste.Text, textBox_zakazivanjeTermina2_kubikaza.Text, uneseniBrojSasije, textBox_zakazivanjeTermina2_stiker.Text, textBox_zakazivanjeTermina2_rokRegistracije.Text))
-                {
-                    textBox_zakazivanjeTermina1_brojSasije.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_kategorija.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_potkategorija.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_marka.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_model.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_godiste.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_kubikaza.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_stiker.Text = string.Empty;
-                    textBox_zakazivanjeTermina2_rokRegistracije.Text = string.Empty;
-                    dateTimePicker_zakazivanjeTermina3.Value = DateTime.Now;
-                    monthCalendar_zakazivanjeTermina3.SelectionStart = DateTime.Today;
-                    monthCalendar_zakazivanjeTermina3.SelectionEnd = DateTime.Today;
-                    panel_zakazivanjeTermina1.Visible = false;
-                    panel_zakazivanjeTermina3.Visible = false;
-                    panel_zakazivanjeTermina2.Visible = false;
-                }
-            }
-        }
-        //TODO kod zakazivanja termina bi se trebao dodati jmb klijenta i tablica vozila
-
-        private void button_zakazivanjeTermina1_pokreni_Click(object sender, EventArgs e)
-        {
-            string uneseniBrojSasije = textBox_zakazivanjeTermina1_brojSasije.Text;
-            funkcije funkcije = new funkcije();
-            bool voziloImaTermin = funkcije.ProvjeraTerminaDatogVozila(uneseniBrojSasije);
-
-            if (voziloImaTermin)
-            {
-                MessageBox.Show("Ovo vozilo već ima zakazan termin");
-            }
-            else
-            {
-                bool voziloPostoji = funkcije.PretragaVozilaUFajluVozila(uneseniBrojSasije);
-                if (!voziloPostoji)
-                {
-                    panel_zakazivanjeTermina2.Visible = true;
-                }
-                else
-                {
-                    panel_zakazivanjeTermina3.Visible = true;
-                }
-                button_zakazivanjeTermina1_pokreni.Enabled = false;
-                textBox_zakazivanjeTermina1_brojSasije.Enabled = false;
-            }
-        }
-        private void textBox_zakazivanjeTermina1_brojSasije_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                string uneseniBrojSasije = textBox_zakazivanjeTermina1_brojSasije.Text;
-                funkcije funkcije = new funkcije();
-                bool voziloImaTermin = funkcije.ProvjeraTerminaDatogVozila(uneseniBrojSasije);
-
-                if (voziloImaTermin)
-                {
-                    MessageBox.Show("Ovo vozilo vec ima zakazan termin");
-                }
-                else
-                {
-                    bool voziloPostoji = funkcije.PretragaVozilaUFajluVozila(uneseniBrojSasije);
-                    if (!voziloPostoji)
-                    {
-                        panel_zakazivanjeTermina2.Visible = true;
-                    }
-                    else
-                    {
-                        panel_zakazivanjeTermina3.Visible = true;
-                    }
-                }
-
-                e.Handled = true; // Prevent the "ding" sound
-            }
-        }
-
-        private void button_zakazivanjeTermina2_dalje_Click(object sender, EventArgs e)
-        {
-            panel_zakazivanjeTermina3.Visible = true;
-            panel_zakazivanjeTermina2.Visible = false;
-        }
-
-        private void button_zakazivanjeTermina3_nazad_Click(object sender, EventArgs e)
-        {
-            panel_zakazivanjeTermina3.Visible = false;
-            panel_zakazivanjeTermina2.Visible = true;
-        }
-
-        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        private void button_obavljanjeTehnickog_Click(object sender, EventArgs e)
-        {
-            funkcije funkcije = new funkcije();
-            listBox_obavljanjeTehnickog.DataSource = funkcije.GetAllTermini();
-            panel_obavljanjeTehnickog.Visible = !panel_obavljanjeTehnickog.Visible;
-        }
-
-        private void button_obavljanjeTehnickog_otkazi_Click(object sender, EventArgs e)
-        {
-            panel_obavljanjeTehnickog.Visible = !panel_obavljanjeTehnickog.Visible;
-        }
-
-        private void listBox_obavljanjeTehnickog_DoubleClick(object sender, EventArgs e)
-        {
-            if (listBox_obavljanjeTehnickog.SelectedIndex != -1)
-            {
-                string selected = listBox_obavljanjeTehnickog.SelectedItem.ToString();
-                string[] selectedSplit = selected.Split(',');
-                string brojSasije = selectedSplit[4].Split(':')[1];
-                string datum = selectedSplit[0].Split(':')[1];
-                string vrijeme = selectedSplit[1].Split(':')[1];
-
-                funkcije funkcije = new funkcije();
-                bool uspjesno = funkcije.ObaviTehnicki(brojSasije, datum, vrijeme);
-
-                if (uspjesno)
-                {
-                    MessageBox.Show("Uspjesno obavljen tehnicki pregled");
-                    funkcije.IzdajPotvrduTP(brojSasije);
-                }
-                else
-                {
-                    MessageBox.Show("Niste prosli tehnicki pregled");
-                }
-                //funkcije.RemoveTermin(brojSasije);
-                listBox_obavljanjeTehnickog.DataSource = funkcije.GetAllTermini();
-            }
-        }
-
-        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        private void button_prikazArhive_Click(object sender, EventArgs e)
-        {
-            panel_prikazArhive.Visible = !panel_prikazArhive.Visible;
-            funkcije funkcije = new funkcije();
-            listBox_prikazArhive.DataSource = funkcije.listaSvihIzvjestajaOIspravnosti();
-        }
-
-        private void button_prikazArhive_nazad_Click(object sender, EventArgs e)
-        {
-            panel_prikazArhive.Visible = !panel_prikazArhive.Visible;
-        }
-
-        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        private void button_pregledIstorije_Click(object sender, EventArgs e)
-        {
-            panel_pregledIstorije.Visible = !panel_pregledIstorije.Visible;
-            funkcije funkcije = new funkcije();
-            listBox_pregledIstorije.DataSource = funkcije.listaIstorijeTP();
-        }
-
-        private void button_pregledIstorije_nazad_Click(object sender, EventArgs e)
-        {
-            panel_pregledIstorije.Visible = !panel_pregledIstorije.Visible;
-        }
 
         private void NazadSaPanelaZaBrisanjeAdministratorskihNalogaNaPanelPrijavljenogAdministratoraButton_Click(object sender, EventArgs e)
         {
@@ -791,7 +570,6 @@ namespace sistem_za_registraciju_vozila
                 //MessageBox.Show("Uspješno ste se prijavili!", "Prijava", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RadnikPanel.Visible = true;
                 RadnikPanel.BringToFront();
-                //AdministratorPanel.Visible = false;
                 IndikatorNaKomStePanelu.Text = "Radnik: " + KorisnickoImeRadnikaTextBoxLogin.Text;
                 trenutniNalog = KorisnickoImeRadnikaTextBoxLogin.Text;
                 KorisnickoImeRadnikaTextBoxLogin.Text = "";
@@ -812,5 +590,229 @@ namespace sistem_za_registraciju_vozila
             KlijentPanel.Visible = false;
             IzborniPanel.Visible = true;
         }
+
+        // REGISTRACIJA VOZILA RADNIK-----------------------------------------------------------------------
+
+        private void button_registracijaVozila_Click(object sender, EventArgs e)
+        {
+            panel_registracijaVozila.Visible = true;
+        }
+
+        private void button_registracijaVozila_otkazi_Click(object sender, EventArgs e)
+        {
+            panel_registracijaVozila.Visible = false;
+            textBox_registracijaVozila_brojSasije.Text = string.Empty;
+            panel1_placanjeKazne.Visible = false;
+            panel_registracijaVozila_provjeraKazne.Visible = true;
+            label_registracijaVozila_generisanaTablica.Text = string.Empty;
+            label_registracijaVozila_generisanStiker.Text = string.Empty;
+        }
+
+        private void button_registracijaVozila_registruj_Click(object sender, EventArgs e)
+        {
+            funkcije funkcije = new funkcije();
+            if (textBox_registracijaVozila_brojSasije.Text == string.Empty)
+            {
+                MessageBox.Show("Niste unijeli broj šasije!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!funkcije.provjeraBrojaSasije(textBox_registracijaVozila_brojSasije.Text))
+            {
+                MessageBox.Show("Vozilo sa ovim brojem šasije ne postoji!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (panel_registracijaVozila_provjeraKazne.Visible == true)
+            {
+                if (funkcije.DaLiPostojiFajlSaKaznama(funkcije.PronadjiJmbPrekoBrojaSasije(textBox_registracijaVozila_brojSasije.Text)))
+                {
+                    listaKazni.Items.Clear();
+                    // TODO Dodati string koji cuva maticni broj logovanog klijenta
+                    string maticniBroj = funkcije.PronadjiJmbPrekoBrojaSasije(textBox_registracijaVozila_brojSasije.Text);
+
+                    using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\kazne\\" + maticniBroj + ".txt"))
+                    {
+                        while (!sr.EndOfStream)
+                        {
+                            string line = sr.ReadLine();
+                            string[] podaci = line.Split(',');
+                            listaKazni.Items.Add(podaci[0] + " - Cijena: " + podaci[1] + "KM");
+                        }
+                    }
+
+                    if (listaKazni.Items.Count == 0)
+                    {
+                        panel_registracijaVozila_provjeraKazne.Visible = false;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vlasnik vozila " + textBox_registracijaVozila_brojSasije.Text + " ima neplaćenih kazni.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        panel1_placanjeKazne.Visible = true;
+                    }
+                }
+                else
+                {
+                    panel_registracijaVozila_provjeraKazne.Visible = false;
+                }
+            }
+            else
+            {
+                funkcije.registracijaVozila(textBox_registracijaVozila_brojSasije.Text, label_registracijaVozila_generisanStiker.Text, label_registracijaVozila_generisanaTablica.Text);
+                textBox_registracijaVozila_brojSasije.Text = string.Empty;
+                label_registracijaVozila_generisanaTablica.Text = string.Empty;
+                label_registracijaVozila_generisanStiker.Text = string.Empty;
+                panel_registracijaVozila_provjeraKazne.Visible = true;
+                panel1_placanjeKazne.Visible = false;
+            }
+        }
+        private void textBox_registracijaVozila_brojSasije_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                //trigger button click event
+                button_registracijaVozila_registruj_Click(sender, e);
+
+                e.Handled = true; // Prevent the "ding" sound
+            }
+        }
+
+        private void button_registracijaVozila_generisiStiker_Click(object sender, EventArgs e)
+        {
+            funkcije funkcije = new funkcije();
+            label_registracijaVozila_generisanStiker.Text = funkcije.generisiStiker();
+        }
+
+        //---------------------------------------------------------------------------------------------------
+
+        private void listaKazni_DoubleClick(object sender, EventArgs e)
+        {
+            funkcije funkcije = new funkcije();
+            if (listaKazni.SelectedIndex != -1)
+            {
+
+                DialogResult result = MessageBox.Show("Da li želite platiti kaznu?", "Plaćanje kazne", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    string jmb = funkcije.PronadjiJmbPrekoBrojaSasije(textBox_registracijaVozila_brojSasije.Text);
+
+                    string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\kazne\\" + jmb + ".txt");
+                    string pomFajl = Path.GetTempFileName();
+                    using (StreamWriter sw = new StreamWriter(pomFajl))
+                    {
+                        foreach (string line in lines)
+                        {
+                            string[] parts = line.Split(',');;
+                            if (parts.Length > 0 && parts[0] == listaKazni.SelectedItem.ToString().Split('-')[0].Trim())
+                            {
+                                continue;
+                            }
+                            sw.WriteLine(line);
+                        }
+                    }
+                    File.Delete("..\\..\\..\\..\\..\\kazne\\" + jmb + ".txt");
+                    File.Move(pomFajl, "..\\..\\..\\..\\..\\kazne\\" + jmb + ".txt");
+
+                    if (listaKazni.Items.Count == 0)
+                    {
+                        MessageBox.Show("Nemate kazni za plaćanje!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        panel1_placanjeKazne.Visible = false;
+                    }
+                    listaKazni.Items.RemoveAt(listaKazni.SelectedIndex);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Niste izabrali kaznu", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //GENRISANJE TABLICE--------------------------------------------------------------------------------------------------
+
+        private void button_registracijaVozila_generisiTablicu_Click(object sender, EventArgs e)
+        {
+            panel_generisanjeTablice.Visible = true;
+        }
+
+        private void button_personalizovaneTablice_Click(object sender, EventArgs e)
+        {
+            GenerisiTabliceDugme.Visible = true;
+            TriCifreLabela.Visible = true;
+            button_nasumicneTablice.Enabled = false;
+            CustomUnos.Visible = true;
+        }
+
+        private void CustomUnos_TextChanged(object sender, EventArgs e)
+        {
+            if (CustomUnos.Text.Length == 3)
+            {
+                GenerisiTabliceDugme.Enabled = true;
+            }
+        }
+
+        private void CustomUnos_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+                MessageBox.Show("Smijete unositi samo cifre!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else if (!char.IsControl(e.KeyChar) && CustomUnos.Text.Length > 2)
+            {
+                e.Handled = true;
+                MessageBox.Show("Mozete unijeti samo 3 cifre!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void RegistarskeTablice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GenerisiTabliceDugme_Click(object sender, EventArgs e)
+        {
+            funkcije funkcije = new funkcije();
+            Random random = new Random();
+            string tablice;
+            char[] slova = ['A', 'E', 'T', 'K', 'J', 'O', 'M'];
+            do
+            {
+                if (GenerisiTabliceDugme.Visible == true && TriCifreLabela.Visible == true && CustomUnos.Visible == true)
+                {
+                    char[] randomSlova = { slova[random.Next(0, slova.Length - 1)], slova[random.Next(0, slova.Length - 1)] };
+                    char[] randomBrojevi = [(char)random.Next('0', '9' + 1), (char)random.Next('0', '9' + 1)];
+                    tablice = $"{randomSlova[1]}{randomBrojevi[0]}{randomBrojevi[1]}-{randomSlova[0]}-{CustomUnos.Text}";
+                }
+                else
+                {
+                    char[] randomSlova = [slova[random.Next(slova.Length)], slova[random.Next(slova.Length)]];
+                    char[] randomBrojevi = [(char)random.Next('0', '9' + 1), (char)random.Next('0', '9' + 1), (char)random.Next('0', '9' + 1), (char)random.Next('0', '9' + 1), (char)random.Next('0', '9' + 1)];
+                    tablice = $"{randomSlova[1]}{randomBrojevi[0]}{randomBrojevi[1]}-{randomSlova[0]}-{randomBrojevi[2]}{randomBrojevi[3]}{randomBrojevi[4]}";
+                }
+            } while (funkcije.provjeriTablice(tablice));
+            RegistarskeTablice.Text = tablice;
+            label_registracijaVozila_generisanaTablica.Text = tablice;
+            RegistarskeTablice.Visible = true;
+        }
+
+        private void button_nasumicneTablice_Click(object sender, EventArgs e)
+        {
+            button_personalizovaneTablice.Enabled = false;
+            GenerisiTabliceDugme.Enabled = true;
+            GenerisiTabliceDugme.Visible = true;
+        }
+
+        private void button_generisanjeTablice_nazad_Click(object sender, EventArgs e)
+        {
+            panel_generisanjeTablice.Visible = false;
+            GenerisiTabliceDugme.Visible = false;
+            TriCifreLabela.Visible = false;
+            CustomUnos.Visible = false;
+            GenerisiTabliceDugme.Enabled = false;
+            RegistarskeTablice.Text = "";
+            RegistarskeTablice.Visible = false;
+            button_nasumicneTablice.Enabled = true;
+            button_personalizovaneTablice.Enabled = true;
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------
     }
 }

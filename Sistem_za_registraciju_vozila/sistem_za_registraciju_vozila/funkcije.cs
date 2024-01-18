@@ -38,6 +38,7 @@ namespace sistem_za_registraciju_vozila
         private string vozilaFilePath = "..\\..\\..\\..\\..\\Fajlovi\\vozila.txt";
         private string izvjestajiOIspravnostiFilePath = "..\\..\\..\\..\\..\\Fajlovi\\izvjestajiOIspravnosti.txt";
         private string istorijaTPFilePath = "..\\..\\..\\..\\..\\Fajlovi\\istorijaTP.txt";
+        private string kazneFilePath = "..\\..\\..\\..\\..\\Fajlovi\\kazne.txt";
         public bool provjeraKorisnickogImena(string username, string putanja)
         {
             if (username.Length < 5 || username.Length > 32)
@@ -801,11 +802,131 @@ return true;
             }
             return istorija;
         }
+        public void registracijaVozila(string brojSasije, string stiker, string tablica)
+        {
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            // Create a temporary file to store updated account information
+            string tempFile = Path.GetTempFileName();
+
+            using (StreamWriter writer = new StreamWriter(tempFile))
+            {
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(',');
+
+                    // Check if the line contains the provided username
+                    if (parts.Length > 0 && parts[7] == brojSasije)
+                    {
+                        parts[8] = stiker;
+                        parts[11] = tablica;
+                        parts[12] = "True";
+                        writer.WriteLine(string.Join(",", parts));
+                    }
+                    else
+                    {
+                        // Write other lines to the temporary file
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+            // TODO da li se treba dodati vozilo u fajl vozila ako nije do tada postojalo (jer na potvrdi o uspjesnom
+            // tehnickom pregledu pise tablica a ako vozilo nije u fajlu vozila ne mozemo doci do te tablice
+
+            // Replace the original file with the temporary file
+            File.Delete(vozilaFilePath);
+            File.Move(tempFile, vozilaFilePath);
+            MessageBox.Show("Vozilo uspješno registrovano!");
+        }
+        public string PronadjiJmbPrekoBrojaSasije(string brojSasije)
+        {
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[7] == brojSasije)
+                {
+                    return parts[2];
+                }
+            }
+            return "";
+        }
+        
+        public bool provjeraBrojaSasije(string brojSasije)
+        {
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[7] == brojSasije)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public string generisiStiker()
+        {
+            Random random = new Random();
+            string stiker = "";
+            for (int i = 0; i < 10; i++)
+            {
+                stiker += random.Next(0, 10).ToString();
+            }
+
+            //check if stiker already exists
+            bool exists = false;
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[8] == stiker)
+                {
+                    exists = true;
+                }
+            }
+            if (exists)
+            {
+                stiker = generisiStiker();
+            }
+            else
+            {
+                return stiker;
+            }
+            return stiker;
+        }
+        public bool DaLiPostojiFajlSaKaznama(string jmb)
+        {
+            string[] lines = File.ReadAllLines(kazneFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[0] == jmb)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool provjeriTablice(string tablice)
+        {
+            string[] lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length > 0 && parts[11] == tablice)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public List<string> listaSvihVozila()
         {
             string[] lines = File.ReadAllLines(vozilaFilePath);
             List<string> vozila = new List<string>();
-
             foreach (string line in lines)
             {
                 string[] parts = line.Split(',');
