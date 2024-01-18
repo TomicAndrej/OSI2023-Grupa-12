@@ -953,5 +953,82 @@ return true;
             }
             return "";
         }
+
+        public void ChangeLineInFile(string filePath, int lineNumber, string newLineValue)
+        {
+            // Čitanje svih linija iz fajla
+            string[] lines = File.ReadAllLines(filePath);
+
+            // Provera da li je zadati red unutar opsega fajla
+            if (lineNumber >= 0 && lineNumber <= lines.Length - 1)
+            {
+                // Postavljanje nove vrednosti linije
+                lines[lineNumber] = newLineValue;
+
+                // Pisanje izmenjenih linija nazad u fajl
+                using (StreamWriter writer = new StreamWriter(filePath))
+                {
+                    foreach (string line in lines)
+                    {
+                        writer.WriteLine(line);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Zadati red ne postoji u fajlu.");
+            }
+        }
+        public void DeleteLineFromFile(string filePath, int lineNumber)
+        {
+            // Čitanje svih linija iz fajla
+            List<string> lines = new List<string>(File.ReadAllLines(filePath));
+
+            // Provera da li je zadati red unutar opsega fajla
+            if (lineNumber >= 0 && lineNumber <= lines.Count - 1)
+            {
+                // Brisanje linije
+                lines.RemoveAt(lineNumber);
+
+                // Pisanje izmenjenih linija nazad u fajl
+                File.WriteAllLines(filePath, lines);
+            }
+            else
+            {
+                Console.WriteLine("Zadati red ne postoji u fajlu.");
+            }
+        }
+        public List<string> ListaVozilaOdNaloga(string nalog)
+        {
+            List<string> vozila = new List<string>();
+            string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt");
+            string jmb = "";
+            // get jmb based on username
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+
+                if (parts.Length > 0 && parts[0] == nalog)
+                {
+                    jmb = parts[6];
+                }
+            }
+            if (jmb == "") return vozila;
+
+
+            lines = File.ReadAllLines(vozilaFilePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+
+                if (parts.Length > 0 && parts[2] == jmb)
+                {
+                    vozila.Add($"{parts[3]} {parts[4]} {parts[5]}, Broj šasije: {parts[7]}, Broj tablice: {parts[11]}");
+                }
+            }
+            return vozila;
+        }
+
+
     }
 }

@@ -157,6 +157,26 @@ namespace sistem_za_registraciju_vozila
             AdministratorButton = new Button();
             RadnikButton = new Button();
             KlijentButton = new Button();
+            button_to_pregledPodatakaoRegistracijama = new Button();
+            PromjenaPodatakaButton = new Button();
+            button_to_prikazStatusaoKaznama = new Button();
+            BrisanjeNalogaButton = new Button();
+            PromjenaPodatakaPanel = new Panel();
+            PromjenaKorisnickogImenaRadioButton = new RadioButton();
+            PromjenaLozinkeRadioButton = new RadioButton();
+            PromjenaBrojaLicneKarteRadioButton = new RadioButton();
+            PromjenaBrojaZiroRacunaRadioButton = new RadioButton();
+            PotvrdiPromjenuPodatakaButton = new Button();
+            PotvrdaPromjeneLozinkeTextBox = new TextBox();
+            PromjenaPodatakaTextBox = new TextBox();
+            PotvrdaPromjeneLozinkeLabel = new Label();
+            PromjenaPodatakaLabel = new Label();
+            PromjenaPodatakaButton = new Button();
+            NazadSaPromjenePodatakaNaLogovanogKlijenta = new Button();
+            panel_pregledPodatakaoRegistracijama = new Panel();
+            label_pregledPodatakaoRegistracijama = new Label();
+            listbox_pregledPodatakaoRegistracijama = new ListBox();
+            button_pregledPodatakaoRegistracijama_nazad = new Button();
             IzborniPanel.SuspendLayout();
             KlijentPanel.SuspendLayout();
             RegistracijaNalogaPanel.SuspendLayout();
@@ -174,6 +194,8 @@ namespace sistem_za_registraciju_vozila
             panel_registracijaVozila_provjeraKazne.SuspendLayout();
             panel1_placanjeKazne.SuspendLayout();
             panel_generisanjeTablice.SuspendLayout();
+            PromjenaPodatakaPanel.SuspendLayout();
+            panel_pregledPodatakaoRegistracijama.SuspendLayout();
             SuspendLayout();
             // 
             // IzborniPanel
@@ -475,12 +497,98 @@ namespace sistem_za_registraciju_vozila
             // 
             // LogovanKlijentPanel
             // 
+            LogovanKlijentPanel.Controls.Add(panel_pregledPodatakaoRegistracijama);
             LogovanKlijentPanel.Controls.Add(OdjavaLogovanogKlijentaButton);
+            LogovanKlijentPanel.Controls.Add(button_to_pregledPodatakaoRegistracijama);
+            LogovanKlijentPanel.Controls.Add(PromjenaPodatakaButton);
+            LogovanKlijentPanel.Controls.Add(button_to_prikazStatusaoKaznama);
+            LogovanKlijentPanel.Controls.Add(BrisanjeNalogaButton);
+            LogovanKlijentPanel.Controls.Add(PromjenaPodatakaPanel);
             LogovanKlijentPanel.Location = new Point(0, 0);
             LogovanKlijentPanel.Name = "LogovanKlijentPanel";
             LogovanKlijentPanel.Size = new Size(800, 450);
             LogovanKlijentPanel.TabIndex = 9;
             LogovanKlijentPanel.Visible = false;
+            //
+            // panel_pregledPodatakaoRegistracijama
+            //
+            panel_pregledPodatakaoRegistracijama.Controls.Add(label_pregledPodatakaoRegistracijama);
+            panel_pregledPodatakaoRegistracijama.Controls.Add(listbox_pregledPodatakaoRegistracijama);
+            panel_pregledPodatakaoRegistracijama.Controls.Add(button_pregledPodatakaoRegistracijama_nazad);
+            panel_pregledPodatakaoRegistracijama.Dock = DockStyle.Fill;
+            panel_pregledPodatakaoRegistracijama.Location = new Point(0, 0);
+            panel_pregledPodatakaoRegistracijama.Name = "AdministratorPanel";
+            panel_pregledPodatakaoRegistracijama.Size = new Size(800, 450);
+            panel_pregledPodatakaoRegistracijama.TabIndex = 20;
+            panel_pregledPodatakaoRegistracijama.Visible = false;
+            // 
+            // button_pregledPodatakaoRegistracijama_nazad
+            // 
+            button_pregledPodatakaoRegistracijama_nazad.Location = new Point(694, 409);
+            button_pregledPodatakaoRegistracijama_nazad.Name = "button_pregledPodatakaoRegistracijama_nazad";
+            button_pregledPodatakaoRegistracijama_nazad.Size = new Size(94, 29);
+            button_pregledPodatakaoRegistracijama_nazad.TabIndex = 6;
+            button_pregledPodatakaoRegistracijama_nazad.Text = "Nazad";
+            button_pregledPodatakaoRegistracijama_nazad.UseVisualStyleBackColor = true;
+            button_pregledPodatakaoRegistracijama_nazad.Click += button_pregledPodatakaoRegistracijama_nazad_Click;
+            // 
+            // listbox_pregledPodatakaoRegistracijama
+            // 
+            listbox_pregledPodatakaoRegistracijama.FormattingEnabled = true;
+            listbox_pregledPodatakaoRegistracijama.HorizontalScrollbar = true;
+            listbox_pregledPodatakaoRegistracijama.Location = new Point(50, 120);
+            listbox_pregledPodatakaoRegistracijama.Name = "listbox_pregledPodatakaoRegistracijama";
+            listbox_pregledPodatakaoRegistracijama.Size = new Size(400, 260);
+            listbox_pregledPodatakaoRegistracijama.TabIndex = 1;
+            // 
+            // label_pregledPodatakaoRegistracijama
+            // 
+            label_pregledPodatakaoRegistracijama.AutoSize = true;
+            label_pregledPodatakaoRegistracijama.Location = new Point(50, 65);
+            label_pregledPodatakaoRegistracijama.Name = "label_pregledPodatakaoRegistracijama";
+            label_pregledPodatakaoRegistracijama.Size = new Size(100, 20);
+            label_pregledPodatakaoRegistracijama.TabIndex = 0;
+            label_pregledPodatakaoRegistracijama.Text = "Vozila registrovana na ovog vlasnika:";
+            // 
+            // button_to_pregledPodatakaoRegistracijama
+            // 
+            button_to_pregledPodatakaoRegistracijama.Location = new Point(450, 200);
+            button_to_pregledPodatakaoRegistracijama.Name = "button_to_pregledPodatakaoRegistracijama";
+            button_to_pregledPodatakaoRegistracijama.Size = new Size(200, 60); ;
+            button_to_pregledPodatakaoRegistracijama.TabIndex = 8;
+            button_to_pregledPodatakaoRegistracijama.Text = "Pregled podataka o vlastitim registracijama";
+            button_to_pregledPodatakaoRegistracijama.UseVisualStyleBackColor = true;
+            button_to_pregledPodatakaoRegistracijama.Click += button_to_pregledPodatakaoRegistracijama_Click;
+            // 
+            // PromjenaPodatakaButton
+            // 
+            PromjenaPodatakaButton.Location = new Point(150, 70);
+            PromjenaPodatakaButton.Name = "PromjenaPodatakaButton";
+            PromjenaPodatakaButton.Size = new Size(200, 60);
+            PromjenaPodatakaButton.TabIndex = 8;
+            PromjenaPodatakaButton.Text = "Promjena podataka";
+            PromjenaPodatakaButton.UseVisualStyleBackColor = true;
+            PromjenaPodatakaButton.Click += PromjenaPodatakaButton_Click;
+            // 
+            // button_to_prikazStatusaoKaznama
+            // 
+            button_to_prikazStatusaoKaznama.Location = new Point(150, 200);
+            button_to_prikazStatusaoKaznama.Name = "button_to_prikazStatusaoKaznama";
+            button_to_prikazStatusaoKaznama.Size = new Size(200, 60);
+            button_to_prikazStatusaoKaznama.TabIndex = 8;
+            button_to_prikazStatusaoKaznama.Text = "Prikaz statusa o kaznama";
+            button_to_prikazStatusaoKaznama.UseVisualStyleBackColor = true;
+            button_to_prikazStatusaoKaznama.Click += button_to_prikazStatusaoKaznama_Click;
+            // 
+            // BrisanjeNalogaButton
+            // 
+            BrisanjeNalogaButton.Location = new Point(450, 70);
+            BrisanjeNalogaButton.Name = "BrisanjeNalogaButton";
+            BrisanjeNalogaButton.Size = new Size(200, 60);
+            BrisanjeNalogaButton.TabIndex = 8;
+            BrisanjeNalogaButton.Text = "Brisanje naloga";
+            BrisanjeNalogaButton.UseVisualStyleBackColor = true;
+            BrisanjeNalogaButton.Click += BrisanjeNalogaButton_Click;
             // 
             // OdjavaLogovanogKlijentaButton
             // 
@@ -1450,6 +1558,126 @@ namespace sistem_za_registraciju_vozila
             KlijentButton.UseVisualStyleBackColor = true;
             KlijentButton.Click += KlijentButton_Click;
             // 
+            // PromjenaPodatakaPanel
+            // 
+            PromjenaPodatakaPanel.Controls.Add(NazadSaPromjenePodatakaNaLogovanogKlijenta);
+            PromjenaPodatakaPanel.Controls.Add(PotvrdiPromjenuPodatakaButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaPodatakaTextBox);
+            PromjenaPodatakaPanel.Controls.Add(PotvrdaPromjeneLozinkeTextBox);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaBrojaZiroRacunaRadioButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaBrojaLicneKarteRadioButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaLozinkeRadioButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaKorisnickogImenaRadioButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaPodatakaLabel);
+            PromjenaPodatakaPanel.Controls.Add(PotvrdaPromjeneLozinkeLabel);
+            PromjenaPodatakaPanel.Dock = DockStyle.Fill;
+            PromjenaPodatakaPanel.Location = new Point(0, 0);
+            PromjenaPodatakaPanel.Name = "PromjenaPodatakaPanel";
+            PromjenaPodatakaPanel.Size = new Size(800, 450);
+            PromjenaPodatakaPanel.TabIndex = 9;
+            PromjenaPodatakaPanel.Visible = false;
+            // 
+            // PromjenaKorisnickogImenaRadioButton
+            // 
+            PromjenaKorisnickogImenaRadioButton.AutoSize = true;
+            PromjenaKorisnickogImenaRadioButton.Location = new Point(111, 141);
+            PromjenaKorisnickogImenaRadioButton.Name = "PromjenaKorisnickogImenaRadioButton";
+            PromjenaKorisnickogImenaRadioButton.Size = new Size(217, 24);
+            PromjenaKorisnickogImenaRadioButton.TabIndex = 0;
+            PromjenaKorisnickogImenaRadioButton.TabStop = true;
+            PromjenaKorisnickogImenaRadioButton.Text = "Promjena korisničkog imena";
+            PromjenaKorisnickogImenaRadioButton.UseVisualStyleBackColor = true;
+            PromjenaKorisnickogImenaRadioButton.CheckedChanged += PromjenaKorisnickogImenaRadioButton_CheckedChanged;
+            // 
+            // PromjenaLozinkeRadioButton
+            // 
+            PromjenaLozinkeRadioButton.AutoSize = true;
+            PromjenaLozinkeRadioButton.Location = new Point(111, 171);
+            PromjenaLozinkeRadioButton.Name = "PromjenaLozinkeRadioButton";
+            PromjenaLozinkeRadioButton.Size = new Size(144, 24);
+            PromjenaLozinkeRadioButton.TabIndex = 1;
+            PromjenaLozinkeRadioButton.TabStop = true;
+            PromjenaLozinkeRadioButton.Text = "Promjena lozinke";
+            PromjenaLozinkeRadioButton.UseVisualStyleBackColor = true;
+            PromjenaLozinkeRadioButton.CheckedChanged += PromjenaLozinkeRadioButton_CheckedChanged;
+            // 
+            // PromjenaBrojaLicneKarteRadioButton
+            // 
+            PromjenaBrojaLicneKarteRadioButton.AutoSize = true;
+            PromjenaBrojaLicneKarteRadioButton.Location = new Point(111, 201);
+            PromjenaBrojaLicneKarteRadioButton.Name = "PromjenaBrojaLicneKarteRadioButton";
+            PromjenaBrojaLicneKarteRadioButton.Size = new Size(204, 24);
+            PromjenaBrojaLicneKarteRadioButton.TabIndex = 2;
+            PromjenaBrojaLicneKarteRadioButton.TabStop = true;
+            PromjenaBrojaLicneKarteRadioButton.Text = "Promjena broja lične karte";
+            PromjenaBrojaLicneKarteRadioButton.UseVisualStyleBackColor = true;
+            PromjenaBrojaLicneKarteRadioButton.CheckedChanged += PromjenaBrojaLicneKarteRadioButton_CheckedChanged;
+            // 
+            // PromjenaBrojaZiroRacunaRadioButton
+            // 
+            PromjenaBrojaZiroRacunaRadioButton.AutoSize = true;
+            PromjenaBrojaZiroRacunaRadioButton.Location = new Point(111, 231);
+            PromjenaBrojaZiroRacunaRadioButton.Name = "PromjenaBrojaZiroRacunaRadioButton";
+            PromjenaBrojaZiroRacunaRadioButton.Size = new Size(209, 24);
+            PromjenaBrojaZiroRacunaRadioButton.TabIndex = 3;
+            PromjenaBrojaZiroRacunaRadioButton.TabStop = true;
+            PromjenaBrojaZiroRacunaRadioButton.Text = "Promjena broja žiro računa";
+            PromjenaBrojaZiroRacunaRadioButton.UseVisualStyleBackColor = true;
+            PromjenaBrojaZiroRacunaRadioButton.CheckedChanged += PromjenaBrojaZiroRacunaRadioButton_CheckedChanged;
+            // 
+            // PotvrdiPromjenuPodatakaButton
+            // 
+            PotvrdiPromjenuPodatakaButton.Location = new Point(408, 226);
+            PotvrdiPromjenuPodatakaButton.Name = "PotvrdiPromjenuPodatakaButton";
+            PotvrdiPromjenuPodatakaButton.Size = new Size(200, 29);
+            PotvrdiPromjenuPodatakaButton.TabIndex = 5;
+            PotvrdiPromjenuPodatakaButton.Text = "Potvrdi";
+            PotvrdiPromjenuPodatakaButton.UseVisualStyleBackColor = true;
+            PotvrdiPromjenuPodatakaButton.Click += PotvrdiPromjenuPodatakaButton_Click;
+            //
+            // PotvrdaPromjeneLozinkeTextBox
+            //
+            PotvrdaPromjeneLozinkeTextBox.Location = new Point(408, 186);
+            PotvrdaPromjeneLozinkeTextBox.Name = "PotvrdaPromjeneLozinkeTextBox";
+            PotvrdaPromjeneLozinkeTextBox.Size = new Size(200, 27);
+            PotvrdaPromjeneLozinkeTextBox.TabIndex = 4;
+            PotvrdaPromjeneLozinkeTextBox.PasswordChar = '*';
+            PotvrdaPromjeneLozinkeTextBox.Visible = false;
+            // 
+            // PromjenaPodatakaTextBox
+            // 
+            PromjenaPodatakaTextBox.Location = new Point(408, 138);
+            PromjenaPodatakaTextBox.Name = "PromjenaPodatakaTextBox";
+            PromjenaPodatakaTextBox.Size = new Size(200, 27);
+            PromjenaPodatakaTextBox.TabIndex = 4;
+            //
+            // PotvrdaPromjeneLozinkeLabel
+            //
+            PotvrdaPromjeneLozinkeLabel.AutoSize = true;
+            PotvrdaPromjeneLozinkeLabel.Location = new Point(408, 166);
+            PotvrdaPromjeneLozinkeLabel.Name = "PotvrdaPromjeneLozinkeLabel";
+            PotvrdaPromjeneLozinkeLabel.Size = new Size(113, 20);
+            PotvrdaPromjeneLozinkeLabel.Text = "Potvrda lozinke:";
+            PotvrdaPromjeneLozinkeLabel.Visible = false;
+            //
+            // PromjenaPodatakaLabel
+            //
+            PromjenaPodatakaLabel.AutoSize = true;
+            PromjenaPodatakaLabel.Location = new Point(408, 118);
+            PromjenaPodatakaLabel.Name = "PromjenaPodatakaLabel";
+            PromjenaPodatakaLabel.Size = new Size(113, 20);
+            PromjenaPodatakaPanel.Visible = false;
+            // 
+            // NazadSaPromjenePodatakaNaLogovanogKlijenta
+            // 
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Location = new Point(694, 409);
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Name = "NazadSaPromjenePodatakaNaLogovanogKlijenta";
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Size = new Size(94, 29);
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.TabIndex = 8;
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Text = "Nazad";
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.UseVisualStyleBackColor = true;
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Click += NazadSaPromjenePodatakaNaLogovanogKlijenta_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1490,6 +1718,10 @@ namespace sistem_za_registraciju_vozila
             panel1_placanjeKazne.ResumeLayout(false);
             panel_generisanjeTablice.ResumeLayout(false);
             panel_generisanjeTablice.PerformLayout();
+            PromjenaPodatakaPanel.ResumeLayout(false);
+            PromjenaPodatakaPanel.PerformLayout();
+            panel_pregledPodatakaoRegistracijama.ResumeLayout(false);
+            panel_pregledPodatakaoRegistracijama.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -1622,5 +1854,24 @@ namespace sistem_za_registraciju_vozila
         private Button button_personalizovaneTablice;
         private TextBox RegistarskeTablice;
         private Button button_generisanjeTablice_nazad;
+        private Button button_to_pregledPodatakaoRegistracijama;
+        private Button button_to_prikazStatusaoKaznama;
+        private Button BrisanjeNalogaButton;
+        private Button PromjenaPodatakaButton;
+        private Panel PromjenaPodatakaPanel;
+        private RadioButton PromjenaKorisnickogImenaRadioButton;
+        private RadioButton PromjenaLozinkeRadioButton;
+        private RadioButton PromjenaBrojaLicneKarteRadioButton;
+        private RadioButton PromjenaBrojaZiroRacunaRadioButton;
+        private Button PotvrdiPromjenuPodatakaButton;
+        private TextBox PotvrdaPromjeneLozinkeTextBox;
+        private TextBox PromjenaPodatakaTextBox;
+        private Label PotvrdaPromjeneLozinkeLabel;
+        private Label PromjenaPodatakaLabel;
+        private Button NazadSaPromjenePodatakaNaLogovanogKlijenta;
+        private Panel panel_pregledPodatakaoRegistracijama;
+        private Label label_pregledPodatakaoRegistracijama;
+        private ListBox listbox_pregledPodatakaoRegistracijama;
+        private Button button_pregledPodatakaoRegistracijama_nazad;
     }
 }
