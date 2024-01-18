@@ -563,7 +563,7 @@ namespace sistem_za_registraciju_vozila
             // 
             button_to_pregledPodatakaoRegistracijama.Location = new Point(450, 200);
             button_to_pregledPodatakaoRegistracijama.Name = "button_to_pregledPodatakaoRegistracijama";
-            button_to_pregledPodatakaoRegistracijama.Size = new Size(200, 60); ;
+            button_to_pregledPodatakaoRegistracijama.Size = new Size(200, 60);
             button_to_pregledPodatakaoRegistracijama.TabIndex = 8;
             button_to_pregledPodatakaoRegistracijama.Text = "Pregled podataka o vlastitim registracijama";
             button_to_pregledPodatakaoRegistracijama.UseVisualStyleBackColor = true;
