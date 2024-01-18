@@ -826,5 +826,24 @@ return true;
                 Console.WriteLine("Zadati red ne postoji u fajlu.");
             }
         }
+        public void DeleteLineFromFile(string filePath, int lineNumber)
+        {
+            // Čitanje svih linija iz fajla
+            List<string> lines = new List<string>(File.ReadAllLines(filePath));
+
+            // Provera da li je zadati red unutar opsega fajla
+            if (lineNumber >= 0 && lineNumber <= lines.Count - 1)
+            {
+                // Brisanje linije
+                lines.RemoveAt(lineNumber);
+
+                // Pisanje izmenjenih linija nazad u fajl
+                File.WriteAllLines(filePath, lines);
+            }
+            else
+            {
+                Console.WriteLine("Zadati red ne postoji u fajlu.");
+            }
+        }
     }
 }

@@ -64,6 +64,20 @@ namespace sistem_za_tehnicki_pregled
             NazadKlijentButton = new Button();
             LogovanKlijentPanel = new Panel();
             OdjavaLogovanogKlijentaButton = new Button();
+            PromjenaPodatakaButton = new Button();
+            PromjenaPodatakaPanel = new Panel();
+            NazadSaPromjenePodatakaNaLogovanogKlijenta = new Button();
+            PotvrdiPromjenuPodatakaButton = new Button();
+            PromjenaPodatakaTextBox = new TextBox();
+            PotvrdaPromjeneLozinkeTextBox = new TextBox();
+            PromjenaBrojaZiroRacunaRadioButton = new RadioButton();
+            PromjenaBrojaLicneKarteRadioButton = new RadioButton();
+            PromjenaLozinkeRadioButton = new RadioButton();
+            PromjenaKorisnickogImenaRadioButton = new RadioButton();
+            BrisanjeNalogaButton = new Button();
+            ZakazivanjeTerminaTehnickogButton = new Button();
+            ZakazivanjeTerminaTehnickogPanel = new Panel();
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta = new Button();
             AdministratorPanel = new Panel();
             KorisnickoImeAdministratorLabelLogin = new Label();
             LozinkaAdministratorLabelLogin = new Label();
@@ -78,6 +92,8 @@ namespace sistem_za_tehnicki_pregled
             NazadSaPanelaZaPracenjeStatistikeNaPanelPrijavljenogAdministratoraButton = new Button();
             VozilaKojaSuProslaTehnickiButton = new Button();
             VozilaKojaNisuProslaTehnickiButton = new Button();
+            PotvrdaPromjeneLozinkeLabel = new Label();
+            PromjenaPodatakaLabel = new Label();
             PrikazStatistikePanel = new Panel();
             KategorijaComboBox = new ComboBox();
             PotkategorijaComboBox = new ComboBox();
@@ -195,6 +211,8 @@ namespace sistem_za_tehnicki_pregled
             KlijentPanel.SuspendLayout();
             RegistracijaNalogaPanel.SuspendLayout();
             LogovanKlijentPanel.SuspendLayout();
+            PromjenaPodatakaPanel.SuspendLayout();
+            ZakazivanjeTerminaTehnickogPanel.SuspendLayout();
             AdministratorPanel.SuspendLayout();
             LogovanAdministratorPanel.SuspendLayout();
             PracenjeStatistikePanel.SuspendLayout();
@@ -514,6 +532,12 @@ namespace sistem_za_tehnicki_pregled
             // LogovanKlijentPanel
             // 
             LogovanKlijentPanel.Controls.Add(OdjavaLogovanogKlijentaButton);
+            LogovanKlijentPanel.Controls.Add(PromjenaPodatakaButton);
+            LogovanKlijentPanel.Controls.Add(PromjenaPodatakaPanel);
+            LogovanKlijentPanel.Controls.Add(BrisanjeNalogaButton);
+            LogovanKlijentPanel.Controls.Add(ZakazivanjeTerminaTehnickogButton);
+            LogovanKlijentPanel.Controls.Add(ZakazivanjeTerminaTehnickogPanel);
+            LogovanKlijentPanel.Dock = DockStyle.Fill;
             LogovanKlijentPanel.Location = new Point(0, 0);
             LogovanKlijentPanel.Name = "LogovanKlijentPanel";
             LogovanKlijentPanel.Size = new Size(800, 450);
@@ -529,6 +553,177 @@ namespace sistem_za_tehnicki_pregled
             OdjavaLogovanogKlijentaButton.Text = "Odjava";
             OdjavaLogovanogKlijentaButton.UseVisualStyleBackColor = true;
             OdjavaLogovanogKlijentaButton.Click += OdjavaLogovanogKlijentaButton_Click;
+            // 
+            // PromjenaPodatakaButton
+            // 
+            PromjenaPodatakaButton.Location = new Point(275, 190);
+            PromjenaPodatakaButton.Name = "PromjenaPodatakaButton";
+            PromjenaPodatakaButton.Size = new Size(250, 70);
+            PromjenaPodatakaButton.TabIndex = 1;
+            PromjenaPodatakaButton.Text = "Promjena podataka";
+            PromjenaPodatakaButton.UseVisualStyleBackColor = true;
+            PromjenaPodatakaButton.Click += PromjenaPodatakaButton_Click;
+            // 
+            // PromjenaPodatakaPanel
+            // 
+            PromjenaPodatakaPanel.Controls.Add(NazadSaPromjenePodatakaNaLogovanogKlijenta);
+            PromjenaPodatakaPanel.Controls.Add(PotvrdiPromjenuPodatakaButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaPodatakaTextBox);
+            PromjenaPodatakaPanel.Controls.Add(PotvrdaPromjeneLozinkeTextBox);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaBrojaZiroRacunaRadioButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaBrojaLicneKarteRadioButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaLozinkeRadioButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaKorisnickogImenaRadioButton);
+            PromjenaPodatakaPanel.Controls.Add(PromjenaPodatakaLabel);
+            PromjenaPodatakaPanel.Controls.Add(PotvrdaPromjeneLozinkeLabel);
+            PromjenaPodatakaPanel.Dock = DockStyle.Fill;
+            PromjenaPodatakaPanel.Location = new Point(0, 0);
+            PromjenaPodatakaPanel.Name = "PromjenaPodatakaPanel";
+            PromjenaPodatakaPanel.Size = new Size(800, 450);
+            PromjenaPodatakaPanel.TabIndex = 9;
+            PromjenaPodatakaPanel.Visible = false;
+            // 
+            // NazadSaPromjenePodatakaNaLogovanogKlijenta
+            // 
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Location = new Point(694, 409);
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Name = "NazadSaPromjenePodatakaNaLogovanogKlijenta";
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Size = new Size(94, 29);
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.TabIndex = 8;
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Text = "Nazad";
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.UseVisualStyleBackColor = true;
+            NazadSaPromjenePodatakaNaLogovanogKlijenta.Click += NazadSaPromjenePodatakaNaLogovanogKlijenta_Click;
+            // 
+            // PotvrdiPromjenuPodatakaButton
+            // 
+            PotvrdiPromjenuPodatakaButton.Location = new Point(408, 226);
+            PotvrdiPromjenuPodatakaButton.Name = "PotvrdiPromjenuPodatakaButton";
+            PotvrdiPromjenuPodatakaButton.Size = new Size(200, 29);
+            PotvrdiPromjenuPodatakaButton.TabIndex = 5;
+            PotvrdiPromjenuPodatakaButton.Text = "Potvrdi";
+            PotvrdiPromjenuPodatakaButton.UseVisualStyleBackColor = true;
+            PotvrdiPromjenuPodatakaButton.Click += PotvrdiPromjenuPodatakaButton_Click;
+            //
+            // PromjenaPodatakaLabel
+            //
+            PromjenaPodatakaLabel.AutoSize = true;
+            PromjenaPodatakaLabel.Location = new Point(408, 118);
+            PromjenaPodatakaLabel.Name = "PromjenaPodatakaLabel";
+            PromjenaPodatakaLabel.Size = new Size(113, 20);
+            PromjenaPodatakaPanel.Visible = false;
+            //
+            // PotvrdaPromjeneLozinkeLabel
+            //
+            PotvrdaPromjeneLozinkeLabel.AutoSize = true;
+            PotvrdaPromjeneLozinkeLabel.Location = new Point(408, 166);
+            PotvrdaPromjeneLozinkeLabel.Name = "PotvrdaPromjeneLozinkeLabel";
+            PotvrdaPromjeneLozinkeLabel.Size = new Size(113, 20);
+            PotvrdaPromjeneLozinkeLabel.Text = "Potvrda lozinke:";
+            PotvrdaPromjeneLozinkeLabel.Visible = false;
+            // 
+            // PromjenaPodatakaTextBox
+            // 
+            PromjenaPodatakaTextBox.Location = new Point(408, 138);
+            PromjenaPodatakaTextBox.Name = "PromjenaPodatakaTextBox";
+            PromjenaPodatakaTextBox.Size = new Size(200, 27);
+            PromjenaPodatakaTextBox.TabIndex = 4;
+            //
+            // PotvrdaPromjeneLozinkeTextBox
+            //
+            PotvrdaPromjeneLozinkeTextBox.Location = new Point(408, 186);
+            PotvrdaPromjeneLozinkeTextBox.Name = "PotvrdaPromjeneLozinkeTextBox";
+            PotvrdaPromjeneLozinkeTextBox.Size = new Size(200, 27);
+            PotvrdaPromjeneLozinkeTextBox.TabIndex = 4;
+            PotvrdaPromjeneLozinkeTextBox.PasswordChar = '*';
+            PotvrdaPromjeneLozinkeTextBox.Visible = false;
+            // 
+            // PromjenaBrojaZiroRacunaRadioButton
+            // 
+            PromjenaBrojaZiroRacunaRadioButton.AutoSize = true;
+            PromjenaBrojaZiroRacunaRadioButton.Location = new Point(111, 231);
+            PromjenaBrojaZiroRacunaRadioButton.Name = "PromjenaBrojaZiroRacunaRadioButton";
+            PromjenaBrojaZiroRacunaRadioButton.Size = new Size(209, 24);
+            PromjenaBrojaZiroRacunaRadioButton.TabIndex = 3;
+            PromjenaBrojaZiroRacunaRadioButton.TabStop = true;
+            PromjenaBrojaZiroRacunaRadioButton.Text = "Promjena broja žiro računa";
+            PromjenaBrojaZiroRacunaRadioButton.UseVisualStyleBackColor = true;
+            PromjenaBrojaZiroRacunaRadioButton.CheckedChanged += PromjenaBrojaZiroRacunaRadioButton_CheckedChanged;
+            // 
+            // PromjenaBrojaLicneKarteRadioButton
+            // 
+            PromjenaBrojaLicneKarteRadioButton.AutoSize = true;
+            PromjenaBrojaLicneKarteRadioButton.Location = new Point(111, 201);
+            PromjenaBrojaLicneKarteRadioButton.Name = "PromjenaBrojaLicneKarteRadioButton";
+            PromjenaBrojaLicneKarteRadioButton.Size = new Size(204, 24);
+            PromjenaBrojaLicneKarteRadioButton.TabIndex = 2;
+            PromjenaBrojaLicneKarteRadioButton.TabStop = true;
+            PromjenaBrojaLicneKarteRadioButton.Text = "Promjena broja lične karte";
+            PromjenaBrojaLicneKarteRadioButton.UseVisualStyleBackColor = true;
+            PromjenaBrojaLicneKarteRadioButton.CheckedChanged += PromjenaBrojaLicneKarteRadioButton_CheckedChanged;
+            // 
+            // PromjenaLozinkeRadioButton
+            // 
+            PromjenaLozinkeRadioButton.AutoSize = true;
+            PromjenaLozinkeRadioButton.Location = new Point(111, 171);
+            PromjenaLozinkeRadioButton.Name = "PromjenaLozinkeRadioButton";
+            PromjenaLozinkeRadioButton.Size = new Size(144, 24);
+            PromjenaLozinkeRadioButton.TabIndex = 1;
+            PromjenaLozinkeRadioButton.TabStop = true;
+            PromjenaLozinkeRadioButton.Text = "Promjena lozinke";
+            PromjenaLozinkeRadioButton.UseVisualStyleBackColor = true;
+            PromjenaLozinkeRadioButton.CheckedChanged += PromjenaLozinkeRadioButton_CheckedChanged;
+            // 
+            // PromjenaKorisnickogImenaRadioButton
+            // 
+            PromjenaKorisnickogImenaRadioButton.AutoSize = true;
+            PromjenaKorisnickogImenaRadioButton.Location = new Point(111, 141);
+            PromjenaKorisnickogImenaRadioButton.Name = "PromjenaKorisnickogImenaRadioButton";
+            PromjenaKorisnickogImenaRadioButton.Size = new Size(217, 24);
+            PromjenaKorisnickogImenaRadioButton.TabIndex = 0;
+            PromjenaKorisnickogImenaRadioButton.TabStop = true;
+            PromjenaKorisnickogImenaRadioButton.Text = "Promjena korisničkog imena";
+            PromjenaKorisnickogImenaRadioButton.UseVisualStyleBackColor = true;
+            PromjenaKorisnickogImenaRadioButton.CheckedChanged += PromjenaKorisnickogImenaRadioButton_CheckedChanged;
+            // 
+            // BrisanjeNalogaButton
+            // 
+            BrisanjeNalogaButton.Location = new Point(275, 320);
+            BrisanjeNalogaButton.Name = "BrisanjeNalogaButton";
+            BrisanjeNalogaButton.Size = new Size(250, 70);
+            BrisanjeNalogaButton.TabIndex = 2;
+            BrisanjeNalogaButton.Text = "Brisanje naloga";
+            BrisanjeNalogaButton.UseVisualStyleBackColor = true;
+            BrisanjeNalogaButton.Click += BrisanjeNalogaButton_Click;
+            // 
+            // ZakazivanjeTerminaTehnickogButton
+            // 
+            ZakazivanjeTerminaTehnickogButton.Location = new Point(275, 60);
+            ZakazivanjeTerminaTehnickogButton.Name = "ZakazivanjeTerminaTehnickogButton";
+            ZakazivanjeTerminaTehnickogButton.Size = new Size(250, 70);
+            ZakazivanjeTerminaTehnickogButton.TabIndex = 3;
+            ZakazivanjeTerminaTehnickogButton.Text = "Zakazivanje termina tehničkog pregleda";
+            ZakazivanjeTerminaTehnickogButton.UseVisualStyleBackColor = true;
+            ZakazivanjeTerminaTehnickogButton.Click += ZakazivanjeTerminaTehnickogButton_Click;
+            // 
+            // ZakazivanjeTerminaTehnickogPanel
+            // 
+            //ZakazivanjeTerminaTehnickogPanel.Controls.Add()
+            ZakazivanjeTerminaTehnickogPanel.Controls.Add(NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta);
+            ZakazivanjeTerminaTehnickogPanel.Dock = DockStyle.Fill;
+            ZakazivanjeTerminaTehnickogPanel.Location = new Point(0, 0);
+            ZakazivanjeTerminaTehnickogPanel.Name = "ZakazivanjeTerminaTehnickogPanel";
+            ZakazivanjeTerminaTehnickogPanel.Size = new Size(800, 450);
+            ZakazivanjeTerminaTehnickogPanel.TabIndex = 9;
+            ZakazivanjeTerminaTehnickogPanel.Visible = false;
+            // 
+            // NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta
+            // 
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta.Location = new Point(694, 409);
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta.Name = "NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta";
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta.Size = new Size(94, 29);
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta.TabIndex = 8;
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta.Text = "Nazad";
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta.UseVisualStyleBackColor = true;
+            NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta.Click += NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta_Click;
             // 
             // AdministratorPanel
             // 
@@ -756,7 +951,7 @@ namespace sistem_za_tehnicki_pregled
             // 
             // BrisanjeRadnickihNalogaButton
             // 
-            BrisanjeRadnickihNalogaButton.Location = new Point(450, 191);
+            BrisanjeRadnickihNalogaButton.Location = new Point(450, 190);
             BrisanjeRadnickihNalogaButton.Name = "BrisanjeRadnickihNalogaButton";
             BrisanjeRadnickihNalogaButton.Size = new Size(250, 70);
             BrisanjeRadnickihNalogaButton.TabIndex = 3;
@@ -1815,6 +2010,9 @@ namespace sistem_za_tehnicki_pregled
             RegistracijaNalogaPanel.ResumeLayout(false);
             RegistracijaNalogaPanel.PerformLayout();
             LogovanKlijentPanel.ResumeLayout(false);
+            PromjenaPodatakaPanel.ResumeLayout(false);
+            PromjenaPodatakaPanel.PerformLayout();
+            ZakazivanjeTerminaTehnickogPanel.ResumeLayout(false);
             AdministratorPanel.ResumeLayout(false);
             AdministratorPanel.PerformLayout();
             LogovanAdministratorPanel.ResumeLayout(false);
@@ -1907,6 +2105,13 @@ namespace sistem_za_tehnicki_pregled
         private Button PrijaviSeAdministratorButton;
         private Button PrijaviSeRadnikButton;
         private Button NazadKlijentButton;
+        private Button PromjenaPodatakaButton;
+        private Panel PromjenaPodatakaPanel;
+        private Button BrisanjeNalogaButton;
+        private Button ZakazivanjeTerminaTehnickogButton;
+        private Panel ZakazivanjeTerminaTehnickogPanel;
+        private Button NazadSaPromjenePodatakaNaLogovanogKlijenta;
+        private Button NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta;
         private ComboBox ListaRadnickihNalogaComboBox;
         private ComboBox ListaAdministratorskihNalogaComboBox;
         private Label HeaderListeRadnickihNaloga;
@@ -2008,5 +2213,14 @@ namespace sistem_za_tehnicki_pregled
         private ListBox listBox_pregledIstorije;
         private Label label_pregledIstorije_naslov;
         private Button button_pregledIstorije_nazad;
+        private RadioButton PromjenaKorisnickogImenaRadioButton;
+        private RadioButton PromjenaLozinkeRadioButton;
+        private RadioButton PromjenaBrojaLicneKarteRadioButton;
+        private RadioButton PromjenaBrojaZiroRacunaRadioButton;
+        private TextBox PromjenaPodatakaTextBox;
+        private TextBox PotvrdaPromjeneLozinkeTextBox;
+        private Button PotvrdiPromjenuPodatakaButton;
+        private Label PotvrdaPromjeneLozinkeLabel;
+        private Label PromjenaPodatakaLabel;
     }
 }

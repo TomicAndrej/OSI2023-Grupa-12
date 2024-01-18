@@ -941,7 +941,7 @@ namespace sistem_za_tehnicki_pregled
 
         private void PrikazStatistikeUPrikazuStatistikeButton_Click(object sender, EventArgs e)
         {
-            StatistikaRichTextBox .Clear();
+            StatistikaRichTextBox.Clear();
             string kategorija = ((KeyValuePair<string, List<string>>)KategorijaComboBox.SelectedItem).Key;
             if (KategorijaComboBox.SelectedItem != null && PotkategorijaComboBox.SelectedItem == null)
             {
@@ -997,6 +997,319 @@ namespace sistem_za_tehnicki_pregled
                     PotkategorijaComboBox.Enabled = false;
                 }
             }
+        }
+
+        private void PromjenaPodatakaButton_Click(object sender, EventArgs e)
+        {
+            string lozinka = Interaction.InputBox("Unesite lozinku da biste pristupili pomjeni podataka", "Promjena podataka", "lozinka", -1, -1);
+            string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt");
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string[] podaci = lines[i].Split(',');
+                if (podaci[0] == trenutniNalog)
+                {
+                    if (podaci[1] == lozinka)
+                    {
+                        PromjenaPodatakaPanel.Visible = true;
+                        PromjenaPodatakaPanel.BringToFront();
+                        PromjenaPodatakaPanel.ResumeLayout();
+                        if (PromjenaKorisnickogImenaRadioButton.Checked || PromjenaLozinkeRadioButton.Checked || PromjenaBrojaLicneKarteRadioButton.Checked || PromjenaBrojaZiroRacunaRadioButton.Checked)
+                        {
+                            PotvrdiPromjenuPodatakaButton.Enabled = true;
+                        }
+                        else
+                        {
+                            PotvrdiPromjenuPodatakaButton.Enabled = false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pogrešna lozinka!", "Promjena podataka", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    break;
+                }
+            }
+        }
+
+        private void ZakazivanjeTerminaTehnickogButton_Click(object sender, EventArgs e)
+        {
+            ZakazivanjeTerminaTehnickogPanel.Visible = true;
+            ZakazivanjeTerminaTehnickogPanel.BringToFront();
+            ZakazivanjeTerminaTehnickogPanel.ResumeLayout();
+        }
+
+        private void NazadSaPromjenePodatakaNaLogovanogKlijenta_Click(object sender, EventArgs e)
+        {
+            PromjenaPodatakaPanel.Visible = false;
+            PromjenaBrojaZiroRacunaRadioButton.Checked = false;
+            PromjenaBrojaLicneKarteRadioButton.Checked = false;
+            PromjenaKorisnickogImenaRadioButton.Checked = false;
+            PromjenaLozinkeRadioButton.Checked = false;
+            PotvrdiPromjenuPodatakaButton.Enabled = false;
+            PotvrdaPromjeneLozinkeTextBox.Visible = false;
+            PromjenaPodatakaTextBox.PasswordChar = '\0';
+            PotvrdaPromjeneLozinkeLabel.Visible = false;
+            PromjenaPodatakaLabel.Visible = false;
+            PromjenaPodatakaTextBox.Text = "";
+        }
+
+        private void NazadSaZakazivanjaTerminaTehnickogNaLogovanogKlijenta_Click(object sender, EventArgs e)
+        {
+            ZakazivanjeTerminaTehnickogPanel.Visible = false;
+        }
+
+        private void BrisanjeNalogaButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Da li ste sigurni da želite da obrišete nalog?", "Brisanje naloga", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt");
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] podaci = lines[i].Split(',');
+                    if (podaci[0] == trenutniNalog)
+                    {
+                        funkcije f = new funkcije();
+                        f.DeleteLineFromFile("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt", i);
+                        break;
+                    }
+                }
+                LogovanKlijentPanel.Visible = false;
+                IndikatorNaKomStePanelu.Text = "";
+                KlijentPanel.Visible = false;
+                IzborniPanel.Visible = true;
+            }
+        }
+
+        private void PromjenaLozinkeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            PotvrdiPromjenuPodatakaButton.Enabled = true;
+            PotvrdaPromjeneLozinkeTextBox.Visible = true;
+            PromjenaPodatakaTextBox.PasswordChar = '*';
+            PotvrdaPromjeneLozinkeLabel.Visible = true;
+            PromjenaPodatakaLabel.Text = "Nova lozinka:";
+            PromjenaPodatakaLabel.Visible = true;
+        }
+
+        private void PromjenaBrojaZiroRacunaRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            PotvrdiPromjenuPodatakaButton.Enabled = true;
+            PotvrdaPromjeneLozinkeTextBox.Visible = false;
+            PromjenaPodatakaTextBox.PasswordChar = '\0';
+            PotvrdaPromjeneLozinkeLabel.Visible = false;
+            PromjenaPodatakaLabel.Text = "Novi broj žiro računa:";
+            PromjenaPodatakaLabel.Visible = true;
+        }
+
+        private void PromjenaKorisnickogImenaRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            PotvrdiPromjenuPodatakaButton.Enabled = true;
+            PotvrdaPromjeneLozinkeTextBox.Visible = false;
+            PromjenaPodatakaTextBox.PasswordChar = '\0';
+            PotvrdaPromjeneLozinkeLabel.Visible = false;
+            PromjenaPodatakaLabel.Text = "Novo korisničko ime:";
+            PromjenaPodatakaLabel.Visible = true;
+        }
+
+        private void PromjenaBrojaLicneKarteRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            PotvrdiPromjenuPodatakaButton.Enabled = true;
+            PotvrdaPromjeneLozinkeTextBox.Visible = false;
+            PromjenaPodatakaTextBox.PasswordChar = '\0';
+            PotvrdaPromjeneLozinkeLabel.Visible = false;
+            PromjenaPodatakaLabel.Text = "Novi broj lične karte:";
+            PromjenaPodatakaLabel.Visible = true;
+        }
+
+        private void PotvrdiPromjenuPodatakaButton_Click(object sender, EventArgs e)
+        {
+            if (PromjenaKorisnickogImenaRadioButton.Checked)
+            {
+                if (PromjenaPodatakaTextBox.Text == "")
+                {
+                    MessageBox.Show("Polje za unos korisničkog imena ne smije biti prazno!", "Promjena korisničkog imena", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                funkcije f = new funkcije();
+                if (!f.ProvjeriValidnostKorisnickogImena(PromjenaPodatakaTextBox.Text))
+                {
+                    MessageBox.Show("Korisničko ime nije validno!", "Registracija", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                /////////////////////
+                if (!f.provjeraKorisnickogImena(PromjenaPodatakaTextBox.Text, "..\\..\\..\\..\\..\\Fajlovi\\klijent.txt"))
+                {
+                    return;
+                }
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt");
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    
+                    string[] podaci = lines[i].Split(',');
+                    if (podaci[0] == trenutniNalog)
+                    {
+                        podaci[0] = PromjenaPodatakaTextBox.Text;
+                        string novaLinija = "";
+                        for (int j = 0; j < podaci.Length - 1; j++)
+                        {
+                            novaLinija += podaci[j] + ",";
+                        }
+                        novaLinija += podaci[podaci.Length - 1];
+                        
+                        f.ChangeLineInFile("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt", i, novaLinija);
+                        trenutniNalog = PromjenaPodatakaTextBox.Text;
+                        break;
+                    }
+                }
+                trenutniNalog = PromjenaPodatakaTextBox.Text;
+                IndikatorNaKomStePanelu.Text = "Klijent: " + trenutniNalog;
+                MessageBox.Show("Uspješno ste promijenili korisničko ime!", "Promjena korisničkog imena", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PromjenaPodatakaPanel.Visible = false;
+                PromjenaBrojaLicneKarteRadioButton.Checked = false;
+                PromjenaBrojaZiroRacunaRadioButton.Checked = false;
+                PromjenaKorisnickogImenaRadioButton.Checked = false;
+                PromjenaLozinkeRadioButton.Checked = false;
+                PotvrdiPromjenuPodatakaButton.Enabled = false;
+                PotvrdaPromjeneLozinkeTextBox.Visible = false;
+                PromjenaPodatakaTextBox.PasswordChar = '\0';
+                PotvrdaPromjeneLozinkeLabel.Visible = false;
+                PromjenaPodatakaLabel.Visible = false;
+                PromjenaPodatakaTextBox.Text = "";
+            }
+            else if (PromjenaLozinkeRadioButton.Checked)
+            {
+                if (PromjenaPodatakaTextBox.Text == "")
+                {
+                    MessageBox.Show("Polje za unos lozinke ne smije biti prazno!", "Promjena lozinke", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (PromjenaPodatakaTextBox.Text.Length < 8 || PromjenaPodatakaTextBox.Text.Length > 32)
+                {
+                    MessageBox.Show("Lozinka mora imati između 8 i 32 karaktera!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (PotvrdaPromjeneLozinkeTextBox.Text == "")
+                {
+                    MessageBox.Show("Niste potvrdili lozinku!", "Potvrda promjene lozinke", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (PromjenaPodatakaTextBox.Text != PotvrdaPromjeneLozinkeTextBox.Text)
+                {
+                    MessageBox.Show("Lozinka i potvrda lozinke se ne poklapaju!", "Promjena lozinke", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt");
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] podaci = lines[i].Split(',');
+                    if (podaci[0] == trenutniNalog)
+                    {
+                        podaci[1] = PromjenaPodatakaTextBox.Text;
+                        string novaLinija = "";
+                        for (int j = 0; j < podaci.Length - 1; j++)
+                        {
+                            novaLinija += podaci[j] + ",";
+                        }
+                        novaLinija += podaci[podaci.Length - 1];
+                        funkcije f = new funkcije();
+                        f.ChangeLineInFile("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt", i, novaLinija);
+                        break;
+                    }
+                }
+                MessageBox.Show("Uspješno ste promijenili lozinku!", "Promjena lozinke", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PromjenaPodatakaPanel.Visible = false;
+                PromjenaBrojaLicneKarteRadioButton.Checked = false;
+                PromjenaBrojaZiroRacunaRadioButton.Checked = false;
+                PromjenaKorisnickogImenaRadioButton.Checked = false;
+                PromjenaLozinkeRadioButton.Checked = false;
+                PotvrdiPromjenuPodatakaButton.Enabled = false;
+                PotvrdaPromjeneLozinkeTextBox.Visible = false;
+                PromjenaPodatakaTextBox.PasswordChar = '\0';
+                PotvrdaPromjeneLozinkeLabel.Visible = false;
+                PromjenaPodatakaLabel.Visible = false;
+                PromjenaPodatakaTextBox.Text = "";
+            }
+            else if (PromjenaBrojaLicneKarteRadioButton.Checked)
+            {
+                if (PromjenaPodatakaTextBox.Text == "")
+                {
+                    MessageBox.Show("Polje za unos broja lične karte ne smije biti prazno!", "Promjena broja lične karte", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt");
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] podaci = lines[i].Split(',');
+                    if (podaci[0] == trenutniNalog)
+                    {
+                        podaci[4] = PromjenaPodatakaTextBox.Text;
+                        string novaLinija = "";
+                        for (int j = 0; j < podaci.Length - 1; j++)
+                        {
+                            novaLinija += podaci[j] + ",";
+                        }
+                        novaLinija += podaci[podaci.Length - 1];
+                        funkcije f = new funkcije();
+                        f.ChangeLineInFile("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt", i, novaLinija);
+                        break;
+                    }
+                }
+                MessageBox.Show("Uspješno ste promijenili broj lične karte!", "Promjena broja lične karte", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PromjenaPodatakaPanel.Visible = false;
+                PromjenaBrojaLicneKarteRadioButton.Checked = false;
+                PromjenaBrojaZiroRacunaRadioButton.Checked = false;
+                PromjenaKorisnickogImenaRadioButton.Checked = false;
+                PromjenaLozinkeRadioButton.Checked = false;
+                PotvrdiPromjenuPodatakaButton.Enabled = false;
+                PotvrdaPromjeneLozinkeTextBox.Visible = false;
+                PromjenaPodatakaTextBox.PasswordChar = '\0';
+                PotvrdaPromjeneLozinkeLabel.Visible = false;
+                PromjenaPodatakaLabel.Visible = false;
+                PromjenaPodatakaTextBox.Text = "";
+            }
+            else if (PromjenaBrojaZiroRacunaRadioButton.Checked)
+            {
+                if (PromjenaPodatakaTextBox.Text == "")
+                {
+                    MessageBox.Show("Polje za unos broja žiro računa ne smije biti prazno!", "Promjena broja žiro računa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (PromjenaPodatakaTextBox.Text.Length != 16)
+                {
+                    MessageBox.Show("Broj žiro računa mora imati 16 cifara!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                string[] lines = File.ReadAllLines("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt");
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    string[] podaci = lines[i].Split(',');
+                    if (podaci[0] == trenutniNalog)
+                    {
+                        podaci[5] = PromjenaPodatakaTextBox.Text;
+                        string novaLinija = "";
+                        for (int j = 0; j < podaci.Length - 1; j++)
+                        {
+                            novaLinija += podaci[j] + ",";
+                        }
+                        novaLinija += podaci[podaci.Length - 1];
+                        funkcije f = new funkcije();
+                        f.ChangeLineInFile("..\\..\\..\\..\\..\\Fajlovi\\klijent.txt", i, novaLinija);
+                        break;
+                    }
+                }
+                MessageBox.Show("Uspješno ste promijenili broj žiro računa!", "Promjena broja žiro računa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PromjenaPodatakaPanel.Visible = false;
+                PromjenaBrojaLicneKarteRadioButton.Checked = false;
+                PromjenaBrojaZiroRacunaRadioButton.Checked = false;
+                PromjenaKorisnickogImenaRadioButton.Checked = false;
+                PromjenaLozinkeRadioButton.Checked = false;
+                PotvrdiPromjenuPodatakaButton.Enabled = false;
+                PotvrdaPromjeneLozinkeTextBox.Visible = false;
+                PromjenaPodatakaTextBox.PasswordChar = '\0';
+                PotvrdaPromjeneLozinkeLabel.Visible = false;
+                PromjenaPodatakaLabel.Visible = false;
+                PromjenaPodatakaTextBox.Text = "";
+            }   
         }
     }
 }
