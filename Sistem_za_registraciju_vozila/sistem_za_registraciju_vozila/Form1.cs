@@ -873,28 +873,36 @@ namespace sistem_za_registraciju_vozila
 
         private void button_to_placanjeKazniKlijent_Click(object sender, EventArgs e)
         {
-            listbox_placanjeKazniKlijent.Items.Clear();
-            //Dodati string koji cuva maticni broj logovanog klijenta
-            funkcije f = new funkcije();
-            string maticniBroj = f.PronadjiJmbNaOsnovuNaloga(trenutniNalog);
-            using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\kazne\\" + maticniBroj + ".txt"))
+            funkcije funkcije = new funkcije();
+            if(funkcije.DaLiPostojiFajlSaKaznama(funkcije.PronadjiJmbNaOsnovuNaloga(trenutniNalog)))
             {
-                while (!sr.EndOfStream)
+                listbox_placanjeKazniKlijent.Items.Clear();
+                //Dodati string koji cuva maticni broj logovanog klijenta
+                funkcije f = new funkcije();
+                string maticniBroj = f.PronadjiJmbNaOsnovuNaloga(trenutniNalog);
+                using (StreamReader sr = new StreamReader("..\\..\\..\\..\\..\\kazne\\" + maticniBroj + ".txt"))
                 {
-                    string line = sr.ReadLine();
-                    string[] podaci = line.Split(',');
-                    if (podaci[2] == "N")
-                        listbox_placanjeKazniKlijent.Items.Add(podaci[0] + " - Cijena: " + podaci[1] + "KM");
+                    while (!sr.EndOfStream)
+                    {
+                        string line = sr.ReadLine();
+                        string[] podaci = line.Split(',');
+                        if (podaci[2] == "N")
+                            listbox_placanjeKazniKlijent.Items.Add(podaci[0] + " - Cijena: " + podaci[1] + "KM");
+                    }
                 }
-            }
 
-            if (listbox_placanjeKazniKlijent.Items.Count == 0)
-            {
-                MessageBox.Show("Nemate kazni za plaćanje!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (listbox_placanjeKazniKlijent.Items.Count == 0)
+                {
+                    MessageBox.Show("Nemate kazni za plaćanje!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    panel_placanjeKazniKlijent.Visible = true;
+                }
             }
             else
             {
-                panel_placanjeKazniKlijent.Visible = true;
+                MessageBox.Show("Nemate kazni za plaćanje!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void listbox_placanjeKazniKlijent_MouseDoubleClick(object sender, MouseEventArgs e)

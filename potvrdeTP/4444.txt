@@ -1,0 +1,6 @@
+Broj šasije: 4444
+Marka: Audi
+Model: a1
+Datum i vrijeme tehničkog pregleda: 01/26/2024 17:28
+Ime i prezime: Andrej Tomić
+ID polise osiguranja: 603035
